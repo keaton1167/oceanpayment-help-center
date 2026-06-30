@@ -1,0 +1,10 @@
+{
+  "item.label.帮助中心": {
+    "message": "Help Center",
+    "description": "Navbar item with label 帮助中心"
+  },
+  "logo.alt": {
+    "message": "Oceanpayment Logo",
+    "description": "The alt text of navbar logo"
+  }
+}
