@@ -18,6 +18,7 @@ const ENGLISH_DOC_IDS = [
 ];
 
 const currentLocale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'zh-Hans';
+const isGitHubPages = process.env.DEPLOY_TARGET === 'github-pages';
 const ENGLISH_CATEGORY_LABELS = {
   'ODPM 账户后台操作指引': 'ODPM Account Backend Operation Guide',
   'Payment 收单常见 FAQ': 'Common FAQs About Payment Processing',
@@ -87,11 +88,13 @@ const config = {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
 
-  url: 'https://support.oceanpayment.com',
-  baseUrl: '/',
+  url: isGitHubPages
+    ? 'https://keaton1167.github.io'
+    : 'https://support.oceanpayment.com',
+  baseUrl: isGitHubPages ? '/oceanpayment-help-center/' : '/',
 
-  organizationName: 'oceanpayment',
-  projectName: 'support-center',
+  organizationName: isGitHubPages ? 'keaton1167' : 'oceanpayment',
+  projectName: isGitHubPages ? 'oceanpayment-help-center' : 'support-center',
 
   onBrokenLinks: 'warn',
   markdown: { hooks: { onBrokenMarkdownImages: 'warn' } },

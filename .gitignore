@@ -28,8 +28,11 @@ yarn-debug.log*
 yarn-error.log*
 deploy.log
 debug.log
+preview-*.log
+preview-manual.log
 .docusaurus.zip
 tmp-*
+start-preview.bat
 
 # Local Codex/editor state
 /.codex
