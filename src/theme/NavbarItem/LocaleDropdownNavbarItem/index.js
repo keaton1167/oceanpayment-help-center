@@ -1,6 +1,7 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {translate} from '@docusaurus/Translate';
+import {useBaseUrlUtils} from '@docusaurus/useBaseUrl';
 import {mergeSearchStrings, useHistorySelector} from '@docusaurus/theme-common';
 import DropdownNavbarItem from '@theme/NavbarItem/DropdownNavbarItem';
 import IconLanguage from '@theme/Icon/Language';
@@ -14,9 +15,9 @@ function useLocaleDropdownUtils() {
   const {
     i18n: {localeConfigs},
   } = useDocusaurusContext();
+  const {withBaseUrl} = useBaseUrlUtils();
   const search = useHistorySelector((history) => history.location.search);
   const hash = useHistorySelector((history) => history.location.hash);
-  const pathname = useHistorySelector((history) => history.location.pathname);
 
   const getLocaleConfig = (locale) => {
     const localeConfig = localeConfigs[locale];
@@ -32,7 +33,7 @@ function useLocaleDropdownUtils() {
         [search, options.queryString],
         'append',
       );
-      return `pathname://${getLocalePath(locale)}${finalSearch}${hash}`;
+      return `pathname://${withBaseUrl(getLocalePath(locale))}${finalSearch}${hash}`;
     },
     getLabel: (locale) => getLocaleConfig(locale).label,
     getLang: (locale) => getLocaleConfig(locale).htmlLang,
