@@ -83,58 +83,58 @@ const content = {
       {
         title: 'ODPM Guide',
         description: 'Account backend and section operations',
-        href: '/en/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
+        href: '/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
       },
       {
         title: 'Payment FAQ',
         description: 'Information updates and account operations',
-        href: '/en/docs/payment-faq/info-update/assign-account-setting/',
+        href: '/docs/payment-faq/info-update/assign-account-setting/',
       },
       {
         title: 'OP Card FAQ',
         description: 'Common questions, terms, and Google Pay',
-        href: '/en/docs/op-card-faq/common-questions/opccount-guideline/',
+        href: '/docs/op-card-faq/common-questions/opccount-guideline/',
       },
     ],
     categories: [
       {
         title: 'ODPM Account Backend Operation Guide',
         description: 'Account backend, section operations, and related process guidance.',
-        href: '/en/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
+        href: '/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
       },
       {
         title: 'Common FAQs About Payment Processing',
         description: 'Information updates, common questions, fund transfers, withdrawals, and payout guidance.',
-        href: '/en/docs/payment-faq/info-update/assign-account-setting/',
+        href: '/docs/payment-faq/info-update/assign-account-setting/',
       },
       {
         title: 'OP Card Common FAQs',
         description: 'Common questions, terms and conditions, and Google Pay related guidance.',
-        href: '/en/docs/op-card-faq/common-questions/opccount-guideline/',
+        href: '/docs/op-card-faq/common-questions/opccount-guideline/',
       },
       {
         title: 'Products and Services',
         description: 'Oceanpayment products and services documentation.',
-        href: '/en/docs/products-services/oceanpayment-products/reconciliation-guideline/',
+        href: '/docs/products-services/oceanpayment-products/reconciliation-guideline/',
       },
       {
         title: 'Compliance and Certification',
         description: 'Enterprise certification, access, and compliance management guidance.',
-        href: '/en/docs/compliance-certification/enterprise-certification-faq/klarna-payment-operations-guide/',
+        href: '/docs/compliance-certification/enterprise-certification-faq/klarna-payment-operations-guide/',
       },
     ],
     featured: [
       {
         title: 'New- Oceanpayment-ODPM Digital Platform Guidelines Manual',
-        href: '/en/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
+        href: '/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
       },
       {
         title: 'Assign Account Setting',
-        href: '/en/docs/payment-faq/info-update/assign-account-setting/',
+        href: '/docs/payment-faq/info-update/assign-account-setting/',
       },
       {
         title: 'Guideline of Reconciliation',
-        href: '/en/docs/products-services/oceanpayment-products/reconciliation-guideline/',
+        href: '/docs/products-services/oceanpayment-products/reconciliation-guideline/',
       },
     ],
   },
