@@ -1,5 +1,6 @@
 import React from 'react';
 import clsx from 'clsx';
+import Link from '@docusaurus/Link';
 import {useLocation} from '@docusaurus/router';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import TOCItems from '@theme/TOCItems';
@@ -16,10 +17,10 @@ const introLinks = {
     {label: '产品与服务', href: '/docs/products-services/oceanpayment-products/data-analysis-manual/'},
   ],
   en: [
-    {label: 'ODPM Guide', href: '/en/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/'},
-    {label: 'Payment FAQ', href: '/en/docs/payment-faq/info-update/assign-account-setting/'},
-    {label: 'OP Card FAQ', href: '/en/docs/op-card-faq/common-questions/opccount-guideline/'},
-    {label: 'Products', href: '/en/docs/products-services/oceanpayment-products/reconciliation-guideline/'},
+    {label: 'ODPM Guide', href: '/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/'},
+    {label: 'Payment FAQ', href: '/docs/payment-faq/info-update/assign-account-setting/'},
+    {label: 'OP Card FAQ', href: '/docs/op-card-faq/common-questions/opccount-guideline/'},
+    {label: 'Products', href: '/docs/products-services/oceanpayment-products/reconciliation-guideline/'},
   ],
 };
 
@@ -36,7 +37,7 @@ function IntroPanel() {
       <ul>
         {links.map((item) => (
           <li key={item.href}>
-            <a href={item.href}>{item.label}</a>
+            <Link to={item.href}>{item.label}</Link>
           </li>
         ))}
       </ul>
@@ -44,13 +45,25 @@ function IntroPanel() {
   );
 }
 
+function normalizePathname(pathname, baseUrl) {
+  const normalizedBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+
+  if (normalizedBaseUrl !== '/' && pathname.startsWith(normalizedBaseUrl)) {
+    return `/${pathname.slice(normalizedBaseUrl.length)}`
+      .replace(/\/+/g, '/')
+      .replace(/\/$/, '');
+  }
+
+  return pathname.replace(/\/$/, '');
+}
+
 export default function TOC({className, ...props}) {
   const {pathname} = useLocation();
+  const {siteConfig} = useDocusaurusContext();
+  const normalizedPathname = normalizePathname(pathname, siteConfig.baseUrl);
   const isIntroPage =
-    pathname === '/docs/intro' ||
-    pathname === '/docs/intro/' ||
-    pathname === '/en/docs/intro' ||
-    pathname === '/en/docs/intro/';
+    normalizedPathname === '/docs/intro' ||
+    normalizedPathname === '/en/docs/intro';
 
   return (
     <div className={clsx(styles.tableOfContents, 'thin-scrollbar', className)}>

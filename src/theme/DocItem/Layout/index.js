@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import {useLocation} from '@docusaurus/router';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {useWindowSize} from '@docusaurus/theme-common';
 import {useDoc} from '@docusaurus/plugin-content-docs/client';
 import DocItemPaginator from '@theme/DocItem/Paginator';
@@ -14,14 +15,26 @@ import DocBreadcrumbs from '@theme/DocBreadcrumbs';
 import ContentVisibility from '@theme/ContentVisibility';
 import styles from './styles.module.css';
 
+function normalizePathname(pathname, baseUrl) {
+  const normalizedBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+
+  if (normalizedBaseUrl !== '/' && pathname.startsWith(normalizedBaseUrl)) {
+    return `/${pathname.slice(normalizedBaseUrl.length)}`
+      .replace(/\/+/g, '/')
+      .replace(/\/$/, '');
+  }
+
+  return pathname.replace(/\/$/, '');
+}
+
 function useIsIntroPage() {
   const {pathname} = useLocation();
+  const {siteConfig} = useDocusaurusContext();
+  const normalizedPathname = normalizePathname(pathname, siteConfig.baseUrl);
 
   return (
-    pathname === '/docs/intro' ||
-    pathname === '/docs/intro/' ||
-    pathname === '/en/docs/intro' ||
-    pathname === '/en/docs/intro/'
+    normalizedPathname === '/docs/intro' ||
+    normalizedPathname === '/en/docs/intro'
   );
 }
 
