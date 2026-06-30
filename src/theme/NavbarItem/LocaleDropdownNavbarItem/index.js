@@ -1,21 +1,24 @@
 import React from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {translate} from '@docusaurus/Translate';
-import {useBaseUrlUtils} from '@docusaurus/useBaseUrl';
 import {mergeSearchStrings, useHistorySelector} from '@docusaurus/theme-common';
 import DropdownNavbarItem from '@theme/NavbarItem/DropdownNavbarItem';
 import IconLanguage from '@theme/Icon/Language';
 import styles from './styles.module.css';
 
 function getLocalePath(locale) {
-  return locale === 'en' ? '/en/docs/intro' : '/docs/intro';
+  return '/docs/intro';
+}
+
+function addSiteBaseUrl(baseUrl, pathname) {
+  const normalizedBaseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+  return `${normalizedBaseUrl}${pathname.replace(/^\/+/, '')}`;
 }
 
 function useLocaleDropdownUtils() {
   const {
     i18n: {localeConfigs},
   } = useDocusaurusContext();
-  const {withBaseUrl} = useBaseUrlUtils();
   const search = useHistorySelector((history) => history.location.search);
   const hash = useHistorySelector((history) => history.location.hash);
 
@@ -33,7 +36,11 @@ function useLocaleDropdownUtils() {
         [search, options.queryString],
         'append',
       );
-      return `pathname://${withBaseUrl(getLocalePath(locale))}${finalSearch}${hash}`;
+      const localeConfig = getLocaleConfig(locale);
+      return `pathname://${addSiteBaseUrl(
+        localeConfig.baseUrl,
+        getLocalePath(locale),
+      )}${finalSearch}${hash}`;
     },
     getLabel: (locale) => getLocaleConfig(locale).label,
     getLang: (locale) => getLocaleConfig(locale).htmlLang,
