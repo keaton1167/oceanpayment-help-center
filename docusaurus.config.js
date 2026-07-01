@@ -11,7 +11,13 @@ import remarkStrongInline from './plugins/remark-strong-inline.js';
 
 const ENGLISH_DOC_IDS = [
   'compliance-certification/enterprise-certification-faq/klarna-payment-operations-guide',
+  'odpm-guide/section-guide/blacklist-operation-manual',
   'odpm-guide/section-guide/digital-platform-guidelines-manual',
+  'odpm-guide/section-guide/digital-platform-guidelines-manual-all-exceptions',
+  'odpm-guide/section-guide/high-fraud-risk-alert-manual',
+  'odpm-guide/section-guide/merchant-initiated-chargeback-recall-guidelines',
+  'odpm-guide/section-guide/reconciliation-guide',
+  'odpm-guide/section-guide/whitelist-operation-manual',
   'op-card-faq/common-questions/opccount-guideline',
   'payment-faq/info-update/assign-account-setting',
   'products-services/oceanpayment-products/reconciliation-guideline',

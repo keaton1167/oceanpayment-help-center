@@ -1,0 +1,179 @@
+---
+title: "Oceanpayment Reconciliation Guide"
+sidebar_label: "Oceanpayment Reconciliation Guide"
+sidebar_position: 8
+hide_title: true
+---
+## 1. Account Funds
+
+- Know about the overall fund situation of the account, as follows:
+
+![image7.jpeg](/img/help-center/reconciliation-guide/image7.jpeg)
+
+- The displayed data is the settlement currency and debit amount.
+
+1. Total Settled Amount: Cumulative total of actual settled amount (Fees Deducted).
+
+2. Total Unsettled Amount: Unsettled transaction amount (Fees undeducted, including the amount able to be settled).
+
+3. Total Unsettled Reserve: Held rolling reserve + fixed reserve+ deposit for settled transactions.
+
+4. Able To Be Settled Amount: The amount that has met the settlement cycle and currently meets the corresponding settlement condition.
+
+- Merchant Settlement Condition: If the settlement condition is order review + upload shipping info, the displayed amount is the amount of the order that has met settlement cycle and the shipping info has been uploaded, also the delivery status is “Signed For”. This amount is only for reference and will be updated once the logistics status changes.
+
+- Settlement Condition: If the settlement condition is free from order review + upload shipping info, the displayed amount is the amount of the order that has met settlement cycle and the shipping info has been uploaded. This amount is only for reference and will be updated once the logistics status changes.
+
+## 2. Trans Details
+
+The transaction status can be queried according to different conditions and time periods, it’s convenient to view statistics data, and download the Excel/CSV of transaction details which is displaying the positive and negative numbers by transaction type. The query filter conditions are shown as follows:
+
+![image8.jpeg](/img/help-center/reconciliation-guide/image8.jpeg)
+
+![image9.jpeg](/img/help-center/reconciliation-guide/image9.jpeg)
+
+- Payment Method: Credit Card、Alipay、WeChatpay or other applicated payment methods.
+
+- Transaction Type: Approved, Refund, Chargeback, Retrieval, Retrieval Void, Chargeback Reversed, Failed.
+
+- Time Type: Debit Time - Time for settlement and statement statistics.
+
+- Tracking No.: Orders can be filtered and queried as the logistics information have been synchronized or not.
+
+-
+
+Delivery Status:
+
+- Blank: The logistic status of this order has not been reviewed or the shipping info has not been uploaded.
+
+- Not Signed For: The logistic status of this order has not been signed.
+
+- Signed For: The logistics status of this order has been signed for.
+
+- Abnormal: The logistics of this order is abnormal, need to check whether the uploaded information is correct or not, upload again if applicable.
+
+Note: The query conditions of the tracking number and the delivery status only take effect for the "Approved" transaction type orders.
+
+- Settlement Status: Settled, Non-settled, this condition allows you to statistics on the amount of settled or non-settled orders.
+
+- Debit Amount: The amount of the transaction is converted into the settlement currency at exchange rate on the day of transaction, and the settlement and billing are based on this amount.
+
+- Amount Statistics: Total amount (debit amount and transaction amount) of orders queried by selected time, status and other conditions.
+
+## 3. Trans Settlement
+
+- Query the status of each transaction settled batch, download the statement and details.
+
+![image10.jpeg](/img/help-center/reconciliation-guide/image10.jpeg)
+
+- The transaction settled batch can be checked by selected settlement currency, settlement type and transfer time.
+
+1. Download Statement (PDF): Download the PDF statement to verify the settlement status of the transaction settled batch (for transaction settlement types only, see Chapter 3 for statement types).
+
+2. Export Summary（Excel）: Download the summary table of the corresponding batch (for batches download, select the batches you need and click on the "Export Summary" button at the top left).
+
+3. Export Details (Excel/CSV）: Download the deduction and settlement details for each order of the corresponding batch (for batches download, select the batches you need and click on the "Export Details" button at the top left).
+
+- Click the “Transaction Settled Batch No.” to display hidden information, view the OP transfer bank of the settlement, and additional remarks information.
+
+![image11.jpeg](/img/help-center/reconciliation-guide/image11.jpeg)
+
+## Chapter 2 Reports
+
+### 1. Transaction Report
+
+The transaction report and amount data of the last month can be downloaded on the 1st day of each month. You can download the transaction report every first day of the month, the report can be used to statistic the transaction amount of previous month (Excel format, by payment method, transaction type, transaction currency, debit currency).
+
+![image12.jpeg](/img/help-center/reconciliation-guide/image12.jpeg)
+
+### 2. Monthly Report
+
+The settlement monthly report of the previous month can be downloaded on the 1st day of each month, which is convenient for financial statistics.
+
+![image13.jpeg](/img/help-center/reconciliation-guide/image13.jpeg)
+
+Download the settlement report by the required month.
+
+## Chapter 3 Report and Statement Instruction
+
+### 1. Statement
+
+- Sample：
+
+![image14.jpeg](/img/help-center/reconciliation-guide/image14.jpeg)
+
+- Instruction：
+
+1. Settled Trans Amount: Settled transactions in this batch (including different transaction types, which are shown separately below).
+
+2. Total Fees: The fees deducted from this batch of settled orders, which are reflected in the settlement details for each order.
+
+3. Other Fee: Monthly fee, annual service fee, etc. will be reflected in this item, the details are descripted in the notes of the transfer.
+
+4. Others: Bank transfer fees, deposit, and other transfers are reflected in this item, the specific items are explained in the notes of the transfer.
+
+5. Reserve: Reserve and deposit withheld for this batch.
+
+6. Net Payout: Settled Trans Amount + Total Fees + Others + Reserve
+
+### 2. Transaction Report
+
+- Sample：
+
+![image15.jpeg](/img/help-center/reconciliation-guide/image15.jpeg)
+
+- Instruction:
+
+1. Time Period: All transaction details of debit time from day 1 to day 31 of the month.
+
+2. Total Amount: Same as “activity amount” of Settlement Monthly report.
+
+3. Can be statistics by different dimensions, such as payment method, transaction type, transaction currency, and debit currency.
+
+4. Chargeback Rate(Reference)
+
+- Chargeback Ratio (Count) = Chargeback counts of this month/Approved counts of this month.
+
+- Chargeback Ratio(Amount) = Chargeback amount of this month/Approved amount of this month, conversion based on the exchange rate on the 1st day of the following month, the data is only for reference.
+
+5. Refund Ratio(Reference)
+
+- Refund Ratio (Count)= Refund counts of this month/Approved counts of this month.
+
+- Refund Ratio(Amount)= Refund amount of this month/Approved amount of this month, conversion based on the exchange rate on the 1st day of the following month, the data is only for reference.
+
+### 3. Monthly Report
+
+- Sample：
+
+![image16.png](/img/help-center/reconciliation-guide/image16.png)
+
+- Instruction:
+
+1. Display by different settlement currencies in individual pages.
+
+2. The current month can only download the report of the previous months.
+
+3. Trans Balance/Reserve Balance: Trans balance/reserve balance that has not been settled at the end of the month.
+
+4. Trans Balance:
+
+Opening of the period=Trans Balance of the end of last month. Ending of the period=Opening of the period + activity amount- settled amount of this month.
+
+5. Reserve Balance:
+
+Opening of the period = Reserve Balance of the end of last month. Ending of the period = Opening of the period -withheld reserve of this month-released reserve of this month.
+
+6. Activity Amount: All transactions of the month (debit time: debit amount from day 1 to day 31 of the month), which can compare with the amount of transaction report.
+
+7. Settled Trans Amount: All settled transactions amount(all settled orders amount transfer time from day 1 to day 31 of the month)
+
+8. Fees: All deduction of transactions have settled of this month (including all settlement batches of the month, refer to the notes for each batch).
+
+9. Others: Including all others and rebate funds from the month's settlement batches, check out the notes for each batch.
+
+10. Reserve = reserve balance of this month + released reserve of this month.
+
+Hold: Reserve held from settled trans amount of this month. Released: Reserve released from settlement this month.
+
+11. Total Net Payout: total settlement trans amount + total reserve amount.

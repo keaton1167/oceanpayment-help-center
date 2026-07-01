@@ -1,0 +1,893 @@
+---
+title: "Oceanpayment ODPM-数字平台操作指引手册-异常交易管理"
+sidebar_label: "Oceanpayment ODPM-数字平台操作指引手册-异常交易管理"
+sidebar_position: 5
+hide_title: true
+---
+## 异常交易管理操作手册
+
+## 1. 拒付交易
+
+### 1.1 什么是拒付？
+
+持卡人对信用卡账单的某笔交易有争议，向发卡行申请交易资金强制退回给持卡人
+(A chargeback is the reversal of financial transaction, typically initiated by a customer(the cardholder),who disputes a sale on his or her credit card.）
+
+一般发生在交易后180天内，某些行业和某些发卡行可以接受更长时间期限的拒付申请。当发生拒付时，银行除扣除交易款外，还会额外收取拒付处理费。
+
+### 1.2 信用卡拒付原因
+
+|拒付原因（中文）|拒付原因（英文）|拒付原因类别|
+|---|---|---|
+|欺诈交易|Other Fraud-Card Absent Environment|Allocation|
+|触发伪冒监控程序|Visa Fraud Monitoring Program|Allocation|
+|持卡人未授权|No Authorisation|Allocation|
+|交易清算延迟|Late Presentment|Collaboration|
+|错误交易代码|Incorrect Transaction Code|Collaboration|
+|错误交易币种|Incorrect Currency|Collaboration|
+|错误账户|Incorrect Account Number|Collaboration|
+|错误交易金额|Incorrect Amount|Collaboration|
+|重复处理|Duplicate Processing|Collaboration|
+|已用其他方式支付|Paid by Other Means|Collaboration|
+|无效数据|Invalid Data|Collaboration|
+|服务未提供或未收到商品|Merchandise/Services Not Received|Collaboration|
+|未收到退款|Credit Not Processed|Collaboration|
+|已取消的循环交易|Cancelled Recurring|Collaboration|
+|货物损坏/货不对版|Not as Described or Defective Merchandise/Services|Collaboration|
+|虚假商品|Counterfeit Merchandise|Collaboration|
+|虚假描述|Misrepresentation|Collaboration|
+|已取消的商品/服务|Cancelled Merchandise/Services|Collaboration|
+|其他|Others|　|
+|持卡人无法识别交易|Cardholder Does Not Recognize the Transaction|　|
+|调单请求不清晰/理由不充分|Request for support illegible/insufficient|　|
+|无效授权|Invalid Authorisation|　|
+|费用存在疑义|Car Rental Charge non qualified or unsubstantiated|　|
+|重复处理/已用其他方式支付|Duplicate Processing/Paid by Other Means|Collaboration|
+|授权问题拒付|Authorization-Related Chargeback||
+|持卡人争议|Cardholder Disputes||
+
+## 2. 拒付交易功能介绍
+
+点击【Payment】-【异常交易管理】-【拒付交易】，则可以根据账户订单号或支付ID查询相应的拒付交易信息。也可以根据交易时间、拒付时间、回复截止时间、处理时间、拒付原因、拒付申诉状态、拒付撤销状态等筛选相应的拒付交易明细。
+
+![image7.png](/img/help-center/digital-platform-guide-exception-transaction-management/image7.png)
+
+### 2.1 查询
+
+时间：默认处理时间，可以选择的时间条件有交易时间、拒付时间、回复截止时间、处理时间：
+
+- 交易时间：是指该笔交易进入Oceanpayment支付系统的时间
+
+- 拒付时间：等于CPD时间，消费者向发卡行提起争议，发卡行受理该笔拒付的时间
+
+- 回复截止时间：是指银行要求商户提出申诉的截止日期，超时未回复默认为商户接受拒付，放弃申诉
+
+- 处理时间：是指该笔交易最新状态的处理时间，包括拒付的复核时间、申诉状态的复核时间
+
+- 商户处理时间：即商户处理拒付交易的时间；例如：发起申诉的时间、接受拒付的时间
+
+拒付原因有欺诈拒付、服务未提供或者未收到商品、货物损坏/货不对版等主要原因，商户可在Oceanpayment后台的引导下，针对不同原因的拒付交易发起申诉。
+
+### 2.2 拒付状态
+
+此笔交易的处理状态
+
+- 待处理：在回复截止时间内，支持申诉提交，但还没【发起申诉】的订单
+
+- 申诉中：在后台已经提交【发起申诉】的订单
+
+- 申诉成功：已【发起申诉】的订单，最终申诉结果是【申诉成功】，拒付金额会返还给商户
+
+- 申诉失败：已【发起申诉】的订单，最终申诉结果是【申诉失败】
+
+- 接受拒付：在后台已经提交【接受拒付】的订单；支持申诉提交，但超过回复截止时间内还没【发起申诉】的订单
+
+- 无需处理：拒付金额为0；或拒付更新时，回复截止时间已过期（也就是不支持申诉的拒付订单）
+
+### 2.3 拒付类型
+
+拒付类型：拒付、RDR、Klarna CT、Dispute、第三方RDR、Ethoca、Other、拒付Gateway
+
+- 拒付：拒付交易
+
+- RDR：拒付警报交易
+
+- Klarna CT：Klarna拒付预警交易
+
+- Dispute：Afterpay拒付交易
+
+- 第三方RDR：第三方拒付预警交易
+
+- Ethoca：拒付预警交易
+
+- Other：交易以其他方式扣除，非拒付订单
+
+- 拒付Gateway：Gateway模式支付产品，资金非OP结算的银行通知的拒付
+
+### 2.4 发起申诉（Re-Presentment）
+
+表示商户不认同来自持卡人或发卡行向卡组织提交的拒付，需要向银行提交申诉材料，证明持卡人的争议无效，从而向银行争取返还拒付金额。
+1. 发起申诉的流程为：在【拒付处理】中根据相关的筛选条件查询到对应的拒付交易记录，点击该笔交易记录，则展开显示该笔拒付交易的详情。如下所示：
+
+![image8.png](/img/help-center/digital-platform-guide-exception-transaction-management/image8.png)
+
+2. 可以看到上图该笔拒付交易的原因是重复处理，交易日期是2025年04月29日，拒付日期是2025年06月26日，回复截止日期是2025年07月27日，则商户在2025年07月27日之前可以操作【接受拒付】或者【发起申诉】。点击【发起申诉】，则展开申诉编辑页面。
+
+![image9.png](/img/help-center/digital-platform-guide-exception-transaction-management/image9.png)
+
+![image10.png](/img/help-center/digital-platform-guide-exception-transaction-management/image10.png)
+
+3. 申诉页面已自动同步了该笔订单的原始订单信息，商户可以在此页面上修改编辑交易信息和收货信息，同时针对不同的拒付原因系统会展示对应需要提供的资料信息项，及申诉示例文字说明，双击以上绿色字体可自动同步到文本框中；上传相关证明材料后，可点击预览，系统每1分钟自动保存草稿。**点击【提交】后，允许原页面预览申诉文件**。
+
+![image11.png](/img/help-center/digital-platform-guide-exception-transaction-management/image11.png)
+
+4. 申诉提交要求证明材料使用英文，并且证明材料必须为图片，可提供1\~5 张图片。图片要求清晰，可支持JPG,JPEG,PNG等图片格式，单个图片控制在3M 以内，图片尺寸不能超过：1800px*1500px。
+
+![image12.png](/img/help-center/digital-platform-guide-exception-transaction-management/image12.png)
+
+#### 2.4.1 批量申诉
+
+功能介绍：批量申诉功能解决商户对申诉资料的个性化要求，商户可实现自主定义申诉资料排版及内容，同时批量操作提升商户体验，减少多步骤操作的繁琐过程。
+
+![image13.png](/img/help-center/digital-platform-guide-exception-transaction-management/image13.png)
+
+批量申诉与发起申诉操作的区别：
+发起申诉：对拒付订单进行单笔提交申诉资料，在拒付订单下点击“发起申诉”后会进入到指定的申诉提交页面，根据系统上指定的文本框进行编辑以及上传证明材料。
+
+批量申诉：是拒付交易板块的功能按钮，能够支持对多笔支付ID进行提交申诉资料，同时也减少了系统限制，能够支持商户自定义编辑申诉文档。
+批量申诉和发起申诉均属于提交申诉资料的方式，最终申诉结果仍取决于银行。
+
+批量申诉说明：为保证申诉文档准确匹配到需申诉的拒付订单上，需根据申诉说明进行操作，若满足以下条件则可具备批量申诉请求。
+
+- 上传文件时，请先将文件压缩为 ZIP 格式
+
+- 压缩文件命名格式必须为：Representment-YYYYMMDD.zip
+
+- 压缩包文件内，申诉文档需以支付ID命名，支持1000个以内
+
+- 不支持重复支付ID申诉文件提交，若存在两笔相同支付ID需要申诉，仅支持单笔提交
+
+- 申诉文档格式要求，请参考示例文档
+
+- 提交后，对应支付ID拒付状态变更为"申诉中”则代表文件上传成功
+
+- 上传成功后，可点击“下载凭证”进行预览申诉文档
+
+更多详情请查阅账户后台-帮助中心：【商户批量申诉操作指引】
+注意事项说明：在以下情况下，Visa和MC 可能会征收技术违规费，需要对相关信息进行涂抹脱敏。
+
+- 申诉资料中提供了如**个人身份证、护照、Visa卡等涉及个人身份信息的资料**，需要**脱敏处理**
+
+- Visa对每次违规征收技术违规费: **250.00 EUR**
+
+- MC对每次违规征收技术违规费: **200.00 EUR**
+
+### 2.5 接受拒付
+
+接受拒付表示认可此笔拒付订单，不提交申诉资料，接受银行扣除交易对应的拒付金额。
+
+1. 可以看到下图中这笔交易的回复截止时间为2025-07-27 23:59:59前，若认可这笔拒付交易，则在回复截止时间之前点击【接受拒付】，点击【接受拒付】后，不可再【发起申诉】；若回复截止时间已超过，则系统默认【接受拒付】，后续不能再【发起申诉】。商户若要提交
+申诉资料，必须在【回复截止时间】之前【发起申诉】。
+
+![image14.png](/img/help-center/digital-platform-guide-exception-transaction-management/image14.png)
+
+### 2.6 待处理提醒
+
+![image15.png](/img/help-center/digital-platform-guide-exception-transaction-management/image15.png)
+
+1. 如上图【拒付交易】，可以查看【拒付处理】全部【待处理】状态订单。也就是所有的“在回复截止时间内，支持申诉提交，但还没【发起申诉】的订单”。商户可以优先处理【回复截止时间】快到期的【待处理】订单。
+2. 对【条件筛选器】进行重新选择后，点击【查询】可以按更新后的查询条件查询数据。
+
+### 2.7 下载
+
+1.点击【下载】，可以下载查询到的结果
+
+![image16.png](/img/help-center/digital-platform-guide-exception-transaction-management/image16.png)
+
+### 2.8 详情
+
+1.点击【详情】，可以查看此笔交易的交易信息、物流信息、风险信息和附加信息。
+
+![image17.png](/img/help-center/digital-platform-guide-exception-transaction-management/image17.png)
+
+### 2.9 拒付撤销
+
+拒付撤销条件筛选：未申请、已申请、撤销成功、撤销失败
+拒付撤销与申诉区别：拒付申诉是商家对拒付有异议，提供相关资料证明拒付是无效或不合理的，最终申诉结果由发卡行决定；
+
+拒付撤销是消费者主动向发卡行取消拒付，同意返还资金，商家需提供相关撤销证明资料，以便收单行向发卡行确认拒付状态。
+
+发起拒付撤销条件：基于不同卡种的拒付流程，拒付撤销功能不完全适用于所有订单，若满足以下所有条件则可具备发起拒付撤销请求，若不满足条件拒付撤销按钮则不显示。
+
+- 支付方式为Credit Card、GooglePay、ApplePay
+
+- 拒付金额大于0
+
+- 拒付类型=拒付
+
+- 拒付状态=待处理、无需处理
+
+- 自拒付时间起15天内
+
+- 拒付撤销状态=未申请，或距离首次发起拒付撤销且撤销失败的申请时间间隔7天以上
+
+如下图所示，点击【拒付撤销】，进入提交撤销凭证页面。
+
+![image18.png](/img/help-center/digital-platform-guide-exception-transaction-management/image18.png)
+
+![image19.png](/img/help-center/digital-platform-guide-exception-transaction-management/image19.png)
+
+发起拒付撤销要求：
+
+- 拒付撤销状态筛选=未申请
+
+- 点击订单下拉详情，点击“拒付撤销”，进入提交撤销凭证页面
+
+- 撤销凭证（必填）：支持doc.docx.pdf.jpg.jpeg
+
+- 沟通记录（选填）：支持doc.docx.pdf.jpg.jpeg
+
+- 文件限制：单个限制3M，支持5个文件上传
+
+- 发起时间：自拒付时间15天内
+
+- 发起次数：最多提交2次，2次申请时间间隔大于7天
+
+- 发起笔数：仅能单笔发起，不支持批量发起
+
+拒付撤销结果反馈：
+
+- 反馈时间：5个工作日内
+
+- 撤销失败：消费者未撤销拒付，维持当前状态（7天后可发起第2次）
+
+- 撤销成功：消费者已撤销拒付，资金通过申诉成功状态返还
+
+![image20.png](/img/help-center/digital-platform-guide-exception-transaction-management/image20.png)
+
+## 3. 调单交易
+
+### 3.1 什么是调单 (Retrieval Request) ?
+
+- 当持卡人不确定其发卡行账单上的交易是否本人做出时，他们通常向其发卡行索要一份有关交易单据副本，以确定该笔交易是否是他们所为。以上行为称为调单。
+
+- 调单发生后，发卡行对此交易的交易款进行冻结，等待进一步核实后才决定是否解冻。
+
+- 若调单发生之后没有升级为拒付，则一般在交易 180 天后交易款将解冻，但某些行业和某些发卡行可能需要更长时间才会解冻交易款。
+
+### 3.2 常见调单原因
+
+|**调单原因（中文）**|**调单原因（英文）**|
+|---|---|
+|欺诈交易|Other Fraud-Card Absent Environment|
+|触发伪冒监控程序|Visa Fraud Monitoring Program|
+|持卡人未授权|No Authorization|
+|交易清算延迟|Late Presentment|
+|错误交易代码|Incorrect Transaction Code|
+|错误交易币种|Incorrect Currency|
+|错误账户|Incorrect Account Number|
+|错误交易金额|Incorrect Amount|
+|重复处理/已用其他方式支付|Duplicate Processing/Paid by Other Means|
+|无效数据|Invalid Data|
+|服务未提供或未收到商品|Merchandise/Services Not Received|
+|已取消的循环交易|Cancelled Recurring|
+|货物损坏/货不对版|Not as Described or DefectiveMerchandise/Services|
+|虚假商品|Counterfeit Merchandise|
+|虚假描述|Misrepresentation|
+|未收到退款|Credit Not Processed|
+|已取消的商品/服务|Cancelled Merchandise/Services|
+|其他|Others|
+
+## 4. 调单交易功能介绍
+
+点击【Payment】-【异常交易管理】-【调单交易】，则可以根据订单号或支付ID查询相应的交易信息。也可以根据交易时间、调单时间、回复截止时间、处理时间、调单状态等筛选相应的调单交易明细。
+
+![image21.png](/img/help-center/digital-platform-guide-exception-transaction-management/image21.png)
+
+### 4.1 查询
+
+1. 时间：默认处理时间
+
+- 交易时间：此交易发生的时间
+
+- 调单时间：此交易发生调单的时间
+
+- 回复截止时间：此交易可以提交调单撤销信的最后时间
+
+- 处理时间：Oceanpayment完成处理的时间
+
+- 商户处理时间：即商户处理调单交易的时间；例如：提交撤销调单的时间、接受退款的时间
+
+![image22.png](/img/help-center/digital-platform-guide-exception-transaction-management/image22.png)
+
+2. 账户订单号/支付ID：可以输入账户订单号，或支付ID进行查询
+
+- 可以通过【+】输入多个账户订单号，或多个支付ID
+
+- 要么同时输入账户订单号，要么同时输入支付ID；不能同时输入账户订单号和支付ID
+
+- 多个账户订单号（或多个支付ID）必须用【英文格式的逗号】隔开
+
+![image23.png](/img/help-center/digital-platform-guide-exception-transaction-management/image23.png)
+
+3. 处理状态：查看调单订单的处理状态
+
+- 已申请调单撤销：此笔交易已在后台提交【申请调单撤销】的资料
+
+- 未申请调单撤销：此笔交易未在后台提交【申请调单撤销】的资料
+
+- 无需处理：调单金额为 0；或调单更新时，回复截止时间已过期（也就是无需处理的调单订单，主要是 Klarna 的调单数据）
+
+- 已退款：此笔交易存在退款
+
+![image24.png](/img/help-center/digital-platform-guide-exception-transaction-management/image24.png)
+
+4.终端号：多选，可以查询多个终端号
+
+5.邮箱：不区分大小写，精准查询
+
+6.支付方式：可以同时选择多个支付方式
+
+7.调单取消：是/否
+
+8.调单类型：
+
+- 调单：消费者对交易有疑义
+
+- 客诉：消费者投诉交易
+
+- 询单：监控要求对订单问询
+
+![image25.png](/img/help-center/digital-platform-guide-exception-transaction-management/image25.png)
+
+### 4.2 待处理提醒
+
+![image26.png](/img/help-center/digital-platform-guide-exception-transaction-management/image26.png)
+
+1. 如上图【调单交易】，可以查看【调单处理】全部【未申请调单撤销】、【未退款】状态订单。
+2. 时间范围：从当前时间到待处理订单的最早时间内。
+
+### 4.3 下载
+
+1. 点击【下载】可以下载查询到的结果。
+
+![image27.png](/img/help-center/digital-platform-guide-exception-transaction-management/image27.png)
+
+### 4.4 详情
+
+1. 点击【详情】，可以查看此笔交易的交易信息、物流信息、风险信息和附加信息。
+
+![image28.png](/img/help-center/digital-platform-guide-exception-transaction-management/image28.png)
+
+### 4.5 接受退款
+
+1. 接受退款：表示接受此笔调单，银行直接退款处理。
+
+![image29.png](/img/help-center/digital-platform-guide-exception-transaction-management/image29.png)
+
+2. 点击接受退款，退款页面自动带出当前订单号的相关信息，可进行全额退款和部分退款。
+
+![image30.png](/img/help-center/digital-platform-guide-exception-transaction-management/image30.png)
+
+- 如上图: 接受退款，点击“接受退款”可以对这笔交易进行退款。“**接受退款不受“回复截止时间”的限制**；即使超过回复截止时间，也可以对这笔调单交易进行退款。
+
+- 若在回复截止时间之前：既没有提交【接受退款】，也没有提交【申请调单撤销】，默认接受此笔调单。可能有拒付风险，若发生拒付，银行除扣除交易款外，还需要额外收取拒付处理费。
+
+- 调单通知未及时处理的订单，**Amex 将直接升级为拒付订单**；需要商户需要及时处理调单，以避免拒付。
+
+- 调单通知未及时处理的订单，**Discover 若发生拒付，不再支持拒付申诉提交**；需要商户需要及时处理调单，以避免损失。
+
+- Discover 的调单若要【接受退款】，请**在Discover调单发生后的30天内处理**，超过30天不支持【接受退款】。
+
+### 4.6 申请调单撤销
+
+撤销调单申请信：向银行提交调单撤销的相关材料，申请撤销调单。
+
+![image31.png](/img/help-center/digital-platform-guide-exception-transaction-management/image31.png)
+
+1. 点击撤销调单，则展开撤销调单编辑页面。
+
+![image32.png](/img/help-center/digital-platform-guide-exception-transaction-management/image32.png)
+
+2. 根据调单原因，选择对应调单证明资料。
+
+![image33.png](/img/help-center/digital-platform-guide-exception-transaction-management/image33.png)
+
+3. 光标点击示例， 调单撤销示例文字说明，自动获取调单撤销示例，并对示例文字进行补充。
+4. 上传证明文件:最多上传5张图片，图片支持JPG，JPEG，PNG等图片格式，单个图片最大3M，图片尺寸不能超过：1800px*1500px。
+
+![image34.png](/img/help-center/digital-platform-guide-exception-transaction-management/image34.png)
+
+5. 上传图片后，可点击图片放大预览。
+
+![image35.png](/img/help-center/digital-platform-guide-exception-transaction-management/image35.png)
+
+6. 完成所有必填项(其他选项可根据实际情况进行提交)，点击提交后，【处理状态】由“未申请调单撤销”变更为“已申请调单撤销”。
+
+### 4.7 调单撤销下载凭证
+
+1. 点击“调单撤销下载凭证”，可以下载商户调单撤销上传的图片文件。
+
+![image36.png](/img/help-center/digital-platform-guide-exception-transaction-management/image36.png)
+
+### 4.8 Klarna调单
+
+1. Klarna调单交易在【调单交易】板块无需处理，“操作”内容为空。商户需在【争议交易】版块处理Klarna Dispute相关的订单。
+
+![image37.png](/img/help-center/digital-platform-guide-exception-transaction-management/image37.png)
+
+### 4.9 调单撤销信资料要求
+
+信息正确且完整
+
+- 点击【撤销调单】,即进入【调单撤销资料】提交界面。如下【交易信息】与【收货信息】，可直接编辑修改，将对应信息填写正确与完整。
+
+![image38.png](/img/help-center/digital-platform-guide-exception-transaction-management/image38.png)
+
+撤销调单材料要求使用英文
+
+- 因收单银行的工作语言为英文，所以商户提交的撤销调单材料除了持卡人填写的真实信息外，撤销调单材料尽量使用英文。请不要使用中文。
+
+更全面的资料提交
+
+- 调单撤销信线上化升级后，不仅提供了更全面的调单撤销信资料选择，也对提供了对应调单撤销示例文字供商户使用。可参照如下图示:
+
+![image39.png](/img/help-center/digital-platform-guide-exception-transaction-management/image39.png)
+
+商户可根据自己的情况，提交多个选项，提供对应的证明材料(每项证明材料可提供 1-5 张图片)。总之，调单撤销信资料越全面且有效，调单取消的机率越大。
+证明材料须为有效图片
+
+- 证明材料必须为图片，图片要求清晰，最多上传5张图片，图片支持JPG，JPEG，PNG等图片格式，单个图片最大3M，图片尺寸不能超过：1800px*1500px；图片内容是调单撤销相关，且为支持调单撤销申请。
+
+![image40.png](/img/help-center/digital-platform-guide-exception-transaction-management/image40.png)
+
+## 5. 伪冒交易
+
+### 5.1 什么是伪冒 (Fraud)
+
+各发卡行会将消费者的欺诈行为报告给对应的机构（TC40或SAFE），收单行和发卡行将根据这些机构出具的报告，了解交易的欺诈风险情况，及时调整风控策略，从而确保将欺诈交易控制在合理范围内。Visa的欺诈行为报告为TC40；MasterCard的欺诈行为报告为SAFE。我们把这些报告涉及的交易称为伪冒交易。
+
+- TC40- Transactions reported by issuers for VISA transactions
+
+- SAFE(System to Avoid Fraud Effectively) – Transactions reported by issuers for MasterCard transactions
+
+### 5.2 伪冒原因
+
+|伪冒原因|
+|---|
+|卡片遗失|
+|卡片被盗|
+|卡片未收到|
+|虚假文件申请信用卡|
+|发卡行报假卡（伪冒）|
+|卡片不出现（账户卡号被冒用）|
+|收单行报欺诈|
+|无确定理由（其他）|
+|其他|
+|操纵持卡人|
+|修改支付指令|
+
+## 6. 伪冒交易功能介绍
+
+点击【Payment】-【异常交易管理】-【伪冒交易】，则可以根据账户订单号或支付ID查询相应的交易信息。也可以根据交易时间、伪冒时间、终端号等筛选相应的伪冒交易明细。
+
+![image41.png](/img/help-center/digital-platform-guide-exception-transaction-management/image41.png)
+
+### 6.1 查询
+
+1. 时间：默认伪冒时间
+
+- 交易时间：此交易发生的时间
+
+- 伪冒时间：此交易发生伪冒的时间
+
+- 商户处理时间：即商户处理伪冒交易的时间；例如：接受退款的时间
+
+![image42.png](/img/help-center/digital-platform-guide-exception-transaction-management/image42.png)
+
+2. 账户订单号/支付ID：可以输入账户订单号，或支付ID进行查询
+
+- 可以通过【+】输入多个账户订单号，或多个支付ID
+
+- 要么同时输入账户订单号，要么同时输入支付ID；不要同时输入账户订单号和支付ID
+
+- 多个账户订单号（或多个支付ID）必须用【英文格式的逗号】隔开
+
+![image43.png](/img/help-center/digital-platform-guide-exception-transaction-management/image43.png)
+
+3. 退款状态：已退款、未退款
+
+![image44.png](/img/help-center/digital-platform-guide-exception-transaction-management/image44.png)
+
+4. 终端号：可以同时选择多个终端号
+
+5. 邮箱：区分大小写，精准查询
+
+6. 是否拒付：已拒付/未拒付
+
+7. 可以同时选择多个支付方式
+
+### 6.2 下载
+
+1. 点击【下载】，可以下载查询到的结果。
+
+![image45.png](/img/help-center/digital-platform-guide-exception-transaction-management/image45.png)
+
+### 6.3 接受退款
+
+点击接受退款，退款页面自动带出当前订单号的相关信息，可进行全额退款和部分退款。
+
+![image46.png](/img/help-center/digital-platform-guide-exception-transaction-management/image46.png)
+
+- 接受退款：点击【接受退款】，接受此笔伪冒交易，接受退款：通过退款的方式来避免这笔交易升级为拒付。
+
+- 若在收到伪冒通知后没有及时【接受退款】，可能会有88%以上的机率将发生拒付，拒付发生时，银行除扣除交易款外，还需要额外收取拒付处理费。
+
+- 为避免拒付发生，商户需要及时处理伪冒，以避免损失。
+
+### 6.4 详情
+
+1. 点击“详情”，可以查看此笔交易的交易详情、物流信息、风险信息和附加信息。
+
+![image47.png](/img/help-center/digital-platform-guide-exception-transaction-management/image47.png)
+
+### 6.5 待处理提醒
+
+1. 如下图【伪冒交易】，可以查看【伪冒交易】全部【未退款】【未拒付】状态订单。时间范围：从当前时间到待处理订单的最早时间内。
+
+![image48.png](/img/help-center/digital-platform-guide-exception-transaction-management/image48.png)
+
+## 7. Klarna争议
+
+### 7.1 什么是Klarna宽限期
+
+当消费者向Klarna提出争议时，Klarna会自动暂停账单并建议消费者：
+
+- 如有退货，请将商品退回
+
+- 如有其他争议原因(未收到货物、有缺陷的货物等)，请联系商户
+
+- 在消费者提出争议给Klarna后，商户有21天的时间来解决该案件。但“未经授权的购买”(消费者提出的欺诈)由于情况紧急，商户需要在当天回复。
+
+- 如果商户和消费者不能在Klarna给定的解决时间内达成一致的解决方案，Klarna将介入调查，则订单进入争议处理阶段。
+
+- Klarna未介入订单争议处理之前为Klarna宽限期。
+
+### 7.2 什么是Klarna争议
+
+当订单在宽限期未能达成一致的解决方案，Klarna介入订单的争议处理时，进入Klarna争议(Dispute)处理环节。
+
+- 每笔争议订单均有响应的截止时间，商户需要在截止时间回复Klarna。
+
+- 一笔Klarna订单，同一个争议案件只要争议未解决，消费者可以持续向商户了解更多信息，发起多次争议请求；
+
+- 一笔Klarna订单争议，若消费者已认可商户的解决方案，则当前的争议问题已关闭。
+
+- 消费者已认可并已关闭的Klarna争议订单，若消费者后续有疑义，可以再发起新的争议(Dispute)案件，新的争议(Dispute)案件未解决之前，消费者依然可以持续向商户了解更多争议疑问，发起多次争议请求。
+
+- 一笔Klarna争议订单，若消费者不认可商户的解决方案，且则此争议将升级为拒付，Klarna直接返款给到消费者。
+
+**Klarna争议升级拒付后，不支持商户提交申诉。**
+
+更多Klarna 争议内容详情见：https://docs.klarna.com/disputes/disputes-app-in-merchant-portal/
+
+### 7.3 Klarna常见争议原因
+
+|争议原因（中文）|争议原因（英文）|
+|---|---|
+|服务未提供或未收到商品|Goods not received|
+|退款/退货|Return|
+|货不对版/货物损坏|Faulty Goods|
+|已取消的商品/服务|Incorrect Invoice|
+|重复交易|Already Paid|
+|未授权交易|Unauthorized purchases|
+|高风险订单|High risk order|
+|受新冠疫情影响|Pandemic impact|
+
+更多关于争议处理要求，请参考Klarna【Merchant Protection Program】，详情见如下链接：
+
+[https://www.klarna.com/international/merchant-protection-program/](https://www.klarna.com/international/merchant-protection-program/)
+
+### 7.4 Klarna Dispute处理流程（宽限期和争议）
+
+![image49.png](/img/help-center/digital-platform-guide-exception-transaction-management/image49.png)
+
+## 8. 争议交易功能介绍
+
+点击【Payment】-【异常交易管理】-【争议交易】，则可以根据订单号或支付ID查询相应的交易信息。也可以根据时间类型、争议类型、处理状态、争议次数、Klarna处理状态等筛选相应的争议交易明细。
+
+![image50.png](/img/help-center/digital-platform-guide-exception-transaction-management/image50.png)
+
+### 8.1 查询
+
+1. 时间类型：可选申请时间、交易时间、发起时间、争议回复截止时间、宽限期开始时间、宽限期结束时间；默认查询【申请时间】。
+
+- 申请时间：宽限期、争议订单在 Oceanpayment 后台更新的时间
+
+- 交易时间：此笔交易的交易发生时间
+
+- 发起时间：Klarna 订单升级为争议的时间
+
+- 争议回复截止时间：在 Oceanpayment 后台提交 Klarna 争议申诉提交的最后截止时间
+
+- 宽限期开始时间：Klarna 订单升级为宽限期的时间
+
+- 宽限期结束时间：Klarna 宽限期订单结束的时间
+
+- 关闭时间：宽限期、争议订单在Klarna后台关闭的时间
+
+- 商户处理时间：即商户处理争议交易的时间，例如：发起申诉的时间、点击联系消费者的时间、接受退款的时间
+
+2. 最多可以同时选择五组时间类型进行交叉查询。
+
+![image51.png](/img/help-center/digital-platform-guide-exception-transaction-management/image51.png)
+
+3. 条件筛选器选择处理状态为【未处理】，可查看订单剩余回复【截止天数】，若回复截止时间未到，则截止天数范围为当天、1、2、3、4、5、6、7、大于7天；若当前已超过回复截止时间，截止天数显示-。
+
+![image52.png](/img/help-center/digital-platform-guide-exception-transaction-management/image52.png)
+
+4. 起始时间：根据所选时间类型查询开始时间。
+
+5. 截止时间：根据所选时间类型查询截止时间。
+
+6. 账户订单号/支付ID：可以输入账户订单号，或支付ID进行查询。
+
+- 可以通过【+】输入多个账户订单号，或多个支付ID
+
+- 要么同时输入账户订单号，要么同时输入支付ID；不能同时输入账户订单号和支付ID
+
+- 多个账户订单号（或多个支付ID）必须用【英文格式的逗号】隔开
+
+![image53.png](/img/help-center/digital-platform-guide-exception-transaction-management/image53.png)
+
+7. 争议类型：可查询争议、宽限期订单，可支持多个类型查询，也可以单个类型查询，默认查询所有的争议类型。
+
+8. 处理状态：可查询未处理、已处理、无需处理的订单。
+
+- 无需处理：订单可退金额=0(每2个小时更新一次状态判断)
+
+- 已处理：争议订单已提交争议申诉，或宽限期订单点击确认【是否已联系消费者】
+
+- 未处理：【无需处理】和【已处理】外的订单，均为【未处理】订单
+
+- 宽限期的【未处理】订单：建议商户在宽限期结束时间之前，与消费者联系沟通并双方达成一致，可以点击【是否已联系消费者】并完成确认，用来记录已处理过宽限期的订单
+
+- 争议的【未处理】订单：Klarna介入处理，需要商户在争议回复截止时间之前，提交争议申诉资料，或退款后提交争议申诉补充退款说明
+
+9. 争议次数：通过选择框选择争议次数，可支持多选。
+
+10. 争议原因：根据争议原因筛选，可支持多选，默认查询所有争议原因。
+
+11. 终端号：可以同时选择多个终端号。
+
+12. 邮箱：区分大小写，精准查询。
+
+13. 申诉状态：可查询争议的申诉状态，默认查询所有状态。
+
+- 未申诉：宽限期订单全部为【未申诉】；争议订单没有提交【发起争议申诉】的订单
+
+- 争议申诉中：争议订单已提交【发起争议申诉】的订单
+
+14. Klarna 处理状态：Klarna API 同步 Klarna 端的处理结果，默认查询 Klarna 处理中的状态
+
+- Klarna处理中：Klarna还没有给出争议的最终处理结果
+
+- Klarna已关闭：Klarna端已给出此争议订单的处理结果，可能是消费者取消了争议，也可能是发生了拒付，也可能是商户操作了退款等
+
+15. 是否退款：是/否；宽限期或争议订单是否存在退款记录。
+
+16. 是否拒付：是/否；宽限期或争议订单是否存在拒付记录。
+
+### 8.2 下载
+
+1. 点击【下载】，可以下载查询到的结果。
+
+![image54.png](/img/help-center/digital-platform-guide-exception-transaction-management/image54.png)
+
+### 8.3 待处理提醒
+
+![image55.png](/img/help-center/digital-platform-guide-exception-transaction-management/image55.png)
+
+1. 点击上图【争议交易】，可以查看【争议交易】全部【未处理】状态订单。
+2. 对【条件筛选器】进行重新选择后，点击【查询】可以按更新后的查询条件查询数据。
+
+### 8.4 宽限期处理流程
+
+- Klarna 宽限期的订单，请商户与消费者积极沟通解决方案，避免超过宽限期结束时间还未达成一致解决方案而升级至 Klarna 介入处理。
+
+- 一旦 Klarna 介入处理，除了需要回复相应的申诉资料外，还可能会有争议费用或升级成为拒付。在宽限期结束时间之前，与消费者沟通达成一致，以避免升级为争议。
+
+自2024-01-01起，Klarna进入宽限期的订单将进行资金冻结（调单），若宽限期订单后续发生了拒付或者退款，系统会立刻自动释放该笔资金退回给到消费者。若宽限期订单后续没有发生拒付或退款，系统120天后会自动释放该笔资金走正常结算流程。为了减少宽限期的订单后续产生拒付，建议商户可以加强服务响应，多与消费者沟通积极解决客诉问题。
+
+1.【是否已联系消费者】：商户可以点击【是否已联系消费者】并完成确认，用来记录已处理过宽限期的订单。
+
+![image56.png](/img/help-center/digital-platform-guide-exception-transaction-management/image56.png)
+
+2. 【备注记录】：商户可以点击【备注记录】，用于记录宽限期订单与消费者的沟通情况。
+
+![image57.png](/img/help-center/digital-platform-guide-exception-transaction-management/image57.png)
+
+![image58.png](/img/help-center/digital-platform-guide-exception-transaction-management/image58.png)
+
+3. 【接受退款】：商户可以点击【接受退款】并完成确认，对【宽限期】的订单进行退款操作。点击接受退款，退款页面自动带出当前订单号的相关信息，可进行全额退款和部分退款。
+
+![image59.png](/img/help-center/digital-platform-guide-exception-transaction-management/image59.png)
+
+4. 【Comment回复动态】：商户可以点击【Comment回复动态】查看消费者发起争议时提供给Klarna此Dispute Case的Comment文字内容的全部往返的沟通记录（如有）。
+
+![image60.png](/img/help-center/digital-platform-guide-exception-transaction-management/image60.png)
+
+![image61.png](/img/help-center/digital-platform-guide-exception-transaction-management/image61.png)
+
+### 8.5 争议处理流程
+
+1. 争议时间: 此笔交易升级为争议，争议开始的时间。
+
+2. 争议回复截止时间: 商户可以在争议回复截止时间之前【接受退款】或【发起争议申诉】。若超过争议回复截止时间，此笔争议很大可能会升级为拒付，给商户带来拒付金额和争议费用损失。
+
+小技巧：不要以【争议回复截止时间】来处理争议，建议以【发起时间】来处理争议，避免消费者因为等待时间过长升级投诉，导致Klarna直接判定为拒付。
+
+![image62.png](/img/help-center/digital-platform-guide-exception-transaction-management/image62.png)
+
+3. 接受退款：点击【接受退款】可以对这笔Klarna争议进行退款；点击接受退款，退款页面自动带出当前订单号的相关信息，可进行全额退款和部分退款。
+点击【接受退款】后，请继续下一步，在后续的【发起争议申诉】的Comment中补充退款说明，以便Klarna关闭此争议，争议申诉提交完后当前争议订单处理状态将变更为已处理。
+
+![image59.png](/img/help-center/digital-platform-guide-exception-transaction-management/image59-1.png)
+
+4. 发起争议申诉：点击【发起争议申诉】，进入争议申诉资料申请页面，按照指引和争议评论（Comment）提交Klarna所需的争议申诉资料。
+
+![image63.png](/img/help-center/digital-platform-guide-exception-transaction-management/image63.png)
+
+争议信息填写：如下为Klarna Dispute API必填写信息，请按指引完善申诉内容。
+
+![image64.png](/img/help-center/digital-platform-guide-exception-transaction-management/image64.png)
+
+申诉材料提交：【争议信息填写】后，【下一步】可以进入【申诉材料提交】环节，可以按指引提交相关补充材料。
+
+![image65.png](/img/help-center/digital-platform-guide-exception-transaction-management/image65.png)
+
+![image66.png](/img/help-center/digital-platform-guide-exception-transaction-management/image66.png)
+
+申诉文档下载：提交申诉后，处理状态变更为“已处理”；点击详情-申诉文档下载，可查看到争议申诉文档。
+
+![image67.png](/img/help-center/digital-platform-guide-exception-transaction-management/image67.png)
+
+Comment回复动态：商户可以通过点击comment回复动态查看当前 Klarna 争议案件全部回复过程。
+
+![image68.png](/img/help-center/digital-platform-guide-exception-transaction-management/image68.png)
+
+### 8.6 Klarna争议申诉资料指引
+
+上传说明**：**根据不同争议原因的指引，结合争议评论（Comment）内容，如实填写订单相关状态。
+
+申诉示例：指引如何阐述争议申诉提交内容； 建议直接借鉴申诉示例文字。
+
+证明材料：争议资料证明图片直接上传； (支持jpg、jpeg、png格式)；每项争议资料说明的场景均可上传证明材料，上传后可点击预览图片。
+
+争议申诉材料要求使用英文：Klarna官方处理语言为英文，申诉资料通过API对接，系统自动提交给Klarna。
+
+证明材料须为有效图片：证明材料必须为图片，可提供1-5张图片，图片支持jpg、jpeg、png格式图片要求清晰，单个图片最大控制在3M以内，图片尺寸不能超过：1800px*1500px。
+注意事项说明：**在申诉资料中提供了如个人身份证、护照、卡片等涉及个人身份信息的资料，需要脱敏处理**。
+Klarna申诉资料要求累计需要控制在7M以内，否则无法同步至Klarna。
+
+### 8.7 Klarna拒付
+
+1. Klarna Dispute处理流程如下：
+
+- 【宽限期】：商户与消费者沟通
+
+- 【争议】：Klarna介入，商户需要回复Klarna，提供相应的争议申诉文件
+
+- 【拒付】：商户未回复争议，或Klarna判定商户争议申诉失败
+
+- 【争议退款】：商户认可争议，Oceanpayment系统会自动标记一笔拒付金额=0的拒付订单，用于收取Klarna Dispute Fee
+
+**一旦Klarna发生拒付，Klarna Dispute 处理流程结束，商户无继续申诉的机会。**
+
+## 9. 信用卡申诉处理
+
+### 9.1 什么情况下发起申诉
+
+- 商户认为持卡人拒付不合理，同时商户有充分的申诉证明资料
+
+- 商户有充分的证明资料，证明提供了正确的货物或服务给持卡人
+
+### 9.2 不支持申诉的场景
+
+- 已退款交易：拒付金额为0的拒付交易
+
+- 巴西本地信用卡：不接受申诉处理，需要默认接受拒付
+
+- 墨西哥本地信用卡：不接受申诉处理，需要默认接受拒付
+
+- RDR：国际信用卡Visa，RDR拒付预警交易
+
+- 国际信用卡Discover：调单订单未回复导致升级为拒付的订单，发生拒付的订单不支持申诉
+
+- Klarna拒付：Klarna的争议流程为【宽限期-争议-拒付】，一旦发生拒付，则表示争议结果为拒付，不再支持申诉
+
+- 韩国本地支付：韩国本地支付的争议流程为【调单-拒付】，一旦发生拒付，则表示争议调单结果为拒付，不再支持申诉
+
+不支持申诉的场景在系统的展示效果：**拒付更新时，回复截止时间已过期。**
+
+### 9.3 申诉资料要求
+
+- 信息正确且完整
+
+- 点击【发起申诉】，即进入【申诉资料】提交界面。如下【交易信息】与【收货信息】，可直接编辑修改，将对应信息填写正确与完整。
+
+![image69.png](/img/help-center/digital-platform-guide-exception-transaction-management/image69.png)
+
+- 申诉材料要求使用英文
+
+因收单银行的工作语言为英文，所以商户提交的申诉材料除了持卡人填写的真实信息外，申诉材料尽量使用英文，以提高申诉成功率。请不要使用中文。
+
+- 更全面的申诉资料提交
+
+申诉流程升级后，不仅提供了更全面的申诉资料选择，也对提供了对应申诉示例文字供商户使用。可参照如下图示：
+
+![image70.png](/img/help-center/digital-platform-guide-exception-transaction-management/image70.png)
+
+- 商户可根据自己的情况，提交多个选项，提供对应的证明材料（每项证明材料可提供1-5张图片）。
+
+- 总之，申诉资料越全面且有效，申诉成功的机率越大。
+
+- 证明材料须为有效图片
+
+证明材料必须为图片，可提供1-5张图片。图片要求清晰，单个图片控制在3M以内，图片尺寸不能超过：1800px*1500px；图片内容是申诉相关，且为支持申诉申请。
+
+![image71.png](/img/help-center/digital-platform-guide-exception-transaction-management/image71.png)
+
+更多详情请查阅账户后台-帮助中心：【商户申诉资料提交指引】
+
+### 9.4 申诉资料常见问题
+
+- 申诉材料均为中文
+
+因收单银行的工作语言为英文，所以商户提交的申诉材料除了持卡人填写的真实信息外，申诉材料尽量使用英文。
+
+- 证明资料信息前后不一致，各申诉资料截图上的信息前后不一致，如下：
+
+- 交易详情与信用卡信息上的姓名不一致
+
+- 交易详情中收货地址与发货证明中的地址不一致
+
+- 持卡人账单地址与交易详情中的持卡人账单地址不一致
+
+- 申诉资料存在消费者个人卡片信息
+
+**申诉资料中提供了如个人身份证、护照、信用卡卡片等涉及个人身份信息的资料，需要脱敏处理。**
+
+- 货物在途未被签收
+
+对于“服务未提供或商品未收到”产生的拒付，不能提供货物还在运输途中的物流详情资料，需要提供已签收的物流详情资料。
+
+- 无法证明货物一致
+
+- 对于“货不对版/货物损坏”产生的拒付，不能只提供物流详情或产品详情描述，需要提供能证明发出的货物和消费者收到的货物是一致的证明。
+
+- 针对此种情况，建议先跟消费者协商是否退换货，以便申请时可提供与消费者协议后的沟通资料。
+
+### 9.5 申诉结果更新
+
+- 当在账户后台【发起申诉】，对应的申诉结果将在【回复截止时间】120天内更新在账户后台。
+
+- 若【申诉成功】，则申诉结果会在【回复截止时间】120天内更新在账户后台；【申诉失败】以收到银行通知进行更新。若【回复截止时间】超过120天，则说明此笔交易【申诉失败】。
+
+- Oceanpayment会在每月月底将本月【申诉成功】的交易统一更新至账户后台。
+
+- 为提升申诉成功的机率，请按照Oceanpayment账户后台的申诉指引，提供全面有效的申诉资料。
+
+- 申诉成功的金额，我们将会在本批次的结算日中给您进行结算，请确认查收。
+
+## 10. 韩国本地支付拒付
+
+1. 韩国本地支付 Dispute处理流程如下：
+
+- 【调单】：商户需要回复韩国本地支付银行
+
+- 【拒付】：商户未回复争议，或韩国本地支付判定商户争议申诉失败
+
+一旦韩国本地支付发生拒付，韩国本地支付 Dispute 处理流程结束，商户无继续申诉的机会。
+
+![image72.png](/img/help-center/digital-platform-guide-exception-transaction-management/image72.png)

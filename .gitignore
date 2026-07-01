@@ -42,3 +42,4 @@ start-preview.bat
 # Keep most helper scripts local, but commit the docs audit used for release checks.
 /scripts/*
 !/scripts/audit-docs-content.js
+!/scripts/import-feishu-markdown-docs.js

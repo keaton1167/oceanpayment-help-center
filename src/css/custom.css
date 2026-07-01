@@ -56,12 +56,19 @@ body {
   font-weight: 600;
 }
 
-.theme-doc-sidebar-item-link,
-.theme-doc-sidebar-item-link-level-1 > .menu__link {
+.theme-doc-sidebar-item-link {
   font-size: 13px;
 }
 
+.theme-doc-sidebar-item-category > .menu__list-item-collapsible > .menu__link,
 .theme-doc-sidebar-item-link-level-1 > .menu__link {
+  align-items: center;
+  display: flex;
+  min-height: 40px;
+}
+
+.theme-doc-sidebar-item-link-level-1 > .menu__link {
+  font-size: 14px;
   font-weight: 600;
 }
 

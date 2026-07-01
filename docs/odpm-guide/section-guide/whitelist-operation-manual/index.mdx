@@ -1,0 +1,113 @@
+---
+title: "Oceanpayment ODPM - Whitelist Operation Manual 2025-07-25"
+sidebar_label: "Oceanpayment ODPM - Whitelist Operation Manual 2025-07-25"
+sidebar_position: 4
+hide_title: true
+---
+## 1. Whitelist Function
+
+**Path: **Payment \> Risk\&Fruad \> Whitelist
+
+In this section, merchants can add their customers’ information into the whitelist. The Oceanpayment risk control system will relax the restrictions on transactions for consumers on the whitelist.
+
+- Caution: Please be aware that consumers on the whitelist are exempt from Oceanpayment’s risk control restrictions, and merchants voluntarily assume any adverse effects and economic losses that may result from this. If Oceanpayment verifies that a consumer is a delinquent consumer or that there are anomalies in whitelist transactions, Oceanpayment reserves the right to directly deactivate the consumer information on the whitelist.
+
+### 1.1 Search
+
+![image6.jpeg](/img/help-center/whitelist-operation-manual/image6.jpeg)
+
+- Whitelist Element: Card Number, Email, IP address
+
+- Time Frame: Start datetime \~ End datetime(default to the current datetime)
+
+- Whitelist Status: Active/Disabled
+
+- Terminal No.: Allow multiple selection on terminals or search the whole account.
+
+- Whitelist Value: Input the text, and the system will conduct a precise match query.
+
+- Operator: Input the text, and the system will conduct a fuzzy match query.
+
+- Remarks: Input the text, and the system will conduct a fuzzy match query.
+
+### 1.2 Add
+
+Click the **[Add] **button to enter the page for adding consumer whitelist information.
+
+![image7.jpeg](/img/help-center/whitelist-operation-manual/image7.jpeg)
+
+The page for adding consumer whitelist information are as follows:
+
+![image8.jpeg](/img/help-center/whitelist-operation-manual/image8.jpeg)
+
+![image9.jpeg](/img/help-center/whitelist-operation-manual/image9.jpeg)
+
+![image10.jpeg](/img/help-center/whitelist-operation-manual/image10.jpeg)
+
+![image11.jpeg](/img/help-center/whitelist-operation-manual/image11.jpeg)
+
+#### 1.2.1 Whitelist Element
+
+- OP Payment ID: Input an OP Payment ID into the whitelist, its corresponding email address, card number, IP address will be added into the whitelist simultaneously.
+
+- Email: Add the email address into the whitelist.
+
+- Card Number: Add the HASH value of this card number to the whitelist; display the first 6 and last 4 digits of the card number.
+
+- IP address: Add the IP address to the whitelist; both IPv4 and IPv6 addresses can be added.
+
+#### 1.2.2 Whitelist Status
+
+- Active: The consumer whitelist takes effect within the Oceanpayment risk control system. When processing transactions for consumers on the whitelist, the Oceanpayment risk control system relaxes its risk control restrictions.
+
+- Disabled: The consumer whitelist does not take effect in the Oceanpayment risk control system, and the Oceanpayment risk control system maintains its original risk control restrictions.
+
+#### 1.2.3 Whitelist Value
+
+- Merchants can enter multiple values of whitelist elements, and press Enter and newline separate them. A maximum of 1000 values can be added at a time.
+
+#### 1.2.4 Terminals No. (Required Field)
+
+- Account number: If select an account number, the whitelist value takes effect for all transactions associated with the current account number.
+
+- Terminals: If select a terminal number, the whitelist value only takes effect for transactions associated with the current terminal.
+
+#### 1.2.5 Remarks
+
+- This is a required field. Please enter text (up to 1,000 characters). Suggested note content: OP Payment ID + Reason for Addition.
+
+### 1.3 Modify
+
+Select the whitelist record and click the **[Modify] **button to enter the page for modifying consumer whitelist information.
+
+![image12.jpeg](/img/help-center/whitelist-operation-manual/image12.jpeg)
+
+The page for modifying consumer whitelist information is as follows:
+
+![image13.jpeg](/img/help-center/whitelist-operation-manual/image13.jpeg)
+
+- When selecting a whitelist record, only a single record can be modified at a time; multiple records cannot be modified simultaneously.
+
+- Modifications are only permitted for records with an active whitelist status. The fields that can be modified include Whitelist Status, Terminal No., and Remarks.
+
+### 1.4 The whitelist is disabled in batches
+
+Select whitelist records and click **[The whitelist is disabled in batches] **button to proceed to the next operation page.
+
+![image14.jpeg](/img/help-center/whitelist-operation-manual/image14.jpeg)
+
+The page for disabling consumer whitelist information is as follows:
+
+![image15.jpeg](/img/help-center/whitelist-operation-manual/image15.jpeg)
+
+- When selecting whitelist records, merchants can disable the whitelist status of a single record, or disable the whitelist status of multiple records simultaneously.
+
+- When updating the whitelist status of multiple records, all selected records will be simultaneously updated to a disabled status.
+
+## 2. Restrictions for Whitelist Addition
+
+- Consumers on the blacklist are restricted from being added to the whitelist.
+
+- Consumers who have already been added to the whitelist are not supported for repeated addition to the whitelist.
+
+- If a whitelist value has been disabled, it cannot be re-added to the whitelist.
