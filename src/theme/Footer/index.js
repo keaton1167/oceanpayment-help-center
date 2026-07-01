@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import {useThemeConfig} from '@docusaurus/theme-common';
 import styles from './styles.module.css';
 
@@ -43,6 +44,7 @@ function FooterLink({item}) {
 
 export default function Footer() {
   const {footer} = useThemeConfig();
+  const logoSrc = useBaseUrl('/img/op-logo.svg');
   const {
     i18n: {currentLocale},
   } = useDocusaurusContext();
@@ -63,7 +65,7 @@ export default function Footer() {
       <div className={styles.inner}>
         <div className={styles.main}>
           <div className={styles.brand}>
-            <img src="/img/op-logo.svg" alt="Oceanpayment" />
+            <img src={logoSrc} alt="Oceanpayment" />
             <p>{tagline}</p>
             <div className={styles.socials}>
               {socialLinks.map((item) => (
