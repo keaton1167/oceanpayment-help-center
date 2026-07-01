@@ -39,6 +39,14 @@
     return BASE + url.replace(/^\.\//, '');
   }
 
+  function normalizeDocImagePaths() {
+    document.querySelectorAll('.theme-doc-markdown img[src^="/img/"]').forEach(function(img) {
+      var src = img.getAttribute('src');
+      if (!src) return;
+      img.setAttribute('src', withBase(src));
+    });
+  }
+
   function isAttachmentLink(href) {
     if (!href) return false;
     return HELP_CENTER_RE.test(href) || ASSETS_RE.test(href);
@@ -391,6 +399,8 @@
   }
 
   function enhance() {
+    normalizeDocImagePaths();
+
     document.querySelectorAll('.theme-doc-markdown a[href]').forEach(function(link) {
       if (link.getAttribute('data-att-enhanced') === 'true') return;
       var href = link.getAttribute('href') || '';
@@ -430,6 +440,8 @@
           if (n.nodeType !== 1) return;
           if (n.matches && n.matches('.theme-doc-markdown a[href]')) found = true;
           if (n.querySelector && n.querySelector('.theme-doc-markdown a[href]')) found = true;
+          if (n.matches && n.matches('.theme-doc-markdown img[src^="/img/"]')) found = true;
+          if (n.querySelector && n.querySelector('.theme-doc-markdown img[src^="/img/"]')) found = true;
         });
       });
       if (found) setTimeout(enhance, 100);
