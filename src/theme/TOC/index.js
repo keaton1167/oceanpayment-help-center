@@ -12,15 +12,10 @@ const LINK_ACTIVE_CLASS_NAME = 'table-of-contents__link--active';
 const introLinks = {
   zh: [
     {label: 'ODPM 操作指引', href: '/docs/odpm-guide/section-guide/account-application-guide/'},
-    {label: 'Payment FAQ', href: '/docs/payment-faq/info-update/logistics-upload-manual/'},
-    {label: 'OP Card FAQ', href: '/docs/op-card-faq/common-questions/logistics-query-upload-guide/'},
-    {label: '产品与服务', href: '/docs/products-services/oceanpayment-products/data-analysis-manual/'},
+    {label: 'Payment FAQ', href: '/docs/payment-faq/account-transfer/opccount-platform-manual/'},
   ],
   en: [
     {label: 'ODPM Guide', href: '/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/'},
-    {label: 'Payment FAQ', href: '/docs/payment-faq/info-update/assign-account-setting/'},
-    {label: 'OP Card FAQ', href: '/docs/op-card-faq/common-questions/opccount-guideline/'},
-    {label: 'Products', href: '/docs/products-services/oceanpayment-products/reconciliation-guideline/'},
   ],
 };
 

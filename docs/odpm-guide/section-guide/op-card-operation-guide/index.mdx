@@ -1,0 +1,676 @@
+﻿---
+title: Oceanpayment ODPM-OP Card操作指引手册 2025-8-5
+sidebar_label: Oceanpayment ODPM-OP Card操作指引手册 2025-8-5
+sidebar_position: 11
+---
+## 1. 前言：
+
+### 1.1 OP Card商户平台介绍：
+
+OP Card商户平台支持发卡业务商户进行卡片管理，额度管理，余额查询，交易查询，账单查询等功能，帮助商户管理发卡业务各板块的数据和信息。
+
+### 1.2 页面概览 ：
+
+首页概览
+
+![图片](/img/help-center/op-card-operation-guide/RsNbbt3K4oYY02xcDZvcAZz3nsh.png)
+
+**卡片查询**
+
+![图片](/img/help-center/op-card-operation-guide/L6fTbdnPbocOlBxfimCcsjRInse.png)
+
+**额度+报表**
+
+![图片](/img/help-center/op-card-operation-guide/HLz6bKqpsoRAdJx4d16cW9Uvnmd.png)
+
+![图片](/img/help-center/op-card-operation-guide/E9C6b0RPEoE2bexNCf2cvtawnqc.png)
+
+![图片](/img/help-center/op-card-operation-guide/LnOXb3BpAo26dlx9cmzcJcI7nCg.png)
+
+### 1.3 功能模块概述：
+
+<table className="doc-merged-table">
+  <thead>
+    <tr>
+      <th>功能模块<br />（一级）</th>
+      <th>功能模块<br />（二级）</th>
+      <th>功能按钮</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td rowSpan={5}>首页</td>
+      <td rowSpan={5}></td>
+      <td>额度管理</td>
+    </tr>
+    <tr><td>创建卡片</td></tr>
+    <tr><td>账单报表</td></tr>
+    <tr><td>交易报表</td></tr>
+    <tr><td>额度提醒</td></tr>
+    <tr>
+      <td rowSpan={18}>卡片管理</td>
+      <td rowSpan={8}>卡片查询</td>
+      <td>查询</td>
+    </tr>
+    <tr><td>创建卡片</td></tr>
+    <tr><td>导出</td></tr>
+    <tr><td>批量销卡</td></tr>
+    <tr><td>交易限制</td></tr>
+    <tr><td>变更记录</td></tr>
+    <tr><td>暂停卡片</td></tr>
+    <tr><td>注销卡片</td></tr>
+    <tr>
+      <td rowSpan={4}>持卡人管理</td>
+      <td>查询</td>
+    </tr>
+    <tr><td>新增</td></tr>
+    <tr><td>下载</td></tr>
+    <tr><td>修改</td></tr>
+    <tr>
+      <td>创建卡片</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>变更记录</td>
+      <td>查询</td>
+    </tr>
+    <tr>
+      <td rowSpan={4}>消息设置</td>
+      <td>查询</td>
+    </tr>
+    <tr><td>新增收件人</td></tr>
+    <tr><td>修改</td></tr>
+    <tr><td>停用</td></tr>
+    <tr>
+      <td rowSpan={6}>资金管理</td>
+      <td rowSpan={3}>账户余额</td>
+      <td>查询</td>
+    </tr>
+    <tr><td>下载</td></tr>
+    <tr><td>额度管理</td></tr>
+    <tr>
+      <td rowSpan={2}>账户明细</td>
+      <td>查询</td>
+    </tr>
+    <tr><td>下载</td></tr>
+    <tr>
+      <td>额度提醒</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td rowSpan={2}>交易查询</td>
+      <td rowSpan={2}>交易记录</td>
+      <td>查询</td>
+    </tr>
+    <tr><td>下载</td></tr>
+    <tr>
+      <td rowSpan={10}>报表管理</td>
+      <td rowSpan={4}>月度账单</td>
+      <td>查询</td>
+    </tr>
+    <tr><td>下载汇总</td></tr>
+    <tr><td>下载明细Excel</td></tr>
+    <tr><td>下载明细PDF</td></tr>
+    <tr>
+      <td rowSpan={2}>交易报表</td>
+      <td>查询</td>
+    </tr>
+    <tr><td>详情</td></tr>
+    <tr>
+      <td rowSpan={2}>返点账单</td>
+      <td>查询</td>
+    </tr>
+    <tr><td>下载明细</td></tr>
+    <tr>
+      <td rowSpan={2}>额度报表</td>
+      <td>查询</td>
+    </tr>
+    <tr><td>下载</td></tr>
+    <tr>
+      <td rowSpan={4}>消息中心</td>
+      <td rowSpan={2}>消息通知</td>
+      <td>查询</td>
+    </tr>
+    <tr><td>详情</td></tr>
+    <tr>
+      <td rowSpan={2}>消息配置</td>
+      <td>查询</td>
+    </tr>
+    <tr><td>邮箱设置</td></tr>
+    <tr>
+      <td rowSpan={2}>客户服务</td>
+      <td rowSpan={2}></td>
+      <td>查询</td>
+    </tr>
+    <tr><td>新增</td></tr>
+  </tbody>
+</table>
+
+## 2. 账户设置
+
+- 商户主账号开通OP Card以及发卡额度管理菜单模块权限后可在ODPM操作设置-角色设置 进行子账号OP Card模块权限设置
+
+- 点击菜单【操作设置】-【角色】可配置含OP Card和发卡额度管理的角色权限
+
+![图片](/img/help-center/op-card-operation-guide/JG3ibfJIDoH53cxuhZgct2z7nsf.png)
+
+- 可对一级，二级菜单和按钮进行权限控制，如下图
+
+![图片](/img/help-center/op-card-operation-guide/AYQAb42M1oJ9e6xgntYc6dRenVf.png)
+
+- 点击设置菜单 【账户信息】，可以看到发卡相关信息
+
+![图片](/img/help-center/op-card-operation-guide/XqbJbGOOuoguWmxlSMUcOD8znVf.png)
+
+- 同时, 【账户信息】-【OP Card费用项】会有OP Card费用项展示；
+
+![图片](/img/help-center/op-card-operation-guide/LmyXbUb77oDaVXxDtApczkNKnTb.png)
+
+## 3. 首页概览
+
+|**名称**|**解释**|
+|---|---|
+|额度管理|点击可前往发卡额度管理模块进行币种账户的增额操作|
+
+- 【首页概览】模块可支持查看 不同币种账户的发卡额度和实时可用额度，可根据时间筛选展示所有卡消费和月度账单统计可视化图表，并支持快捷跳转【发卡额度管理】以及四大常用功能模块，同时点击操作手册可以快速跳转至帮助中心OP Card板块教程。
+
+![图片](/img/help-center/op-card-operation-guide/DRoibz3mUoYkJ8xbeu1c4lnWnXd.png)
+
+- 点击菜单【OP Card】-【首页概览】
+
+我的账户可以查看不同币种账户的额度，常见功能支持从左到右快捷跳转至 **卡片管理**-创建卡片，**报表管理**-月度账单，**报表管理**-交易报表，**资金管理**-额度提醒，数据概览支持查看卡片数据，所有卡消费数据，实时可用额度，以及月度账单统计数据
+
+- 点击我的账户 **“额度管理”**，则弹出如下页面，在该页面，可以查看发卡额度不同币种账户的额度，跳转创建发卡额度页面、提现额度操作，
+
+![图片](/img/help-center/op-card-operation-guide/BNrKbP0Zrow9KGxnZgrcwFavnRe.png)
+
+![图片](/img/help-center/op-card-operation-guide/PXCLb3B0SoevjvxXMVzcwBEBnQg.png)
+
+- 点击创建发卡额度，可以在可用币种下拉框看到发卡额度的可用余额，选择同币或者异币创建额度，发卡额度创建只需两步就可以完成
+
+- 第一步：选择发卡额度币种
+
+![图片](/img/help-center/op-card-operation-guide/VPf2bffk0oAVWPxAj1ic3Z0Inuh.png)
+
+- 第二步：确认创建
+
+页面展示参考汇率和预计扣款金额
+
+![图片](/img/help-center/op-card-operation-guide/DVNibSXBAoBYGpxT9MbcDSsznrh.png)
+
+- 点击确定，即可创建成功，可在发卡额度管理页面看到对应的额度增加
+
+- 点击提额，可进入OP Card额度提现页面，
+
+![图片](/img/help-center/op-card-operation-guide/V4Sqb3T4NorZy4xUea6czuyknvg.png)
+
+- 输入对应需要提现的金额，点确认，需要注意：在提额操作进行期间，所有关联的卡片将暂时停止交易功能，
+
+![图片](/img/help-center/op-card-operation-guide/EDUEb0Jfgo70mcxX8cKcWVRQnOc.png)
+
+- 点确定后，对应额度会提现至您的OPCCOUNT账户，可对应查看OPCCOUNT账户可用余额
+
+![图片](/img/help-center/op-card-operation-guide/GGoYbw39fo3e6CxA2lucGJEunme.png)
+
+- 点击常见功能 **“创建卡片”**，快捷跳转卡片管理-创建卡片页面
+
+![图片](/img/help-center/op-card-operation-guide/Sir0bPmjEoc8hGxYMTLchKCqn6d.png)
+
+- 点击 **“账单报表”**，快捷跳转报表管理-月度账单
+
+![图片](/img/help-center/op-card-operation-guide/OzSabhKyUozff1xOmNmclPZCnjf.png)
+
+- 点击 **“交易报表”**，快捷跳转报表管理-交易报表
+
+![图片](/img/help-center/op-card-operation-guide/OdoKbiruVoG1sNxYB5icLw2Lnod.png)
+
+- 点击 **“额度提醒”**，快捷跳转资金管理-额度提醒
+
+![图片](/img/help-center/op-card-operation-guide/AQeObAHIoowm7UxMFiacXJtxneb.png)
+
+- 如没有上述模块的权限，则会提示：暂无权限，请联系管理员设置权限
+
+- **数据概览模块：**
+
+根据筛选的开始时间和截止时间可查询出所有卡消费和月账单统计的可视化图表数据展示
+
+![图片](/img/help-center/op-card-operation-guide/VXHBb7KwKonzb6xfYgMcy88un6f.png)
+
+## 4. 卡片管理
+
+|**名称**|**解释**|
+|---|---|
+|批次号|每次提交创建1张或多张卡片生成的对应批次号，可以用批次号查询对应创建卡片的信息|
+
+【卡片管理】主要用于创建卡片、管理卡片及管理卡片邮件通知收件人。包含五个菜单：
+
+![图片](/img/help-center/op-card-operation-guide/RYmUbTaP7oSJ6PxtTErcc2xYntb.png)
+
+### 4.1 卡片查询
+
+【卡片查询】主要用于创建卡片、查询卡片及管理卡片，包括管理卡片的状态、信息和交易限制。
+
+点击菜单【OP Card】-【卡片管理】-【卡片查询】，可以按照不同条件进行筛选查询，默认查询到当前所有已创建的卡片；点击高级筛选按钮，可以展开更多的筛选条件。
+
+![图片](/img/help-center/op-card-operation-guide/VljPbshlRo5bxRxZXnWc0rFqnub.png)
+
+点击“查询”，可以查询出符合筛选条件的所有查询结果，显示如下：
+
+![图片](/img/help-center/op-card-operation-guide/EdYXbx2AXoPPd6xSn1mczmNWnwh.png)
+
+点击查询列表的+号，可展开显示当前行的更多信息：
+
+![图片](/img/help-center/op-card-operation-guide/JZEAb8YT8oktHmxuWvOcilJAn0c.png)
+
+支持通过列表右侧的“列表设置”按钮，对列表字段进行自定义设置：
+
+![图片](/img/help-center/op-card-operation-guide/WfDnbdA32oNrIMx9hWhcf7l9nDb.png)
+
+列表点击卡号，可进入卡片的详情页：
+
+![图片](/img/help-center/op-card-operation-guide/OSJSb2lgBowDdcxwaoKcbkk3ncU.png)
+
+卡片详情支持下载卡片
+
+详情页的卡基本信息、卡片样式、交易限制均可在此页面编辑。
+
+![图片](/img/help-center/op-card-operation-guide/A8M7buvt1orFURxR4jucDV2qnif.png)
+
+列表上方存在三个操作按钮：
+
+![图片](/img/help-center/op-card-operation-guide/EeQAbgF3Bod0aNxCwdGcDxjCnYc.png)
+
+点击“创建卡片”，进入创建卡片页面：
+
+可在此进行创建卡片同时对卡片进行交易限制的操作。
+
+![图片](/img/help-center/op-card-operation-guide/Vve0bSYxEo4rAHxqn4KcF8lsnPg.png)
+
+![图片](/img/help-center/op-card-operation-guide/L4egbDaBmoo0gwxzYAMcusJDnkb.png)
+
+点击“导出”，系统自动导出当前卡片查询列表数据，其中卡号为前6后4的脱敏格式呈现：
+
+![图片](/img/help-center/op-card-operation-guide/O06rbx9w0o7J4YxSDYJcCbXBn5f.png)
+
+点击“批量销卡”，可以对列表状态为“激活”和“暂停”的卡片数据进行注销操作：
+
+![图片](/img/help-center/op-card-operation-guide/DPGnbNFtQozdJDxvTmYc6CpFnNL.png)
+
+![图片](/img/help-center/op-card-operation-guide/Cofkb6K9vos0OHxbDmhc9AUEnAd.png)
+
+列表数据包含三个操作按钮：
+
+![图片](/img/help-center/op-card-operation-guide/RXBSbLU0Uo96TNxadpOcy3ksnfG.png)
+
+点击“交易限制”，进入交易限制页面：
+
+可以对当前卡片的交易进行限制，限制项由OP进行配置。
+
+![图片](/img/help-center/op-card-operation-guide/P3sObxmTOovyPzxmUR1cqjqCnEd.png)
+
+点击“变更记录”，可查看当前卡片包括创建、状态变更、交易限制等操作的记录：
+
+![图片](/img/help-center/op-card-operation-guide/Ba2gbZ02josZoVxzM5QcR8BPnlf.png)
+
+对于“更多”按钮，鼠标悬浮可查看操作具体操作按钮；对于状态为“激活”的卡片，对应按钮为“暂停卡片”和“注销卡片”；对于状态为“暂停”的卡片，对应按钮为“启用卡片”和“注销卡片”；对于状态为“注销”的卡片，对应按钮置灰为不可点击状态。
+
+![图片](/img/help-center/op-card-operation-guide/AzuxbWFbsomDDfxq8WwcRJ1bnsO.png)
+
+![图片](/img/help-center/op-card-operation-guide/Eq8Kb0oFsohTKbxMglic8J8PnVb.png)
+
+![图片](/img/help-center/op-card-operation-guide/TW3QbsDcVoKVYFx5z9Gcgivhnjg.png)
+
+点击“暂停卡片”，可对卡片进行暂停使用的操作：
+
+![图片](/img/help-center/op-card-operation-guide/BUoab10Elo7z0YxaZOUchSzsnng.png)
+
+卡片被暂停后，卡片无法进行交易。
+
+点击“启用卡片”，可以重新激活卡片：
+
+![图片](/img/help-center/op-card-operation-guide/XQ5TbvsdvooJpuxO12Xccncangf.png)
+
+卡片被启用后，可以正常进行交易。
+
+点击“注销卡片”，可以对卡片进行注销操作：
+
+![图片](/img/help-center/op-card-operation-guide/B6Y8babzkov272x2R73cuBLtnqg.png)
+
+卡片被注销后，卡片不再允许交易，也不再允许激活。
+
+### 4.2 持卡人管理
+
+该板块可查询卡片持有人信息，可对应新增、下载、修改持卡人信息
+
+![图片](/img/help-center/op-card-operation-guide/J634bJItnoPj36x9aLdcKydDnUe.png)
+
+### 4.3 创建卡片
+
+点击菜单【OP Card】-【卡片管理】-【创建卡片】，进入创建卡片页面，效果等同点击【卡片查询】列表“创建卡片”按钮。
+
+![图片](/img/help-center/op-card-operation-guide/WwDLb7RPeoTiWMx1jpacmqE8nBg.png)
+
+### 4.4 变更记录
+
+【变更记录】主要用于记录管理卡片的变更操作，包括创建卡片、卡片状态变更和编辑交易限制等操作。
+
+点击菜单【OP Card】-【卡片管理】-【变更记录】，可以根据不同条件进行筛选查询：
+
+![图片](/img/help-center/op-card-operation-guide/Ke4Rbv44AoDX3vxfRj1cJmuXnNf.png)
+
+默认查询当前账号下的全部卡片变更记录：
+
+![图片](/img/help-center/op-card-operation-guide/JW6ZbpYEooOJqCx9LNgcdfi5ncg.png)
+
+支持通过列表右侧的“列表设置”按钮，对列表字段进行自定义设置：
+
+![图片](/img/help-center/op-card-operation-guide/HEtFbxp5koyMGaxuiWbcj0NUnFb.png)
+
+### 4.5 消息设置
+
+【消息设置】主要用于管理卡片邮件通知的收件人，当前邮件类型包含“卡创建”、“状态变更”、“卡注销”、“卡到期”四类邮件通知，对应收件人可接收对应配置的邮件类型的邮件通知。
+
+点击菜单【OP Card】-【卡片管理】-【消息设置】，可以根据不同条件进行筛选查询：
+
+![图片](/img/help-center/op-card-operation-guide/TYk2bosWMom5iUx5V25cX8n9nNf.png)
+
+默认查询当前账号下的所有卡片消息通知邮件收件人信息：
+
+![图片](/img/help-center/op-card-operation-guide/WE3hbVMr3oP9gJxrcdtc2qTXnDd.png)
+
+支持通过列表右侧的“列表设置”按钮，对列表字段进行自定义设置：
+
+![图片](/img/help-center/op-card-operation-guide/DVdjbbVfzosZB9xrlRXc2QMcnff.png)
+
+点击列表上方的“新增收件人”按钮，进入新增收件人页面：
+
+可在此进行新增邮件通知收件人操作。
+
+![图片](/img/help-center/op-card-operation-guide/YuotbwVCSohZ3oxhxxfcfm2JnHd.png)
+
+列表数据的操作按钮包含“修改”和“停用/启用”：
+
+![图片](/img/help-center/op-card-operation-guide/QMXab9WPsodfNGxPUUaco000n9e.png)
+
+点击“修改”，进入修改页面：
+
+![图片](/img/help-center/op-card-operation-guide/Cl0JbmHO8oNiKLxDuH3cs6EbnKc.png)
+
+可以在此修改收件人的相关信息。
+
+点击“停用”按钮，可对此收件人进行停用操作：
+
+![图片](/img/help-center/op-card-operation-guide/UclOb66LNo2lxfxDT9dccnELnOh.png)
+
+收件人被停用后，对应邮箱不再接收配置的邮件通知。
+
+点击“启用”按钮，可对收件人进行启用造作：
+
+![图片](/img/help-center/op-card-operation-guide/UONYbi3oKoxSFtx6fsaccdotnAv.png)
+
+收件人被启用后，可正常接收已配置的邮件通知。
+
+## 5. 资金管理
+
+用户可以查询实时账户余额，账户实时交易转入转出记录，并进行额度提醒管理
+
+|**名称**|**解释**|
+|---|---|
+|额度提醒|当实时可用余额低于设置的低额阈值，则触发邮件提醒|
+
+### 5.1 账户余额
+
+点击菜单【资金管理】-【账户余额】，可以获取实时余额数据，也可以按照币种对获取的余额数据、卡片类型进行筛选,查询如下：
+
+![图片](/img/help-center/op-card-operation-guide/NHjgbsKSnor1wCxZ8JqcVmzBn0d.png)
+
+我的账户 **“额度管理”**，则弹出如下页面，在该页面，用户可以创建发卡额度，
+
+![图片](/img/help-center/op-card-operation-guide/XcKZb4NUXoOu1Ux2a0JcoLl4nsg.png)
+
+如没有配置发卡额度管理模块权限，则会提示：暂无权限，请联系管理员设置权限
+
+点击 **“下载”**，则可以下载当前查询出来的所有记录
+
+### 5.2 账户明细
+
+点击菜单【资金管理】-【账户明细】，可以获取账户转入转出动账交易信息，可以按照交易表中，交易类型，卡号前六后四数据进行筛选,查询项如下：
+
+![图片](/img/help-center/op-card-operation-guide/FhZ7bVYWEoRtM1xfEpwcQIMLnqs.png)
+
+查询结果显示如下：
+
+![图片](/img/help-center/op-card-operation-guide/ZyfkbLJSFoyktHxTI8UcPgcinUd.png)
+
+点击 **“下载”**，则可以下载当前查询出来的所有记录
+
+### 5.3 额度提醒
+
+用户可以进行额度提醒设置
+
+点击菜单【资金管理】-【额度提醒】，进入额度提醒设置页面
+
+![图片](/img/help-center/op-card-operation-guide/L6SrbAquDo5KezxcYsXcxSbXn2d.png)
+
+点击图1 **“修改”**，页面样式如下图2，可以编辑不同账户额度提醒阈值，点击
+
+![图片](/img/help-center/op-card-operation-guide/NWuKbO1KdoySiUxUucZcy4OCnMd.png)
+
+**开关可以设置开启或关闭，低额通知邮箱支持最大设置3个邮箱**
+
+图1
+
+![图片](/img/help-center/op-card-operation-guide/S0pibLxfToZFIZxgcFAcGRFinBe.png)
+
+图2
+
+![图片](/img/help-center/op-card-operation-guide/VMvObS9Rwoo6Llxrn8JcxDy8nhn.png)
+
+设置开关为开启状态，且设置好通知邮箱后保存修改，当对应币种余额低于对应币种账户所设置的阈值则会触发额度提醒邮件。
+
+![图片](/img/help-center/op-card-operation-guide/VtWvbIOKzoUTXGxP5XtciTEznNH.png)
+
+## 6. 交易查询
+
+用户可以查询当天实时交易记录
+
+### 6.1 交易记录
+
+点击菜单【交易查询】-【交易记录】，可以按照不同条件进行筛选，查询到当天的实时交易记录，时间默认为当天时间 ，00:00:00至当前最新时间
+
+点击左侧的高级筛选按钮，可以展开更多的筛选条件。
+
+![图片](/img/help-center/op-card-operation-guide/L8nzblfD7ovdjQx7KUGclExrnue.png)
+
+时间查询项只支持查询当天的事实交易记录：
+
+![图片](/img/help-center/op-card-operation-guide/RMHwbv9kWoxMLwxc9mAcDHqhnXg.png)
+
+查询结果显示如下：
+
+![图片](/img/help-center/op-card-operation-guide/S7u5b5JczonU2IxCBdhchO5dnNf.png)
+
+点击 **“详情”**，则弹出如下页面，在该页面，用户可以查看该笔交易记录的详细字段信息
+
+![图片](/img/help-center/op-card-operation-guide/SV9ebAsLco4YWjx2MUjc2ijKnLe.png)
+
+详情页面卡号，初始展示为544937\*\*\*\*7563，点击卡号后的小眼睛通过如下验证，则可查看上图明文卡号展示
+
+![图片](/img/help-center/op-card-operation-guide/UrwmbMDcmooxTFxSe1ucmRBUndd.png)
+
+- 点击 **“下载”**，则可以下载当前查询出来的所有交易记录
+
+## 7. 报表管理
+
+用户可以在此模块查询月度账单、交易报表、返点账单以及额度报表。
+
+### 7.1 月度账单
+
+点击菜单【报表管理】-【月度账单】，可以根据账单日期、时间、状态和卡片类型进行筛选，时间默认为结算时间近一年，如2023-05至2024-05，如查询时间范围查询到2024-01，页面展示如下：
+
+![图片](/img/help-center/op-card-operation-guide/UPU9bec1ToJFK2x1bSocQ4gBnbc.png)
+
+筛选已结单月度账单展示如下：
+
+可支持下载汇总、下载明细EXCEL、下载PDF；
+
+![图片](/img/help-center/op-card-operation-guide/DDdeblvuzoqQhvxD8ttcE0ysnAc.png)
+
+点击操作EXCEL，可下载该条月账单记录EXCEL文件，如有多个记账币种则在展示在不同的子sheet。上月月账单通常在下个月的1号生成，PDF下载同理。
+
+![图片](/img/help-center/op-card-operation-guide/VeRZbc4KJodaYMxYz8Uc06eAnrc.png)
+
+### 7.2 交易报表
+
+点击菜单【报表管理】-【交易报表】，可以按照不同条件进行筛选，查询到不包括当天实时的所有交易记录，时间默认为交易时间近7天，2024-05-18 00:00:00至2024-05-24 23:59:59。
+
+点击左侧的高级筛选按钮，可以展开更多的筛选条件。
+
+![图片](/img/help-center/op-card-operation-guide/TMmsbFyAWoaR0VxzKF5c3QRfnJh.png)
+
+查询结果展示如下：
+
+![图片](/img/help-center/op-card-operation-guide/RPtGb9fMloZcNSxOWXQcxHPondd.png)
+
+点击 **“详情”**，则弹出如下页面，在该页面，用户可以查看该笔交易记录的详细字段信息
+
+![图片](/img/help-center/op-card-operation-guide/FakqbcXc6oBqgjxEdwFcQVt3n6f.png)
+
+详情页面卡号，初始展示为540560\*\*\*\*\*\*1234，点击卡号后的小眼睛通过如下验证，则可查看上图明文卡号展示
+
+![图片](/img/help-center/op-card-operation-guide/ZubCb5sTgoRdR3xbq0ccsRYEn9S.png)
+
+点击 **“下载”**，则可以下载当前查询出来的所有记录
+
+### 7.3 返点账单
+
+点击菜单【报表管理】-【返点账单】，可查询发卡账户的返点信息情况，可筛选对应时间段的返点账单进行查看并下载对应明细。
+
+![图片](/img/help-center/op-card-operation-guide/OKMzb04YGo0Iahx698IcZKIIn8e.png)
+
+### 7.4 额度报表
+
+如需查询实时余额则可前往【资金管理】-【账户余额】进行查询
+
+|**名称**|**解释**|
+|---|---|
+|资金类型|卡片动账金额类型说明|
+
+点击菜单【报表管理】-【额度报表】，进入卡片额度资金动账报表页面，
+
+![图片](/img/help-center/op-card-operation-guide/DAYubcVFaoXvVdxEUT5cjBwhn8f.png)
+
+对应筛选框内容如下，可筛选卡片类型、账单币种、动账币种、资金类型等
+
+![图片](/img/help-center/op-card-operation-guide/OMqtbOSCLoRCE9xPVnPcbskDnqe.png)
+
+筛选内容如下，会显示对应卡片的额度变动明细以及变动后的额度余额，可下载页面内容
+
+![图片](/img/help-center/op-card-operation-guide/MkDObaal2omsIfx9UbSc5UGGnVh.png)
+
+发卡账单结算对应的动账类型为转入，创建发卡额度对应的动账类型为转出，
+
+展示列表可查看发卡额度资金转入转出变动。
+
+## 8. 消息中心
+
+用户可在此模块查询账单通知和交易通知消息，并支持接收邮箱设置。
+
+|**名称**|**解释**|
+|---|---|
+|交易通知|每笔交易发生时的通知，包括实时交易|
+|账单通知|账单生成通知|
+|续额通知|卡片续额消息通知|
+
+### 8.1 消息通知
+
+消息中心未读角标数展示
+
+![图片](/img/help-center/op-card-operation-guide/HCf9bzpPOowLF9xZ6uocFGmyn9T.png)
+
+消息中心未读角标数 = 交易通知未读角标数+账单通知未读角标数，最大显示99+
+
+消息中心未读通知只展示最近30天数据，超过30天消息未读 数据系统自动转为已读标识，且全部不展示在消息中心
+
+点击菜单【消息中心】-【消息通知】，可以按照消息时间，交易类型进行筛选，查询到交易通知，通过消息时间查询到账单通知，时间默认为近一个月，如2024-08-20至2024-09-19。
+
+![图片](/img/help-center/op-card-operation-guide/MKOcbg6ZLoiNlBxawDOcujlbnLe.png)
+
+交易通知
+
+![图片](/img/help-center/op-card-operation-guide/U298bcJevoRQSWxh7BScQ4rfnIb.png)
+
+账单通知
+
+点击 **“标为已读”**，则可以将未读消息（红色标识）设置为已读（绿色标识）
+
+![图片](/img/help-center/op-card-operation-guide/Xg8IbkVS5ofQWYxUNX5cNR6InOg.png)
+
+点击 **“只看未读”**，则展示列表只展示未读信息
+
+![图片](/img/help-center/op-card-operation-guide/AHq9bW8Zko3sOwxZiwkcSnF7njc.png)
+
+点击 **“详情”**，则弹出如下页面，在该页面，用户可以查看该笔交易的详情
+
+![图片](/img/help-center/op-card-operation-guide/JyS9bCCz1o4MTuxqjjwcfv9Rnhd.png)
+
+### 8.2 消息配置
+
+通过消息分类和邮箱可搜索当前消息分类配置的接收邮箱，邮箱支持模糊匹配。
+
+![图片](/img/help-center/op-card-operation-guide/D0KnbVDFQoLaZ0xP2nfcP3V0nRC.png)
+
+通知形式-消息中心/邮件通知
+
+- 消息中心-消息通知默认展示所有消息分类的通知，通知形式-消息中心不可编辑取消勾选
+
+- 通知形式-邮件通知可以取消或保持勾选，取消勾选则接收邮箱不会接收到对应消息分类邮件消息
+
+保持勾选，则接收邮箱不会接收到对应消息分类邮件消息
+
+点击 **“邮箱设置”/“通知形式-邮件通知”**
+
+![图片](/img/help-center/op-card-operation-guide/KaFDb4NNHoqwy2xuEXKcNVOJnOe.png)
+
+，则弹出如下弹框，在该页面，用户可以配置对应消息分类的接收邮箱
+
+![图片](/img/help-center/op-card-operation-guide/BIaqbFAyToQyhSxt0o1c4FCPnOc.png)
+
+如需取消某接收邮箱，则点击 **“通知形式-邮件通知”**
+
+![图片](/img/help-center/op-card-operation-guide/THwybAZMbosievxBr05comZOnjf.png)
+
+点击弹框“是”，则成功取消取消某接收邮箱。
+
+![图片](/img/help-center/op-card-operation-guide/VQfBbkBWGodQjzxy9gechZ4snjc.png)
+
+## 9. 客户服务
+
+商户可在客户服务模块进行拒付申请和其它争议的申请提交至OP系统后台进行审核
+
+点击菜单【客户服务】，可以按照提交时间，争议分类，交易ID和处理状态进行筛选，查询到所有成功、失败及待处理的交易，时间默认展示为近7天，如2024-05-18至2024-05-24，更多筛选展示如下：
+
+![图片](/img/help-center/op-card-operation-guide/AuwRbyqpJoUBs5xbF43crJ95nWc.png)
+
+查询结果展示如下：
+
+![图片](/img/help-center/op-card-operation-guide/QJdUbkTxjo0sYXx0L7Bcnbq7ngb.png)
+
+- 点击 **“新增”**，则弹出如下页面，在该页面，用户可以提交拒付申请、其它争议申请
+
+![图片](/img/help-center/op-card-operation-guide/COa7b9oLNo6EBxxsFT5cIszqnKd.png)
+
+![图片](/img/help-center/op-card-operation-guide/VCvWbw9m7ov3sXxV3VfcW9bjnyc.png)
+
+- 点击 **“详情”**，展示提交的拒付申请/其它争议的详情
+
+![图片](/img/help-center/op-card-operation-guide/OtyabmxO4ojxXjxZNljcrenHnYb.png)
+
+![图片](/img/help-center/op-card-operation-guide/VVUlbWsnko2QSRxocELcYs63n5d.png)
+
+- 当处理状态为待审核时，点击“  修改 ”提交争议还可进行修改，页面如下：
+
+![图片](/img/help-center/op-card-operation-guide/Vux2bk68UoMh5XxIrKccc2Jsnob.png)
+
+![图片](/img/help-center/op-card-operation-guide/PJpjb0p2SoQxN2xlfFicxDMDnYb.png)
+

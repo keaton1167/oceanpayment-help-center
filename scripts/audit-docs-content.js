@@ -4,17 +4,17 @@ const path = require('path');
 const ROOT = path.resolve(__dirname, '..');
 const DOC_ROOTS = ['docs', path.join('i18n', 'en', 'docusaurus-plugin-content-docs', 'current')];
 const ENGLISH_DOC_IDS = [
-  'compliance-certification/enterprise-certification-faq/klarna-payment-operations-guide',
   'odpm-guide/section-guide/blacklist-operation-manual',
   'odpm-guide/section-guide/digital-platform-guidelines-manual',
   'odpm-guide/section-guide/digital-platform-guidelines-manual-all-exceptions',
   'odpm-guide/section-guide/high-fraud-risk-alert-manual',
+  'odpm-guide/section-guide/klarna-payment-operations-guide',
   'odpm-guide/section-guide/merchant-initiated-chargeback-recall-guidelines',
+  'odpm-guide/section-guide/assign-account-setting',
+  'odpm-guide/section-guide/opccount-guideline',
   'odpm-guide/section-guide/reconciliation-guide',
+  'odpm-guide/section-guide/reconciliation-guideline',
   'odpm-guide/section-guide/whitelist-operation-manual',
-  'op-card-faq/common-questions/opccount-guideline',
-  'payment-faq/info-update/assign-account-setting',
-  'products-services/oceanpayment-products/reconciliation-guideline',
 ];
 const PHASE2_ZH_DOC_IDS = [
   'odpm-guide/section-guide/agreement-signing-operation-manual',

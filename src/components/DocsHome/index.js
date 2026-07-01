@@ -18,12 +18,7 @@ const content = {
       {
         title: 'Payment FAQ',
         description: '信息更新、常见问题与账户操作',
-        href: '/docs/payment-faq/info-update/logistics-upload-manual/',
-      },
-      {
-        title: 'OP Card FAQ',
-        description: '常见问题、条款条件与 Google Pay',
-        href: '/docs/op-card-faq/common-questions/logistics-query-upload-guide/',
+        href: '/docs/payment-faq/account-transfer/opccount-platform-manual/',
       },
     ],
     categories: [
@@ -35,27 +30,7 @@ const content = {
       {
         title: 'Payment 收单常见 FAQ',
         description: '信息更新、常见问题、账户划款、提现和代付指引。',
-        href: '/docs/payment-faq/info-update/logistics-upload-manual/',
-      },
-      {
-        title: 'OP Card 常见 FAQ',
-        description: '常见问题、条款和条件、Google Pay 相关说明。',
-        href: '/docs/op-card-faq/common-questions/logistics-query-upload-guide/',
-      },
-      {
-        title: '产品与服务',
-        description: 'Oceanpayment 产品与服务相关说明。',
-        href: '/docs/products-services/oceanpayment-products/data-analysis-manual/',
-      },
-      {
-        title: '合规与认证',
-        description: '企业认证常见问题、准入与合规管理说明。',
-        href: '/docs/compliance-certification/access-compliance/op-card-operation-guide/',
-      },
-      {
-        title: '客户服务',
-        description: '客户服务常见问题与平台支持说明。',
-        href: '/docs/customer-service/customer-service-faq/digital-platform-guide/',
+        href: '/docs/payment-faq/account-transfer/opccount-platform-manual/',
       },
     ],
     featured: [
@@ -65,11 +40,11 @@ const content = {
       },
       {
         title: '物流信息上传操作手册',
-        href: '/docs/payment-faq/info-update/logistics-upload-manual/',
+        href: '/docs/odpm-guide/section-guide/logistics-upload-manual/',
       },
       {
         title: 'Oceanpayment ODPM-数据分析功能手册',
-        href: '/docs/products-services/oceanpayment-products/data-analysis-manual/',
+        href: '/docs/odpm-guide/section-guide/data-analysis-manual/',
       },
     ],
   },
@@ -85,42 +60,12 @@ const content = {
         description: 'Account backend and section operations',
         href: '/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
       },
-      {
-        title: 'Payment FAQ',
-        description: 'Information updates and account operations',
-        href: '/docs/payment-faq/info-update/assign-account-setting/',
-      },
-      {
-        title: 'OP Card FAQ',
-        description: 'Common questions, terms, and Google Pay',
-        href: '/docs/op-card-faq/common-questions/opccount-guideline/',
-      },
     ],
     categories: [
       {
         title: 'ODPM Account Backend Operation Guide',
         description: 'Account backend, section operations, and related process guidance.',
         href: '/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
-      },
-      {
-        title: 'Common FAQs About Payment Processing',
-        description: 'Information updates, common questions, fund transfers, withdrawals, and payout guidance.',
-        href: '/docs/payment-faq/info-update/assign-account-setting/',
-      },
-      {
-        title: 'OP Card Common FAQs',
-        description: 'Common questions, terms and conditions, and Google Pay related guidance.',
-        href: '/docs/op-card-faq/common-questions/opccount-guideline/',
-      },
-      {
-        title: 'Products and Services',
-        description: 'Oceanpayment products and services documentation.',
-        href: '/docs/products-services/oceanpayment-products/reconciliation-guideline/',
-      },
-      {
-        title: 'Compliance and Certification',
-        description: 'Enterprise certification, access, and compliance management guidance.',
-        href: '/docs/compliance-certification/enterprise-certification-faq/klarna-payment-operations-guide/',
       },
     ],
     featured: [
@@ -130,11 +75,11 @@ const content = {
       },
       {
         title: 'Assign Account Setting',
-        href: '/docs/payment-faq/info-update/assign-account-setting/',
+        href: '/docs/odpm-guide/section-guide/assign-account-setting/',
       },
       {
         title: 'Guideline of Reconciliation',
-        href: '/docs/products-services/oceanpayment-products/reconciliation-guideline/',
+        href: '/docs/odpm-guide/section-guide/reconciliation-guideline/',
       },
     ],
   },

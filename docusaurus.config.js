@@ -10,7 +10,7 @@ import remarkStrongInline from './plugins/remark-strong-inline.js';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const ENGLISH_DOC_IDS = [
-  'compliance-certification/enterprise-certification-faq/klarna-payment-operations-guide',
+  'odpm-guide/section-guide/klarna-payment-operations-guide',
   'odpm-guide/section-guide/blacklist-operation-manual',
   'odpm-guide/section-guide/digital-platform-guidelines-manual',
   'odpm-guide/section-guide/digital-platform-guidelines-manual-all-exceptions',
@@ -18,9 +18,9 @@ const ENGLISH_DOC_IDS = [
   'odpm-guide/section-guide/merchant-initiated-chargeback-recall-guidelines',
   'odpm-guide/section-guide/reconciliation-guide',
   'odpm-guide/section-guide/whitelist-operation-manual',
-  'op-card-faq/common-questions/opccount-guideline',
-  'payment-faq/info-update/assign-account-setting',
-  'products-services/oceanpayment-products/reconciliation-guideline',
+  'odpm-guide/section-guide/opccount-guideline',
+  'odpm-guide/section-guide/assign-account-setting',
+  'odpm-guide/section-guide/reconciliation-guideline',
 ];
 
 const currentLocale = process.env.DOCUSAURUS_CURRENT_LOCALE ?? 'zh-Hans';

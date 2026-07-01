@@ -1,0 +1,1926 @@
+﻿---
+title: Oceanpayment ODPM-数字平台操作指引手册2025-10-09
+sidebar_label: Oceanpayment ODPM-数字平台操作指引手册2025-10-09
+sidebar_position: 6
+---
+## 1.1 ODPM数字平台多终端概述：
+
+ODPM数字平台兼顾商户多终端使用场景，推出PC端，H5移动端，微信小程序移动端。
+
+PC端聚焦整体业务操作管理，H5移动端聚焦业务信息查询，小程序聚焦财务专区，数据分析和消息通知。各终端页面概览，功能模块和功能按钮详见下述：
+
+
+
+## 1.2 页面概览PC端/H5端/小程序端：
+
+**【PC 端】**
+
+**首页展示：**
+
+![图片](/img/help-center/digital-platform-guide/KMr0bTSKAoYsdyxGTOTcZyUDn1b.png)
+
+
+
+
+**Payment板块展示：**
+
+![图片](/img/help-center/digital-platform-guide/O8rNb72kuoqydIx0NpHcXNxwnRg.png)
+
+
+
+
+**【H5 移动端】**
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/TUCgbfafFoPLsCxBA4Qc587Knbd.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/KTLwbGGEloWE6KxcNfvcRgYjnTf.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/CPU0b3gTpo8U1ZxUwlkcUhC8nUg.png" alt="图片" />
+</div>
+
+
+
+
+**【小程序端】**
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/OalRbQ9dfo0qUNxWdVLcEf6gnfh.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/C67MbcFgPox7MCx6Ubbc9yf0nFb.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/Baw8b4h3OoJnf3xpqszcp8q4nfe.png" alt="图片" />
+</div>
+
+
+
+
+
+
+## 1.3 各端功能模块概述：
+
+
+
+<table className="doc-merged-table">
+  <thead>
+    <tr>
+      <th>功能模块<br />（一级）</th>
+      <th>功能模块<br />（二级）</th>
+      <th>功能模块<br />（三级）</th>
+      <th>PC端</th>
+      <th>H5端</th>
+      <th>微信小程序</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td colSpan="6"><strong>首页</strong></td></tr>
+    <tr><td rowSpan="8"><strong>账户设置</strong></td><td><strong>账户信息</strong></td><td></td><td>√</td><td>√</td><td></td></tr>
+    <tr><td><strong>修改密码</strong></td><td></td><td>√</td><td>√</td><td></td></tr>
+    <tr><td><strong>安全设置</strong></td><td></td><td>√</td><td>√</td><td></td></tr>
+    <tr><td rowSpan="3"><strong>操作设置</strong></td><td>角色</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td>数据权限</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td>管理员</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td rowSpan="2"><strong>应用</strong></td><td>微信设置</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td>小程序设置</td><td>√</td><td></td><td></td></tr>
+    <tr><td colSpan="6"><strong>Payment</strong></td></tr>
+    <tr><td rowSpan="21"><strong>Payment</strong></td><td rowSpan="3"><strong>交易查询</strong></td><td>正式交易</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td>挡掉交易</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td>预授权交易</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td rowSpan="3"><strong>财务专区</strong></td><td>账户资金</td><td>√</td><td>√</td><td>√</td></tr>
+    <tr><td>交易明细</td><td>√</td><td>√</td><td>√</td></tr>
+    <tr><td>交易划款</td><td>√</td><td>√</td><td>√</td></tr>
+    <tr><td><strong>退款管理</strong></td><td></td><td>√</td><td>√</td><td></td></tr>
+    <tr><td rowSpan="4"><strong>异常交易管理</strong></td><td>争议交易</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td>拒付交易</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td>伪冒交易</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td>调单交易</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td rowSpan="2"><strong>风控管理</strong></td><td>高欺诈风险警报通知</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td>黑名单管理</td><td>√</td><td></td><td></td></tr>
+    <tr><td rowSpan="2"><strong>数据分析</strong></td><td>可视化图表</td><td>√</td><td>√</td><td>√</td></tr>
+    <tr><td>数据分析报表</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td rowSpan="3"><strong>报表管理</strong></td><td>交易月报</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td>结算月报</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td>资金日报</td><td>√</td><td>√</td><td></td></tr>
+    <tr><td><strong>网站管理</strong></td><td></td><td>√</td><td>√</td><td></td></tr>
+    <tr><td><strong>下载中心</strong></td><td></td><td>√</td><td></td><td></td></tr>
+    <tr><td><strong>帮助中心</strong></td><td></td><td>√</td><td>√</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
+
+
+## 2. 管理员登录(PC/H5)
+
+- Oceanpaymen-ODPM数字平台网址：https://odpm.oceanpayment.com/
+
+（手机H5和PC同登录链接）
+
+- 账户登录信息在转正后，客户关系专员会将账号信息邮件发送。
+
+![图片](/img/help-center/digital-platform-guide/JglpbAwQ8o6HIlx0ycHckOgpn9f.png)
+
+
+（PC）
+
+- 登录成功后，将弹出安全验证弹框，需根据指引正常绑定。
+
+![图片](/img/help-center/digital-platform-guide/PQ3wbrU6XowEHGxYFixc39pfncg.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/X8qmb1wS0oZD4exqr32cgCU9nab.png)
+
+
+(H5)
+
+如果此账号未绑定邮箱，需要先进行邮箱绑定
+
+![图片](/img/help-center/digital-platform-guide/TJFHbMVWSolKgdxzCQ0cP5etnce.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/C7LFbkwkNo7OfCxxuMkcBTxvnZJ.png)
+
+
+(H5)
+
+经过邮箱二次验证后，才能正常使用账户后台相关功能；主账户号和子账户号登录时都需要进行安全验证。
+
+- 如果同一个公司开通了多个账户，则可联系您的专属客户关系专员，开通SUID信息登录。使用SUID登陆可随意切换账户号，如下图所示：
+
+![图片](/img/help-center/digital-platform-guide/Ara0b9g1aoJvJmxF3UJcvCpWnIe.png)
+
+
+
+
+（PC）
+
+## 3. 账户设置(PC/H5)
+
+![图片](/img/help-center/digital-platform-guide/XymVbPV7yowTtyxdGHXcjF8Lnce.png)
+
+
+登录账户后，点击“简体中文”可切换“中文/英文”语言。点击右上角的用户名，则出现账户设置的菜单，如下图所示：
+
+![图片](/img/help-center/digital-platform-guide/ECAyb9Vekof5QaxNOgxcloqHny0.png)
+
+
+(PC)                                       (H5)
+
+### 3.1 账户设置
+
+点击【账户信息】，则可以查看账户的基本信息。账户基本信息只能查看，不能编辑，如需修改，可联系您的专属客户关系进行信息修改。
+
+![图片](/img/help-center/digital-platform-guide/DqA3bRwQWoqh60xI8dDctTTpnFc.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/Kql1b6f2zoJC0nxXi9bc2Co5nTV.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(H5)
+
+### 3.2 修改密码
+
+点击【修改密码】，则可以修改当前操作账户的密码信息。修改之后，系统会自动退出，需要操作员使用新密码重新登录方可进行账户其他操作。
+
+
+
+![图片](/img/help-center/digital-platform-guide/QwHUbfzGno3tzyxnjnnc6jQdnCg.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/TI7FbDHrdoHzTHxfyi9c4O7jnVf.png)
+
+
+(H5)
+
+
+
+### 3.3 安全设置
+
+点击【安全设置】，进入安全设置页面，可在此进行更换验证邮箱的操作。
+
+![图片](/img/help-center/digital-platform-guide/XB0dbFQAuo7jmnxu1FscZkAMnpd.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/Jy5wbNSSloSlZex677ecTsUVnHc.png)
+
+
+(H5)
+
+
+
+### 3.4 操作设置
+
+操作设置一共分为三个板块：**角色、数据权限、管理员。**
+
+- **角色**
+
+点击【角色】-【添加角色】，则可以根据账户使用者的角色或者部门职能对角色进行设置。在设置页面输入相应的信息并勾选对应的权限之后，点击“提交”，则角色设置成功。然后进入【角色设置】的页面，则可以查看当前账户所设置的所有角色的列表，并可以针对某个角色的信息或者权限进行修改，或者删除某个角色。
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/HZwnb67TYo0RPqxTZCUcAI4Rnfc.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/DzDvb6gthodm0mx2j14c3PAHnOf.png" alt="图片" />
+</div>
+
+
+(PC)
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/Dr7RbZvnwod7tGxLCagcsJbVnUh.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/MO7FbBADyoB3J2xIFB7c1vqcnbf.png" alt="图片" />
+</div>
+
+
+(H5)
+
+- **数据权限**
+
+点击【数据权限】-【新增组别】，则可以根据不同团队管理的网站，设置不同网站数据管理权限。在新增组别页面输入相应的信息并勾选对应的终端号之后，点击“提交”，则组别设置成功。然后进入【数据权限设置】的页面，则可以查看当前账户所设置的所有数据组别的列表，并可以针对某个组别的信息进行修改或者删除。
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/JNNubfu8cowzsHxo6Pyc1trtnva.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/E0uMbSR3GoKbQTxoZxucfjNNnab.png" alt="图片" />
+</div>
+
+
+
+
+(PC)
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/ST5YbJrJ1o2XKax6tzOcCj0UnNV.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/WqaUb2GOgoKlgcxDxJqcSGAynie.png" alt="图片" />
+</div>
+
+
+(H5)
+
+- **管理员**
+
+点击【管理员】，进入管理员管理页面
+
+![图片](/img/help-center/digital-platform-guide/OU50b7kIIoAy7Cx9QXkchnBzn6e.png)
+
+
+(PC)
+
+
+
+![图片](/img/help-center/digital-platform-guide/EOfhbeBwUokG3nxJxRdc2oIknfh.png)
+
+
+(H5)
+
+- 点击【新增管理员】，则可以为某个员工分配一个账户操作员子账户。针对某个操作员子账户，对应的角色和数据权限可以单选也可以多选。
+
+![图片](/img/help-center/digital-platform-guide/PshmbPzc4oFYaWxE6uhc4tpDnTc.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/BTHWbIS8NoFNuzxKqhdcERU8nCV.png)
+
+
+(H5)
+
+- 同时可对管理员操作修改信息、删除信息、重置密码、禁用管理员操作。
+
+- 点击安全验证重置，主账户号可对管理员进行解绑邮箱的操作，若主账户号需要更改绑定邮箱需联系Oceanpayment客关。
+
+![图片](/img/help-center/digital-platform-guide/PmVlbx2PXo189lxZEVfcixL6nBj.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/Ll2rbKuXLoWrWGxRHFScuCggnbc.png)
+
+
+(H5)
+
+### 3.5 应用
+
+应用一共分为两个板块：**微信推送、小程序设置。**
+
+- **微信推送**
+
+点击【微信设置】，则可以根据商户自身业务运营的需要，针对不同管理员账户设置是否推送微信通知，以及解除绑定操作，目前微信推送的信息仅限于交易量统计。
+
+![图片](/img/help-center/digital-platform-guide/Wn3Tb6tvLoAnHMxZo5vcCkGlnJb.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/HaGCbZNd1ogjL5xLue9ctYw9nif.png)
+
+
+(H5)
+
+关注Oceanpayment微信公众号信息，点击【更多服务】-【我的账户】后根据微信提示绑定操作员账户，绑定成功后，超级管理员登陆Oceanpayment账户后台在【微信设置】中对该操作员账户设置为“推送”，则该操作员账户可以收到每日8：00可以收到该账户前一日的交易统计信息。示例如下：
+
+![图片](/img/help-center/digital-platform-guide/XLSebxZtNoFfp6xYX1Gcxlm7n1c.png)
+
+
+- **小程序设置**
+
+Oceanpayment商户助手简介：
+
+定位为商户最高权限管理者使用，提供账户资金明细、待办事项、交易明细、可视化图表、交易划款，消息通知和客服信息功能模块，提效商户移动端信息触达。
+
+
+
+客户关系在Oceanpayment管理后台为商户账户号配置了Oceanpayment商户助手小程序账号设置权限后，仅该账户号的主账号可以在ODPM数字平台PC端进行小程序账号新建，启用，禁用，修改，删除管理。
+
+![图片](/img/help-center/digital-platform-guide/I1K1bgPcXogjR5xr8YHcFzuEn6b.png)
+
+
+（PC）
+
+
+
+PC端录入绑定微信的手机号码，状态为启用即可一键登录Oceanpayment商户助手小程序，**最多可支持配置10个小程序账号**，一个手机号支撑绑定多个账户号信息，小程序可以进行账户号切换查看对应的账户号信息。
+
+
+
+![图片](/img/help-center/digital-platform-guide/ZDD9bvoWXodBKWxbDl3ctv2onIe.png)
+
+
+（PC）
+
+
+
+新增账号可查看小程序所有功能模块，包括待办事项，账户资金明细，交易划款，交易明细，可视化图表，查看客服信息，消息中心。 具体操作指引可以查看本操作手册对应模块，分别为首页-待办事项，财务专区（资金明细，交易划款，交易明细），数据分析（可视化图表），消息中心。
+
+小程序字段为：账户订单号、支付ID、划款批次号、金额、消息中心的通知信息、安全设置里面的所有内容、账户资金明细里的可结算金额信息、累计未结算金额信息、累计划款金额信息，可支持长按复制。
+
+Oceanpayment商户助手小程序登录方式：
+
+- 微信小程序搜索：Oceanpayment商户助手
+
+- 扫描Oceanpayment商户助手二维码登录
+
+![图片](/img/help-center/digital-platform-guide/QYvkbb6I2of7Rtx4POXcFG3Nnwd.png)
+
+
+登录页可使用PC端绑定的微信授权手机号一键登录：
+
+![图片](/img/help-center/digital-platform-guide/DpQrbRiwToSCI5x36nEcxiP4noh.png)
+
+
+（小程序）
+
+
+
+如手机号绑定了多个账户号，则会进入账户选择页面。
+
+![图片](/img/help-center/digital-platform-guide/QJHJb0Qnvo55NDxCqMkc9rEDnhe.png)
+
+
+（小程序）
+
+
+
+
+
+Oceanpayment商户助手首页导航栏可进入待办事项，账户资金明细，交易明细，交易划款和可视化图表模块，如下图
+
+![图片](/img/help-center/digital-platform-guide/OalRbQ9dfo0qUNxWdVLcEf6gnfh.png)
+
+
+（小程序）
+
+可视化图表模块（共八个）：
+
+整体交易分析
+
+各发卡国家交易分布
+
+整体成功率分析
+
+整体拒付原因
+
+整体拒付、伪冒和退款(区分卡种)
+
+整体拒付伪冒退款分析
+
+整体物流情况
+
+整体失败原因
+
+![图片](/img/help-center/digital-platform-guide/LxQpb6mZlorsfVxpuNKcqVE3nve.png)
+
+
+（小程序）
+
+账户资金明细
+
+![图片](/img/help-center/digital-platform-guide/C67MbcFgPox7MCx6Ubbc9yf0nFb.png)
+
+
+（小程序）
+
+
+
+
+
+
+
+消息中心（可查看系统公告，拒付伪冒调单通知）
+
+![图片](/img/help-center/digital-platform-guide/Baw8b4h3OoJnf3xpqszcp8q4nfe.png)
+
+
+（小程序）
+
+
+
+
+
+我的（可查看客服信息）
+
+如手机号绑定多个账户号，账户号为当前登录的账户号信息。
+
+![图片](/img/help-center/digital-platform-guide/KrrobMjl5ocOu2x7bCIc8SnHnLb.png)
+
+
+（小程序）
+
+
+
+## 4. 首页（PC/H5）
+
+登录Oceanpayment账户管理后台，将默认打开账户管理后台首页。
+
+### 4.1 主菜单概览
+
+主菜单由【首页】、【Payment】、【More】、【帮助中心】、【消息通知】、【账户设置】、【操作手册】组成。
+
+点击
+
+![图片](/img/help-center/digital-platform-guide/KDPKbibsiodLUkxY5sIcGnPfnWf.png)
+
+
+，可以跳转到【帮助中心】，可自助搜索一些常见问题的帮助和解答。
+
+点击
+
+![图片](/img/help-center/digital-platform-guide/QhrvbK4u0o9fgxxqLLXcFfmvngc.png)
+
+
+，可以跳转到【系统公告】、【Payment】的消息通知。
+
+点击
+
+![图片](/img/help-center/digital-platform-guide/HYRtbiAzjo6XtixGV63caxkanBf.png)
+
+
+，可以跳转到【账户信息】、【修改密码】、【安全设置】、【操作设置】、【应用】。
+
+点击
+
+![图片](/img/help-center/digital-platform-guide/Yv8Dbm3XeovYpOxQTGecnLX8nD8.png)
+
+
+，可以在对应板块点击【操作手册】，可以跳转到帮助中心对应操作板块的教程文档。
+
+【Payment】由以下菜单组成：
+
+交易查询 – 正式交易、挡掉交易、预授权交易
+
+财务专区 – 账户资金、交易明细、交易划款
+
+退款管理
+
+异常交易管理 – 争议交易、拒付交易、伪冒交易、调单交易
+
+风控管理 - 高欺诈风险警报通知、黑名单管理
+
+数据分析 - 可视化图表、数据分析报表
+
+报表管理 – 交易月报、结算月报、资金日报
+
+网站管理
+
+下载中心
+
+帮助中心
+
+【More】由以下菜单组成：
+
+开发者
+
+日志
+
+### 4.2 待办事项和交易数据
+
+#### 4.2.1 当日的成功交易金额及成功交易笔数统计。
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/ITiVboN0koIftwxhG7Nc1EjWndh.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/OI5vbhRcQoa9eAxlA4pc8fQ6nHh.png" alt="图片" />
+</div>
+
+
+（PC）                                    （H5）
+
+
+
+
+
+点击提示icon可查看对应提示
+
+![图片](/img/help-center/digital-platform-guide/Sy1wbdVx8oEQUJxtErtcRvaznCg.png)
+
+
+（PC）
+
+该统计金额是一个大约的金额，仅供参考，并不能作为实际入账及结算的依据。
+
+
+
+#### 4.2.2 待办事项
+
+![图片](/img/help-center/digital-platform-guide/Ax6mbCfYloYawOx4cwfcAwgrnJd.png)
+
+
+（PC）
+
+
+
+
+
+![图片](/img/help-center/digital-platform-guide/AaQvb6eSXok6G5xFgyAcf4H7nTg.png)
+
+
+（H5）
+
+PC 端轮播展示待授权，拒付，争议，伪冒，调单五种交易的待处理笔数，点击可便捷跳转对应异常交易管理模块，并查询出对应待处理笔数的详细信息。
+
+
+
+#### 4.2.3 交易转化走势图
+
+![图片](/img/help-center/digital-platform-guide/NtJvbt99botujwx4n0CcOrnknCe.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/HR6Qb2YkNoS64RxTvN5c7GgHn7d.png)
+
+
+（H5）
+
+交易金额走势图可以显示截至到查询当日的某一段时间内（近7天、本月、今年）的去重转化率和去重成功率交易转化走势，通过日期标签可以对统计时间段进行切换。
+
+点击【更多数据】可以跳转数据分析—可视化图表模块
+
+
+
+
+
+## 5. 交易查询（PC/H5）
+
+
+
+
+
+|**名称**|**解释**|
+|---|---|
+|账户|Oceanpayment支付平台的交易账户，6位数|
+|终端号|同一账户可按需要配多个终端号；|
+|账户订单号|商户网站抛送给Oceanpayment的订单号；|
+|支付ID|每笔交易在Oceanpayment支付平台生成的唯一支付号，支付ID不重复；|
+
+
+
+### 5.1 正式交易
+
+点击菜单【交易查询】-【正式交易】，可以按照不同条件进行筛选，查询到所有成功、失败及待处理的交易，**时间默认为交易时间近7天，2024-05-18 00:00:00至2024-05-24 23:59:59**。
+
+点击左侧的高级筛选按钮，可以展开更多的筛选条件。
+
+![图片](/img/help-center/digital-platform-guide/ISbQbeRXQo8mPXxMRyVcvWqvnzg.png)
+
+
+(PC)
+
+
+
+![图片](/img/help-center/digital-platform-guide/WEcvbKRQlo93kjx4OaRc7kHrnXg.png)
+
+
+(H5)
+
+
+
+如上图所示，Oceanpayment的交易查询功能提供了超过20个筛选条件，最常使用的方法是按照交易日期进行搜索，便捷时间查询项包括本周，近7日，本月，上个月，本年，并可精确到时分秒进行查询，查询时间期限最长为一年。
+
+例如需要查询2023年01月23日-05月23日发生的所有交易，如下操作：
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/PWCbb3i1goVaGRxuJCMcvXp1nFe.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/ECkDbYhchosbyFxUbZzcN1SfnSb.png" alt="图片" />
+</div>
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/M1C2bW8qooLSFGxy0JJcWcw9nXf.png)
+
+
+(H5)
+
+点击进入一般查询后，如果不更改任何查询条件，点击查询，则默认交易时间近7天所有的交易。显示如下：
+
+![图片](/img/help-center/digital-platform-guide/GAJOborHUoraK8xFucmce0pUnVg.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/E7L8bLxHCo6egPxmBv8cLYc0npe.png)
+
+
+(H5)
+
+点击“下载”，则可以下载当前查询出来的所有交易记录。
+
+点击“金额统计”，则可以分交易币种统计出当前查询出所有交易的汇总金额和笔数。如下图所示。
+
+![图片](/img/help-center/digital-platform-guide/FNmbbkAQboBk1kx5IS1cpf8nnhz.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/NFxSbZypJo78yLxy49mcRnFDnxd.png)
+
+
+（H5）
+
+点击“批量上传物流凭证”，则弹出如下窗口，针对实物贸易的商户，可以下载没有物流单号的全部交易，也可以下载批量上传的物流模板进行批量上传。
+
+![图片](/img/help-center/digital-platform-guide/VC7Vb4PEFosrgExyIEpcHAyqnwx.png)
+
+
+（PC）
+
+点击某笔交易记录，并点击详情，则展示显示该笔交易部分交易详情，如卡号、交易网址等信息，同时可以直接在上面针对单笔订单进行退款、上传物流凭证等操作。
+
+![图片](/img/help-center/digital-platform-guide/N605bJF7coWz7AxS2VBcJlOMnpd.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/P7TPb0sUPoT5S4x7smDc26bnnId.png)
+
+
+(H5)
+
+
+
+在每笔交易的详情展示列表对应的操作上，可以进行申请退款、授权完成、授权撤销、上传物流凭证，交易撤销等操作。
+
+点击“申请退款”，则弹出如下页面，在该页面，用户可以针对当前的这笔交易发起退款申请。退款金额默认为全额退款，用户可以自行修改金额，所修改的金额需小于等于原始的交易金额。
+
+“授权完成”和“授权撤销”主要是针对预授权类型的交易。
+
+“授权完成”：同意银行继续扣款，完成交易
+
+“授权撤销”：拒绝银行继续扣款，撤销交易
+
+预授权优势：当商户认为一笔交易有风险，或者发现因为某些客观因素不能完成交易的时候，可以选择“授权撤销”，而不需要操作退款。选择进行预授权模式下进行交易的商户需要注意，国际信用卡预授权交易的默认有效期限是7个自然日，也可以根据商户需要设置更短的期限，超限的系统操作默认是“授权撤销”。
+
+
+
+点击“上传物流单号”，则商户可以在此页面向系统提交该笔交易所对应的物流单号等信息。
+
+![图片](/img/help-center/digital-platform-guide/Hd8RbMFFjo8hPJxBjtacU0zknbe.png)
+
+
+（PC）
+
+
+
+
+
+![图片](/img/help-center/digital-platform-guide/FmOFbjV7PoXm7CxZHRvcDlfMnPf.png)
+
+
+（H5）
+
+
+
+同时支持批量上传物流凭证，无需选择交易，直接点击展示列表左上角的“批量上传发货凭证”
+
+![图片](/img/help-center/digital-platform-guide/AnumbpYxYo816oxgxQfc6AnxnCh.png)
+
+
+导出未上传发货凭证的交易，根据订单号填入对应的物流单号和查询网址，如果订单还未发货，可将相关记录删除。每次最多可以下载10000笔订单，可以上传之后再重新下载进行上传。
+
+（注：下载未上传物流单号的交易仅可下载两个月以内的订单，如两个月之前的订单，可通过一般交易查询处筛选：时间：近半年、支付状态——“成功”、物流号——“NO”、退款——“NO”、拒付——“NO”的交易订单下载，按批量上传模版补充相应信息后进行上传）
+
+**可以对接物流API，自动传输，无需上传**
+
+点击详情，则可以查看到更多的交易信息、风险信息、退款信息、物流信息、附加信息、时间轴。如下所示：
+
+![图片](/img/help-center/digital-platform-guide/VDa5b64HIoajgmxkwW2cekuhnIf.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/E7L8bLxHCo6egPxmBv8cLYc0npe.png)
+
+
+(H5)
+
+交易信息如下所示，其中边框可支持拉动：
+
+![图片](/img/help-center/digital-platform-guide/X3gNbsUNIo2WHgxJLG2cFvyDntH.png)
+
+
+（PC）
+
+
+
+![图片](/img/help-center/digital-platform-guide/P7TPb0sUPoT5S4x7smDc26bnnId.png)
+
+
+(H5)
+
+风险信息如下所示：
+
+![图片](/img/help-center/digital-platform-guide/QstkblIZEoTEJfxXavNc10Ynnjd.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/J5gTbEjQVoqVyWxaNpacz3Oonfg.png)
+
+
+(H5)
+
+附加信息如下图所示：
+
+![图片](/img/help-center/digital-platform-guide/RMzFbLbckomS4jxNzvAcAmBzncd.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/ZMkEbqtMuo07gexCGcgcNjoJnGV.png)
+
+
+(H5)
+
+时间轴如下图所示：
+
+![图片](/img/help-center/digital-platform-guide/VXgbbDlgooT262x3JyecLp8wn9g.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/MHNObYQCAoSR2fxniDjc06QjnRh.png)
+
+
+(H5)
+
+
+
+
+
+
+
+### 5.2 挡掉交易查询
+
+点击菜单【交易查询】-【挡掉交易】，可以按照不同条件进行筛选，查询因风险问题、接口问题等原因被Oceanpayment挡掉的交易。可以点开“高级筛选”，高级筛选条件包括终端号、挡掉原因、支付方式、支付卡种、交易币种、客户端类型。
+
+挡掉原因一般分为接口问题、风控问题：
+
+- 接口问题：一般是指因为商户所传输的接口参数等问题不符合API文档要求的规则而导致交易被挡掉，这种情况下，一般需要商户的技术人员检查接口参数设置以修复该问题；
+
+- 风控问题：一般是指该笔交易触发了Oceanpayment为商户配置好的某个风控规则被挡掉，这种情况下，商户可以根据需要对相应的交易信息进行核实，如来自高风险国家的IP或者邮箱等等，将相应的订单信息拉入黑名单
+
+除了接口问题和风控问题，也有其他不常见的情况发生，商户不能判断的时候，可以联系您的专属运营支持咨询具体原因。
+
+需要注意的是“客户端”这个信息，前提是商户有将该参数传值给Oceanpayment ，Oceanpayment才能从这个筛选条件进行区分交易是来自网页端还是移动端。
+
+![图片](/img/help-center/digital-platform-guide/ZgQkb8a6QobswKxg0rtcUN2Ynmc.png)
+
+
+（PC）
+
+
+
+
+
+![图片](/img/help-center/digital-platform-guide/QJyQbwnSzogI98xoYSRcNbZPngc.png)
+
+
+(H5)
+
+
+
+### 5.3 预授权交易
+
+点击菜单【交易查询】-【预授权交易】，可以查询所有交易类型为预授权的交易明细。默认选中支付状态为“待处理”的交易，搜索则显示出当前查询的交易日期内的所有待处理订单。点击某笔待处理交易记录，则展开显示部分详情，商户可以在此页面操作“授权完成”或者“授权撤销”。
+
+![图片](/img/help-center/digital-platform-guide/KX9jb66XnoKbs6x91xgcapStnbT.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/Tu25bbCCXoYBHkx66UqcWItYnoc.png)
+
+
+(H5)
+
+![图片](/img/help-center/digital-platform-guide/XKlkb8fAzoHyNwxWo9rcRRp8nLe.png)
+
+
+（PC）
+
+点击预授权交易的订单详情，则订单信息展开如下：
+
+![图片](/img/help-center/digital-platform-guide/DcuCbcJqooYxrjxXA2AcAaUXnje.png)
+
+
+（PC）
+
+处理情况统计
+
+只有支付状态为授权完成、授权撤销，才可点击授权交易处理情况统计。
+
+![图片](/img/help-center/digital-platform-guide/WCoDbtfIjogVevxkIzrcxKS8nkd.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/OHUTb5aXnoeIs2xWPEhcsdk7nKb.png)
+
+
+(H5)
+
+授权交易处理情况统计展示字段如下：
+
+![图片](/img/help-center/digital-platform-guide/LCENbcb8qoUMg2xr0hccbiHIn0c.png)
+
+
+（PC）
+
+
+
+## 6. 财务专区（PC/H5/小程序）
+
+### 6.1 账户资金
+
+点击【Payment】-【财务专区】-【账户资金】，可以查看该账户当前的结算方式、结算周期、可结算金额、累计未结算金额以及累计划款金额。
+
+其中可结算金额、累计未结算金额以及累计划款金额下会按照交易款、扣费/押金后参考金额以及保证金进行区分。
+
+同时会按照币种进行拆分展示。
+
+![图片](/img/help-center/digital-platform-guide/NAZgbXq6uoynd9x22ubcci4lnwc.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/AiLBbnLsEolb66xcXb1cGKTnn8c.png)
+
+
+（H5/小程序）
+
+### 6.2 交易明细
+
+点击【Payment】-【财务专区】-【交易明细】，可以通过设置不同的筛选条件，查询相应的交易明细信息。筛选条件包括支付方式、交易类型、终端号、卡种、是否上传物流单号等，商户还可以通过输入相应的划款批次号、支付ID、账户订单号，来查询具体的交易明细。
+
+可以查询的交易类型有成功、退款、拒付、调单、调单取消、申诉成功、失败。
+
+![图片](/img/help-center/digital-platform-guide/JesFbpYovo1qCYxHiwMceJh2nhg.png)
+
+
+（PC）
+
+
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/NEYmbl8BDodAxpx4YyBcxSwqnOe.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/Zhg9bvaASowv3uxrvxucBAy9nj5.png" alt="图片" />
+</div>
+
+
+（H5/小程序）
+
+点击上侧的“金额统计”，会将查询出的数据会按照币种进行拆分统计对应的记账金额和交易金额。
+
+![图片](/img/help-center/digital-platform-guide/Ieuwb7JrxotOdAxLxZLcD0Ibngd.png)
+
+
+（PC）
+
+
+
+![图片](/img/help-center/digital-platform-guide/GaBkbqoYwoxk8Lx2KikcjL9vnGf.png)
+
+
+（H5/小程序）
+
+
+
+显示列表字段支持自定义选择。
+
+![图片](/img/help-center/digital-platform-guide/VgzKbcxyXoMuxfxNfJcc4Be4nnU.png)
+
+
+（PC）
+
+
+
+同时支持下载功能，下载出对应数据。
+
+![图片](/img/help-center/digital-platform-guide/YMibb1EGSooGaGx1B6hcCVDEnje.png)
+
+
+（PC）
+
+
+
+### 6.3 交易划款
+
+点击【Payment】-【财务专区】-【交易划款】，可以根据划款时间和划款币种查询相应的交易划款记录。显示如下：
+
+![图片](/img/help-center/digital-platform-guide/X7akbAQ8yodIE3xbXdkcPF63nAc.png)
+
+
+（PC）
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/QhGfbOgvno55c3xJh6fcG8KVnbg.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/BFi7bCcdMouKKFxsmQyckj3Ln8e.png" alt="图片" />
+</div>
+
+
+（H5/小程序）
+
+
+
+点击某一条划款记录，则弹出显示该划款批次的结汇费用、内扣费用、其他款项、返还款项、划款备注等信息。
+
+![图片](/img/help-center/digital-platform-guide/Q8RxbfO7Ho9gHnxJNakctM2znud.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/JMbVbaWEaoAe7nxE2GLcmUDFnGf.png)
+
+
+（H5/小程序）
+
+
+
+显示列表字段支持自定义选择。
+
+![图片](/img/help-center/digital-platform-guide/E5m1by5LZoU9erxZnz4cZs0lnaf.png)
+
+
+（PC）
+
+
+
+点击右侧或选择数据点击上侧“下载对账单”，可下载出对应文件，文件中展示此批次的交易款以及费用等信息（保证金划款无对账单提供）。
+
+![图片](/img/help-center/digital-platform-guide/SNJFbvgNQozN0gx8QnGcmoEJnwA.png)
+
+
+（PC）
+
+
+
+选择数据点击上侧“下载小结”，可下载出对应文件，文件中展示此批次的具体交易信息以及费用等信息（保证金划款无对账单提供）。
+
+![图片](/img/help-center/digital-platform-guide/HlTYbT6fSoV2YGxN0QmcI5bynLf.png)
+
+
+（PC）
+
+
+
+选择数据点击上侧“下载明细”，可下载出对应文件，文件中展示此批次的具体交易信息以及费用等信息。下载时，可以选择下载文件的格式是EXCEL或者CSV。
+
+![图片](/img/help-center/digital-platform-guide/HCZhbVZz4olQ3xxsUW8cLbJanGc.png)
+
+
+（PC）
+
+
+
+
+
+
+
+
+
+## 7. 消息通知（PC/H5/小程序）
+
+点击【消息通知】-【系统公告】、【Payments】，【系统公告】可以查看最近半年系统发布的重要公告信息，一般是重要的系统升级维护、节假日放假通知，都会显示在这里。【Payments】可以查看近一个月的【拒付】、【伪冒】、【调单】通知，用户在主页顶部看到的小铃铛，即为消息通知栏目的快捷菜单。点击小铃铛-查看全部，
+
+![图片](/img/help-center/digital-platform-guide/Ola4b3m7Oor6jhxBEutc0ZQNnig.png)
+
+
+也可以进入【系统公告】的消息列表页面。如下所示：
+
+![图片](/img/help-center/digital-platform-guide/Vy4Pb2BiqowJjSx92zacHFd6nNh.png)
+
+
+也可以进入【Payments】的消息列表页面。如下所示：
+
+![图片](/img/help-center/digital-platform-guide/LM89borNAoZPqaxdWt2cEmPsnSb.png)
+
+
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/ZDNUbdOEloze7DxMwFwcczA1nph.png)
+
+
+(H5/小程序)
+
+![图片](/img/help-center/digital-platform-guide/KjWdbOpb7onQ17xlApocr9UZnhf.png)
+
+
+（小程序）
+
+![图片](/img/help-center/digital-platform-guide/ZmxubSTLnocSyfxmgJscAY3ynYg.png)
+
+
+（H5）
+
+
+
+## 8. 退款管理（PC/H5）
+
+### 8.1 退款申请
+
+如果要对一笔成功交易进行全额/部分退款，请选择【Payment】-【退款管理】-【退款申请】
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/YEmjbRzd1ovnyJxuKzvcevDunxb.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/OsxGbgIufogBq1xh7LgcmPslnpb.png" alt="图片" />
+</div>
+
+
+(PC)                                  (H5)
+
+
+
+输入订单号或支付ID，点击空白处，则出现该笔交易的交易金额、可退金额、终端号等信息：
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/VwEPbk3Y9okXhmxWFvVcek8onxg.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/OZopbPfaroEvu4x8znucwGhBnfg.png" alt="图片" />
+</div>
+
+
+(PC）                          (H5)
+
+默认的退款金额为交易金额，即全额退款，如需要部分退款，则填写部分退款的金额，选择相应的退款原因后，提交即可。
+
+退款的处理流程如下所示：
+
+![图片](/img/help-center/digital-platform-guide/Pwa1bNgN9o6R6wxAmrTcVbWmn5b.png)
+
+
+1. 商户通过【申请退款】提交退款申请，提交之后通过【查询退款】查看退款状态为“待处理”（此状态期间商户可自行在账户后台撤销此笔退款申请）；
+
+2. Oceanpayment将在2个小时内处理退款申请提交至银行/卡组织，退款状态则变更为“审核成功未处理”；
+
+3. 银行/卡组织审核完毕，退款状态会更新为“成功”，表示银行/卡组织已经处理此退款，将金额退回至消费者发卡银行，具体到消费者账户时间未知，一般在3至10个工作日左右，主要取决于持卡人的发卡银行的处理速度； 
+
+#### 8.1.1 商户可通过【查询退款】跟踪退款状态。
+
+需要商户注意事项：
+
+- Oceanpayment支付平台支持部分退款及多次部分退款，但是同一笔订单的总退款金额不得超过订单总金额。
+
+- 退款一般不收取商户及持卡人费用，但是个别银行通道会收取退款处理费，具体请参考合同中的报价。
+
+**可对接退款API，能够API直接提交退款。Shopify平台建站的网站，则可直接通过shopify后台提交退款申请。**
+
+### 8.2 查询退款
+
+点击【退款管理】，则可以根据账户订单号或者支付ID，查询相应的退款交易，或者根据时间段筛选一段时间内的退款交易。
+
+![图片](/img/help-center/digital-platform-guide/TYpQbWgLGogfP1xvHKVc8nUvnEe.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/Wv3ebmYcuoh3hjxOqpjcjV5QnEd.png)
+
+
+(H5)
+
+查询的时间类型分为处理时间、申请时间、交易时间
+
+- 处理时间：Oceanpayment系统处理更改退款状态的时间
+
+- 申请时间：商户提交退款申请的时间
+
+- 交易时间：订单原始创建交易的时间
+
+**查询号：**如消费者反馈未收到退款，可查询对应退款订单的查询号，将此号码提供给消费者联系其银行核实退款情况
+
+**可对接退款API，通过API返回相应退款处理状态信息。**
+
+
+
+## 9. 异常交易管理（PC/H5）
+
+### 9.1 争议交易
+
+什么是争议？
+
+当订单在宽限期未能达成一致的解决方案，Klarna介入订单的争议处理时，进入Klarna争议(Dispute)处理环节。每笔争议订单均有响应的截止时间，商户需要在截止时间回复Klarna。
+
+一笔Klarna订单，同一个争议案件只要争议未解决，消费者可以持续向商户了解更多信息，发起多次争议请求；
+
+一笔Klarna订单争议，若消费者已认可商户的解决方案，则当前的争议问题已关闭。消费者已认可并已关闭的Klarna争议订单，若消费者后续有疑义，可以再发起新的争议(Dispute)案件，新的争议(Dispute)案件未解决之前，消费者依然可以持续向商户了解更多争议疑问，发起多次争议请求。
+
+一笔Klarna争议订单，若消费者不认可商户的解决方案，且则此争议将升级为拒付，Klarna直接返款给到消费者。
+
+点击【Payment】-【异常交易管理】-【争议交易】，则可以根据订单号或支付ID查询相应的交易信息。也可以根据时间类型、争议类型、处理状态、争议次数、Klarna处理状态等筛选相应的争议交易明细。
+
+条件筛选器中，可以选择的时间条件有申请时间、交易时间、发起时间、回复截止时间、关闭时间：
+
+- 申请时间：宽限期、争议订单在 Oceanpayment 后台更新的时间
+
+- 交易时间：此笔交易的交易发生时间
+
+- 发起时间：如果订单处于宽限期，则发起时间为Klarna订单升级为宽限期的时间；如果订单已升级为争议，则发起时间为Klarna订单升级为争议的时间
+
+- 回复截止时间：如果订单处于宽限期，则回复截止时间为Klarna宽限期订单结束的时间；如果订单已升级为争议，则回复截止时间为在 Oceanpayment后台提交Klarna争议申诉提交的最后截止时间
+
+- 关闭时间：宽限期、争议订单在Klarna后台关闭的时间
+
+最多可以同时选择五组时间类型进行交叉查询。
+
+![图片](/img/help-center/digital-platform-guide/Is75bOjSvoz7M2xe0OYca8FWnpb.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/LSiGbkoOUo4c62xoJcnculzUnif.png)
+
+
+(H5)
+
+点击该笔争议交易记录，则展示详细订单信息，如果是宽限期订单，商户可以选择接受退款或者联系消费者；
+
+![图片](/img/help-center/digital-platform-guide/AT41bfOw8ozp6txd0WDcSTN5njb.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/Wsujbdv5IosWlZxM3hRcWWZSnWd.png)
+
+
+(H5)
+
+如果是争议类型的订单，商户可以选择接受退款或者发起申诉。
+
+![图片](/img/help-center/digital-platform-guide/Jd5obuH5AoResfxefoMc4lemnod.png)
+
+
+点击接受退款，退款页面自动带出当前订单号的相关信息，可进行全额退款和部分退款；
+
+![图片](/img/help-center/digital-platform-guide/OwFmbZefRoKjmLxsaSLcYaxqnR7.png)
+
+
+点击发起申诉，进入争议信息填写页面；
+
+![图片](/img/help-center/digital-platform-guide/QgylblBTGoTsf1xYNHNcBtYenzb.png)
+
+
+商户也可以通过点击comment回复动态查看银行回复与商户回复。
+
+![图片](/img/help-center/digital-platform-guide/UBGTbAipjocXqBxg6wOc5QdAnJe.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/H3tObfHFFoNumRxYlVAcWws1nCb.png)
+
+
+(H5)
+
+
+
+### 9.2 拒付交易
+
+什么是拒付？持卡人在支付后一定期限内（一般为180天，某些支付机构可能规定更长的期限），可以向发卡银行申请拒付账单上的某笔交易，交易资金会被强制返还消费者发卡行。面对拒付如果可支持申诉的订单，可以选择进行申诉，若申诉成功资金则会返还给到商户。无论是否申诉成功，支付公司均会代银行收取拒付处理费。
+
+点击【Payment】-【异常交易管理】-【拒付交易】，则可以根据账户订单号或支付ID查询相应的拒付交易信息。也可以根据交易时间、拒付时间、回复截止时间、处理时间、拒付原因、拒付申诉状态、拒付撤销状态等筛选相应的拒付交易明细。
+
+![图片](/img/help-center/digital-platform-guide/ZlCTbCC0XoxHM1xTcXccefpAn0d.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/OTY0b8UfmovVxZx5XSLcyiKjnvb.png)
+
+
+(H5)
+
+条件筛选器中，可以选择的时间条件有交易时间、拒付时间、回复截止时间、处理时间：
+
+- 交易时间：是指该笔交易进入Oceanpayment支付系统的时间
+
+- 拒付时间：等于CPD时间，消费者向发卡行提起争议，发卡行受理该笔拒付的时间
+
+- 回复截止时间：是指银行要求商户提出申诉的截止日期，超时未回复默认为商户接受拒付，放弃申诉
+
+- 处理时间：是指该笔交易最新状态的处理时间，包括拒付的复核时间、申诉状态的复核时间
+
+拒付原因有欺诈拒付、服务未提供或者未收到商品、货物损坏/货不对版等主要原因，商户可在拒付邮件的引导下，针对不同原因的拒付交易发起申诉。
+
+发起申诉的流程为：在【拒付处理】中根据相关的筛选条件查询到对应的拒付交易记录，点击该笔交易记录，则展开显示该笔拒付交易的详情，如下所示：
+
+![图片](/img/help-center/digital-platform-guide/UaacbJIDWoccZJxthsWcJBfPn7b.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/NUaPb1bXwoEUbWx3RuacJ1RSnwf.png)
+
+
+(H5)
+
+可以看到该笔拒付交易的原因是虚假商品，交易日期是5月19日，拒付日期是5月19日，回复截止日期是6月8日，则商户在6月8日之前可以操作【接受拒付】或者【】【发起申诉】。点击【发起申诉】，则展开申诉编辑页面。
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/D1y3bMuOMonzzcx8jovcwbTPnZe.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/Y20hbeUMZoyH3fxIakvcrQzmnxd.png" alt="图片" />
+</div>
+
+
+申诉页面已自动同步了该笔订单的原始订单信息，商户可以在此页面上修改编辑交易信息和收货信息，同时针对不同的拒付原因系统会展示对应需要提供的资料信息项，及申诉示例文字说明，双击以上蓝色字体可自动同步到文本框中。上传相关的申诉文件，然后点击【提交】，详细的申诉材料要求，请参考届时拒付通知邮件；**点击【提交】后，允许原页面预览申诉文件**。
+
+![图片](/img/help-center/digital-platform-guide/ACkQbH7Ygo14xexHnjccqjULnYb.png)
+
+
+
+
+### 9.3 伪冒交易
+
+什么是伪冒？各发卡行会将消费者的欺诈行为报告给对应的机构（TC40或SAFE），收单行和发卡行将根据这些机构出具的报告，了解交易的欺诈风险情况，及时调整风控策略，从而确保将欺诈交易控制在合理范围内。Visa的欺诈行为报告为TC40；MasterCard的欺诈行为报告为SAFE。我们把这些报告涉及的交易称为伪冒交易。伪冒交易的订单，交易金额既不会被冻结，也不会被扣除。若未及时处理伪冒订单，可能有85%以上的拒付风险，若发生拒付，银行将按照拒付流程进行处理，除扣除交易款外，还会额外收取拒付处理费，同时考核拒付率。
+
+点击【Payment】-【异常交易管理】-【伪冒处理】，则可以根据账户订单号或支付ID查询相应的交易信息。也可以根据交易时间、伪冒时间、终端号等筛选相应的伪冒交易明细。
+
+![图片](/img/help-center/digital-platform-guide/Ak2NbHk0Aod83Sxj8Uscz8BWnGe.png)
+
+
+(PC)
+
+
+
+![图片](/img/help-center/digital-platform-guide/BbmQbDwH8osO81xzxmmcH7dBnsc.png)
+
+
+(H5)
+
+点击该笔伪冒交易记录，则展示显示操作信息，商户可以选择接受退款，以避免造成拒付风险。
+
+![图片](/img/help-center/digital-platform-guide/Ok8gbsYlvo5aoZxNDX0cY0p5nkd.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/D9bTbZK11o0JRdxraA6chtTCnsg.png)
+
+
+(H5)
+
+点击接受退款，退款页面自动带出当前订单号的相关信息，可进行全额退款和部分退款；
+
+![图片](/img/help-center/digital-platform-guide/VuGRbYat9oNTRTxiupUc4wh7nAh.png)
+
+
+（PC）
+
+
+
+### 9.4 调单交易
+
+什么是调单？指持卡人不确定是否本人做出的交易，发卡行对此交易的交易款进行冻结，等待进一步核实后才决定是否解冻，冻结状态下的交易不参与结算。
+
+点击【Payment】-【异常交易管理】-【调单交易】，则可以根据订单号或支付ID查询相应的交易信息。也可以根据交易时间、调单时间、回复截止时间、处理时间、调单状态等筛选相应的调单交易明细。
+
+条件筛选器中，可以选择的时间条件包括交易时间、调单时间、回复截止时间、处理时间。其中调单时间是指银行系统中记录该笔交易发生调单的时间。
+
+![图片](/img/help-center/digital-platform-guide/WJ6IbNad0oGA7Gxu9YVcjTIynxc.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/Cv5ubXFqkocmimxsdVZcT00FnGd.png)
+
+
+(H5)
+
+点击该笔调单交易记录，则展示详细订单信息，商户可以选择接受退款或者申请调单撤销。
+
+![图片](/img/help-center/digital-platform-guide/XPNFbikEnocUzRxEHd9cdovUnnd.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/MJxebYgzZoS8RPxYgdPcJoSBnwe.png)
+
+
+(H5)
+
+点击接受退款，退款页面自动带出当前订单号的相关信息，可进行全额退款和部分退款；
+
+![图片](/img/help-center/digital-platform-guide/QMgBb8ZOio1BEQxTCDdcYhLzn9d.png)
+
+
+（PC）
+
+点击撤销调单，则展开撤销调单编辑页面。
+
+![图片](/img/help-center/digital-platform-guide/BSPJbsr28ox2RyxEQSYczFLznBd.png)
+
+
+（PC）
+
+
+
+
+
+
+
+
+
+## 10. 风控管理（PC/H5）
+
+
+
+### 10.1 高欺诈风险警报通知（PC/H5）
+
+警报推送
+
+1.数据库:扫描时间向前近720小时内,Oceanpayment平台全部交易数据进行扫描;
+
+2警报扫描时间:早上8:00、晚上 17:00、晚上 20:00;
+
+3.高风险欺诈警报:当前警报扫描向前 168 小时内，未退款，且未拒付、且未伪冒的
+
+成功交易，会在高风险欺诈警报清单中展示(交易状态成功或信用卡预授权待处理
+
+的交易)，警报列表中已经通知的订单不再重复通知。
+
+警报扫描规则
+
+1.商户若需要额外增加警报扫描规则，可以联系 Oceanpayment 专属客户关系经理,
+
+Oceapayment 可以支持自定义的警报扫描规则设置。
+
+
+
+警报接收邮箱
+
+商户可以在后台自行设置警报接收邮箱:
+
+
+
+高欺诈风险警报功能
+
+登录账户后台后，点击 ODPM 按钮，选择【风控管理】，可跳转至高欺诈风险警
+
+报通知模块。
+
+查询字段：
+
+![图片](/img/help-center/digital-platform-guide/A3MMbwTkboDJogxCuhsccFFDn14.png)
+
+
+(PC)
+
+
+
+![图片](/img/help-center/digital-platform-guide/D6Tob7dwHoXd3Fx8Y25cDkqLnwd.png)
+
+
+(H5)
+
+
+
+
+
+- 账户订单号/支付 ID
+
+- 默认【推送时间】:为警报扫描后，高风险订单的推送时间
+
+- 交易时间:警报订单的交易时间
+
+- 处理时间:商户对警报订单进行退款操作的时间
+
+- 终端号:可以选择同时选择多个终端号
+
+- 邮箱:区分大小写，精准查询
+
+- IP 地址、卡号前6位、卡号后 4位、交易币种:精准查询
+
+- 是否拒付:订单已发生拒付则为是，否则为否
+
+- 是否伪冒:订单已发生伪冒则为是，否则为否
+
+- 是否退款:订单已完成退款则为是，否则为否
+
+- 是否 3D:3D 交易则为是，否则为否
+
+- 是否预授权: 预授权交易则为是，否则为否
+
+- 处理状态:【高欺诈风险警报递知】的订单不管是通过 Alert Rules 自动授权完
+
+成、还是 Alert Rules 自动授权撤销，还是人工授权完成、人工授权撤销，还是提
+
+交了退款，处理状态均为已处理，否则为未处理。
+
+- 风险状态:高风险交易、风险预警交易
+
+- 高风险交易:黑名单交易:此订单的信息因“盗卡、欺诈拒付、伪冒、批量
+
+多卡交易”等原因进入黑名单库。同用户多卡交易:此订单的信息存在“批
+
+量多卡交易”的特征，如“同邮箱使用多张不同的信用卡进行交易”。
+
+- 风险预警交易:高金额订单:高金额订单提醒(如订单金额900USD及以
+
+上)。指定风险交易提醒:商户自定义的交易风险提醒。
+
+
+
+Alert Rules设置
+
+![图片](/img/help-center/digital-platform-guide/BgX2bJ7NeoZKsAx75pVcY8GlnUR.png)
+
+
+(PC)
+
+8.1.1Alert:商户配置邮箱，可以额外增加邮件按收高风险警报订单。可以不配置邮
+
+箱，也可以配置多个邮箱。
+
+#### 10.1.1 风险预警交易是否开启自动授权：
+
+- 授权撤销:信用卡预授权交易，且【风险状态=风险预警交易】，自动【授权
+
+撤销】，交易失败
+
+- 授权完成:信用卡预授权交易，且【风险状态=风险预警交易】，自动【授权
+
+完成】，交易成功
+
+
+
+#### 10.1.2 高风险警报交易是否开启自动授权：
+
+- 授权撤销:信用卡预授权交易，且【风险状态=高风险交易】，自动【授权撤
+
+销】，交易失败
+
+- 授权完成:信用卡预授权交易，且【风险状态=高风险交易】，自动【授权完
+
+成】，交易成功
+
+
+
+退款和查看详情
+
+![图片](/img/help-center/digital-platform-guide/MmKDbL5rfowblJxpipTc7ekEnBa.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/MeuibjyznoSQCPxIQDRc6iVPnVb.png)
+
+
+(H5)
+
+
+
+### 10.2 黑名单管理（PC）
+
+黑名单查询条件：
+
+![图片](/img/help-center/digital-platform-guide/E4iubHuZsoIHtnxWeGicTxi8n4f.png)
+
+
+可以通过新增按钮 新增管理网站自己的黑名单数据：
+
+![图片](/img/help-center/digital-platform-guide/PUqUbLJVHo2ALyxpOR0clME3nff.png)
+
+
+新增页面如下：
+
+![图片](/img/help-center/digital-platform-guide/R9sibJgszoDS8VxmSjhcx88onXd.png)
+
+
+黑名单数据可以进行黑名单状态更新：停用、正常启用，或是操作—修改设置对整个账户、某个终端号生效
+
+![图片](/img/help-center/digital-platform-guide/TbZpbIlo3ox6xgxS6eZcvxLdnFe.png)
+
+
+
+
+
+
+## 11. 数据分析(PC/H5)
+
+### 11.1 可视化图表（PC/H5/小程序）
+
+筛选条件
+
+时间默认展示近七日
+
+![图片](/img/help-center/digital-platform-guide/MXTGbby5PomaiLx4PGscscx6nOe.png)
+
+
+(PC)
+
+
+
+![图片](/img/help-center/digital-platform-guide/Kt5PbtahUoLz4Dx6qCJcwqMqn3d.png)
+
+
+(H5/小程序)
+
+支持八大图表的数据可视化展示
+
+![图片](/img/help-center/digital-platform-guide/AA1HbzzwcoNIzRx5P4Ucf8VNnGd.png)
+
+
+（PC）
+
+
+
+![图片](/img/help-center/digital-platform-guide/H8Iab8MtioC3zvx26oAcYTl7naf.png)
+
+
+(H5/小程序)
+
+以下维度支持针对终端号和卡种进行对应更精确查询：
+
+![图片](/img/help-center/digital-platform-guide/JCqxbYYWsoyE0Jx2RiFcwjTCnRd.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/KcZ2bB0htoPNZMxEI0JcjLBgn5p.png)
+
+
+(H5/小程序)
+
+![图片](/img/help-center/digital-platform-guide/MpfUbmjqKo8OsexpukfcXeuwnic.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/EaSWbdyYeoh2olxAEwUcSx2hnRd.png)
+
+
+(H5/小程序)
+
+
+
+![图片](/img/help-center/digital-platform-guide/OY3AbhG3OosnO2xy5FNc7p5qn5d.png)
+
+
+（PC）
+
+
+
+![图片](/img/help-center/digital-platform-guide/Cy5AbXWx1oYhcvxK5s2cvC7AnSh.png)
+
+
+(H5/小程序)
+
+
+
+其中整体拒付伪冒退款还支持针对卡种进行针对查询：
+
+![图片](/img/help-center/digital-platform-guide/JankbmK7Jop4WOxyEoIcyMCKnvh.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/Cy5AbXWx1oYhcvxK5s2cvC7AnSh.png)
+
+
+(H5/小程序)
+
+
+
+### 11.2 数据分析报表（PC/H5）
+
+查询：
+
+![图片](/img/help-center/digital-platform-guide/QAcTbTvTLo0DrxxUWiyc5bArnnB.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/C6PGbv9hMolxuQxdeVWcWYhqnld.png)
+
+
+（H5）
+
+根据商户数据分析模块权限设置最多有22项数据分析维度，如下：
+
+![图片](/img/help-center/digital-platform-guide/F6hDbN1SCoZ3Q1xKElFcbu73nTb.png)
+
+
+点击下载，可下载报表类型选中维度对应的Excel数据报表
+
+![图片](/img/help-center/digital-platform-guide/IGenbD4sgoDsPexaJZPcSXyznEh.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/FR2LbuwPtoGF96xRLMxcTwM6nic.png)
+
+
+（H5）
+
+
+
+## 12. 报表管理(PC/H5)
+
+### 12.1 交易月报
+
+点击【Payment】-【报表管理】-【交易月报】，则可以下载查看每个月的交易报表情况(月初可下载上个月的报表)。
+
+![图片](/img/help-center/digital-platform-guide/Q7fvbT1rToh31PxetyYc3LS0nCb.png)
+
+
+（PC）
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/PZ6pb9DIooPGJJxUSktcHT9inCc.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/HEunbBEf1oFCRXxG4tYcbtnrnNd.png" alt="图片" />
+</div>
+
+
+（H5）
+
+
+
+显示列表字段支持自定义选择。
+
+![图片](/img/help-center/digital-platform-guide/EljAbPEpHotUynxU0BEcyMJKnCb.png)
+
+
+（PC）
+
+选择月份的数据，点击下载，可下载出对应文件，文件中会按照支付方式、交易类型、交易币种、记账币种统计对应月份一整月的笔数、交易金额、记账金额。
+
+同时也会统计对应支付方式的拒付率（笔数）、拒付率（金额）、退款率（笔数）、退款率（金额）。
+
+![图片](/img/help-center/digital-platform-guide/EFAFbZ3nJov9GaxRflicI4j3nTd.png)
+
+
+（PC）
+
+
+
+### 12.2 结算月报
+
+点击【Payment】-【报表管理】-【结算月报】，则可以下载查看每个月的结算月报表(月初可下载上个月的报表)，同时可以下载上个月结算月报的invoice。
+
+![图片](/img/help-center/digital-platform-guide/OyyEby0ldoZWm1xQtoDcMwH2nYf.png)
+
+
+（PC）
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/AIDObDksaoVXJ4xXDi6c9kMyn5S.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/VfeZbUX20oMgF7xWzFncsrAcnMc.png" alt="图片" />
+</div>
+
+
+（H5）
+
+显示列表字段支持自定义选择。
+
+![图片](/img/help-center/digital-platform-guide/FH9gbZjvXoi7YoxKOqIcBZN5nLf.png)
+
+
+（PC）
+
+
+
+可分别下载PDF、Excel格式的文件，文件中会展示对应月份的交易款以及费用等信息，同时会按照报表里的金额币种拆分成不同表格。
+
+![图片](/img/help-center/digital-platform-guide/GdLAbWhjjoMSKQxNBvJcFyiNn4b.png)
+
+
+（PC/H5）
+
+
+
+
+
+
+
+### 12.3 资金日报
+
+点击【Payment】-【报表管理】-【资金日报】，则可以下载查看每天的资金以及交易情况。
+
+![图片](/img/help-center/digital-platform-guide/NN5gbXFDjor5igxPda2cS6rDnmc.png)
+
+
+（PC）
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/E7lRbS8qDo4o7RxLNuMciDl4nhd.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/NE4jbTELeoVwmmx56Kfc0VtHnji.png" alt="图片" />
+</div>
+
+
+（H5）
+
+
+
+显示列表会根据所选择的筛选条件展示资金日报以及交易日报。
+
+资金日报：按日期、账户、结算币种统计每天的新增交易、已结算交易、费用、保证金等资金变动的数据。
+
+交易日报：按日期、账户、结算币种统计每天的新增的各交易类型。
+
+显示列表字段支持自定义选择。
+
+![图片](/img/help-center/digital-platform-guide/XL3Rb1a1xolneExmdG1cJrtsnnW.png)
+
+
+（PC）
+
+
+
+同时支持下载功能，下载出对应数据。
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/X0x4b6qgeol72BxG8YmcVqjCnvh.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/LTYSbWyX6olxx8xJeVwc0Xg2nCg.png" alt="图片" />
+</div>
+
+
+（PC/H5）
+
+
+
+## 13. 网站管理(PC/H5)
+
+点击【网站管理】，商户可以查看所有已接入的网站信息及状态
+
+![图片](/img/help-center/digital-platform-guide/QsOQbWphfo7jG1xptaEcM4kenzd.png)
+
+
+(PC)
+
+![图片](/img/help-center/digital-platform-guide/Z4EqbWZNEop8PIxv5ePcgCsdnOh.png)
+
+
+(H5)
+
+点击【新增】展示页面如下，可填写以下信息发起新增网站申请支付通道：
+
+![图片](/img/help-center/digital-platform-guide/XpVCbYkESo0ktLxgYgociprEnmd.png)
+
+
+(PC)
+
+1. 填写网站推广的国家市场
+
+2. 选择网站的标价币种
+
+3. 填写网站平均客单价
+
+4. 填写网站域名
+
+5. 填写网站销售的产品类型，例如：女装，电子产品，综合百货等
+
+6. 选择建站模式，例如：shopify，APP等
+
+7. 上传域名证书，如果没有域名证书可上传域名管理截图
+
+8. 备注非必填项，如无特殊说明，可不填写
+
+
+
+## 14. 下载中心(PC)
+
+使用场景：目的是针对数据量较大的下载，当商户需要下载正式交易明细数据超过Oceanpayment后台设置的最大阈值10W条数据时(该数据最大阈值可能随业务场景变化而调整)，执行异步下载、离线下载，用户下载大数据量数据时跳转下载专区进行下载。
+
+
+
+![图片](/img/help-center/digital-platform-guide/KBaKb9NsuoOc2XxKPTwcPtu0nkg.png)
+
+
+(PC)
+
+
+
+
+
+## 15. 帮助中心（PC/H5）
+
+点击顶部导航栏该图标
+
+<div className="doc-image-row">
+  <img src="/img/help-center/digital-platform-guide/CQu6bdJG9oHWXxxmV5Vc5fxZnVf.png" alt="图片" />
+  <img src="/img/help-center/digital-platform-guide/Vi4WbDxZDo4eoNxzLyEcx4mHnFf.png" alt="图片" />
+</div>
+
+
+点击【Payment】-【帮助中心】
+
+![图片](/img/help-center/digital-platform-guide/LSR6bfQ8nol0aFxaaoqcxxtknCd.png)
+
+
+（PC）
+
+点击【管理中心】-【帮助中心】菜单
+
+![图片](/img/help-center/digital-platform-guide/N3tObgawGoqQdkx2yLPcgHSynUc.png)
+
+
+（H5）
+
+进入帮助中心，可查看常见问题Q\&A以及分类问题的指引说明
+
+![图片](/img/help-center/digital-platform-guide/E2rkbhhynos3UvxavbXc2WhPnRW.png)
+
+
+（PC）
+
+![图片](/img/help-center/digital-platform-guide/FZl0bNyv6oK0hux3gQjcrS8onAd.png)
+
+
+(H5)
+
+## 16. 开发者(PC)
+
+### 16.1 终端设置
+
+点击【More】-【开发者】-【终端设置】，则可以查询本账户下所有终端号的secureCode，状态，接口类型，操作时间及详情。如下图所示：
+
+![图片](/img/help-center/digital-platform-guide/VuvMbA7g2otsuzxp6u4cDhfzn2e.png)
+
+
+#### 16.1.1 状态“正常”的终端号，代表已转正的终端号，可正常交易
+
+2.状态“测试“的终端号，代表还是测试环境的终端号，不可走正式交易
+
+3.状态”停用“的终端号，代表已弃用的终端号，不可走正式交易
+
+## 17. 日志管理(PC)
+
+### 17.1 登录
+
+点击【More】-【日志】-【登录】，则可以查看本账户下某个时间段内超级管理员及所有子账户的登录信息，如登录账户及IP等，如下图所示：
+
+![图片](/img/help-center/digital-platform-guide/QYrwbY6ZTo9Ii3xDS08c4z8tnhb.png)
+
+
+(PC)
+
+### 17.2 操作
+
+点击【More】-【日志】-【操作】，则可以查询本账户下某个时间段内超级管理员及所有子账户的操作日志，如执行了退款申请、拒付申诉等，如下图所示：
+
+![图片](/img/help-center/digital-platform-guide/WNIJbRXrNo4YdkxqROncafUynjh.png)
+
+
+(PC)
+
+
+
+
+
+
