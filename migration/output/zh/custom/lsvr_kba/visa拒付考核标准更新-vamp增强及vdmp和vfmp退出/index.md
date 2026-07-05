@@ -1,0 +1,6 @@
+---
+title: "Visa拒付管控政策（VAMP）"
+date: 2025-01-21
+---
+
+收到Visa信息同步，自2025年3月31日起，Visa将终止Visa原来的拒付监控计划（VDMP）和伪冒监控计划（VFMP），并将在2025年4月1日起启用增强的Visa收单机构监控计划（VAMP）。VAMP的更新见附件：[【Oceanpayment】VAMP增强及VDMP和VFMP退出 2025-06-25](https://support.oceanpayment.com/wp-content/uploads/2025/01/【Oceanpayment】VAMP增强及VDMP和VFMP退出-2025-06-25.pdf)

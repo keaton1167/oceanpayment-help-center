@@ -1,0 +1,52 @@
+---
+title: "Visa VIRP规则介绍"
+date: 2026-01-08
+---
+
+### **一、什么是VIRP**
+
+Visa 诚信风险计划，全称为Visa Integrity Risk Program（简称 VIRP），是 Visa 于2023 年 5 月 1 日正式推出的合规管控框架，旨在帮助收单机构、其注册代理商及其商户维持适当的控制和监督流程，以阻止非法交易进入 Visa 支付系统。
+
+作为 Visa 支付生态安全体系的核心组成部分，VIRP 聚焦 “诚信风险” 而非单纯的 “品牌风险”，通过明确高风险商户分类标准、强化收单机构管控责任，防范非法交易、欺诈行为及违规操作进入 Visa 支付网络，最终维护支付生态的完整性、安全性与消费者信任。​
+
+VIRP 与 Visa 2025 年推出的收单机构监控计划（VAMP）形成互补：VAMP 针对全行业商户的欺诈与争议率进行普适性监控，而 VIRP 则专门聚焦高风险业务类型的商户，实施更严格的准入与持续管控。
+
+由于支付生态系统的快速扩张、地方法律法规的日益复杂以及某些地区非法交易的可能性不断增加，Visa 及其收单机构面临着新的威胁，这些威胁加剧了监管、财务和诉讼风险。具体挑战包括：
+
+- 非法或违规的在线赌博（Illegal or miscoded online gambling）
+- 非法成人内容（Illegal adult content）
+- 非法药品销售（Illegal pharmaceuticals sales)
+- 非法保健品/营养品销售（Illegal supplements / nutraceuticals sales）
+- 非法销售假冒商品（Illegal sale of counterfeit goods）
+- 非法侵犯版权和知识产权的销售（Illegal copyright and intellectual property infringing sales）
+
+此外，VIRP致力于保护支付生态系统中的所有利益相关者（包括终端客户）免受高风险商业行为的侵害，例如：
+
+- 骗局（Scams）
+- 交易洗钱（Transaction laundering）
+- 共谋（Collusion）
+
+### **二、高诚信风险商户收单 - 定义和范围**
+
+| 风险级别 | 商户业务说明 | 英文说明 | 描述 |
+| --- | --- | --- | --- |
+| Tier 1 | 成人内容 | Adult Content | 成人内容和服务，如网站订阅和视频流。 |
+| Tier 1 | 约会和陪护服务 | Datingand Escort Services | 约会和伴游相关的服务，如在线分类广告，包括伴游服务或约会网站的每月订阅。 |
+| Tier 1 | 赌博 | Gambling | 为运气游戏提供资金，例如对结果下注，在赌博场所购买筹码或体育博彩。 |
+| Tier 1 | 药店 | Pharmacies | 销售处方药品。 |
+| Tier 2 | 加密货币商户：交易所、钱包提供商或on-ramp提供商（无卡），交易需使用特殊条件代码 7 | Crypto Merchants: exchanges, wallet providers or on-ramp providers (card absent) with transactions required to use Special Condition Code 7 | 适用于加密货币交易，例如购买加密货币，为加密货币钱包提供资金或为首次代币发行(ICO)提供资金。 |
+| Tier 2 | 网络锁和类似的远程数字文件共享服务（无卡交易） | Cyberlockers and similar remote digital file-sharing services (card absent) | 适用于网络储物柜和类似的远程数码文件共享服务，在这些服务中，上传的内容可供公众访问，或者该服务向上传者支付内容费用。 |
+| Tier 2 | 技能游戏（无卡交易） | Games of Skill (card absent) | 适用于技巧类游戏，如日常虚拟体育游戏，消费者付费进入游戏，游戏结果由技巧决定，而不是运气。 |
+| Tier 3 | 高诚信风险金融交易平台（无卡交易） | High Integrity Risk Financial Trading Platforms (card absent) | 适用于高诚信风险金融交易平台。 |
+| Tier 3 | 呼出电话营销（无卡交易） | Outbound Telemarketing(card absent) | 使用电话呼出营销的产品或服务。例如，未经征求的技术支持台、信用卡保护或打电话给潜在客户，向他们介绍产品或服务，并试图说服他们购买产品。 |
+| Tier 3 | 默认续费订阅商户（无卡交易） | Subscription "Negative Option" Merchants (card absent) | 适用于订阅“消极选择”的商户（即非面对面的消极选择计费交易）   消极选择指消费者默认同意自动续费，若不希望继续订阅，需主动操作取消。（反之则为 “正面选择”，即消费者需主动勾选同意续费） |
+| Tier 3 | 烟草销售（跨境无卡交易） | Tobacco Sales (cross-border card absent) | 非面对面销售烟草制品，如香烟、电子烟、电子烟装置和吸烟者用品 |
+
+### 三、**2025 年 VIRP 监管要求**
+
+2025年，符合VIRP资格的企业必须遵守适用的监管要求，其中包括：
+
+- 实时交易监控：高风险行业的商家必须使用实时交易监控来发现和防止可疑交易。
+- 强制年龄验证：高风险行业的商家现在必须使用年龄验证来确保顾客可以合法购买商品或服务。这对于烟草或成人娱乐等对年龄要求较高的行业尤为重要。
+- 内容审核： Visa制定了内容合规标准，所有托管用户生成内容的商家（如AIGC商户、直播商户）都必须遵守这些标准。如今，托管用户生成内容的商家必须更加谨慎地管理其平台上出现的内容。
+- 会员身份验证标准：提供订阅付款、会员资格或定期计费的企业必须采用强大的会员身份验证标准，以避免欺诈性注册和付款。

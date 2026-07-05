@@ -1,0 +1,99 @@
+---
+title: "Oceanpayment Recurring知识介绍"
+sidebar_label: "Oceanpayment Recurring知识介绍"
+sidebar_position: 1
+---
+
+对【Recurring 知识介绍】的使用如有疑问或建议，欢迎联系 Emily：emily@oceanpayment.com.cn。
+
+## 基础名词
+
+1. **NRO：**全称 Negative Renewal Option，也称 Negative Option Billing，即负面选择计费营销。这是一种营销策略，商家会提供实体商品、数字商品或服务的免费或低价试用期，然后在试用期结束后自动将持卡人纳入定期计费或订阅计划。
+2. **CIT：**Cardholder-Initiated Transaction，消费者发起的交易。
+3. **MIT：**Merchant-Initiated Transaction，商户发起的交易。
+4. **OTID：**交易的初始事务标识符。在持卡人发起交易时，系统需要生成一个唯一的 OTID 来标识该交易。
+5. **Store the transaction identifier (OTID) of the initial Cardholder-Initiated Transaction (CIT)：**在持卡人发起交易时，系统需要生成唯一的 OTID 来标识该交易，并将其存储在数据库、日志文件或其他存储介质中，以便后续进行交易追踪、管理和安全验证。
+6. **PAN：**Primary Account Number，指 Visa 卡主账号，由 16 位或 19 位数字组成，遵循 ISO/IEC 7812 标准。
+7. **VAU：**全称 Visa Account Updater，即 Visa 账户更新器。当发卡机构更新 Visa 卡 PAN 至新号，且旧号在 Visa MIT 系统中有记录时，系统会将旧 PAN 信息复制至新 PAN 记录。此后，无论使用旧 PAN 还是新 PAN 提交 MIT 服务请求，只要符合条件，MIT 响应都会在同一支付协议中填充对应的 OTID。该服务适用于 VAU 及实时 VAU。
+
+## Visa 的 NRO 规则
+
+Visa 在 2020 年更新了针对免费试用、自动续费订阅的规则，旨在加强消费者与商户之间的沟通规范。所有使用或接入 Visa 网络的商户都必须遵守这些新规。新规定的核心内容可归纳为五大条款：加强信息披露、简化取消流程、明确通知机制、提供争议流程说明与预防措施、持续合规监控。
+
+### 1. 加强信息披露
+
+- 确认持卡人已同意订阅，除非持卡人主动取消。
+- 明确开始订购的日期以及货品或服务详情。
+- 明确正在进行的交易金额，以及结算频率或日期。
+
+### 2. 简化取消流程
+
+Visa 要求商家提供多种取消方式，例如邮件通知或短信方式，方便消费者快速找到取消入口。此外，无论消费者通过何种渠道购买服务，商家都需要支持线上取消服务。
+
+### 3. 明确通知机制
+
+一旦消费者同意订阅协议后，即使还未开始扣款，商家也必须发送交易收据或其他书面确认，证明协议已启动。Visa 订阅交易收据应包含上述披露部分所列的所有项目，以及：
+
+- 用于订阅的信用卡或借记卡后四位数字。
+- 任何取消政策的更新信息。
+- 任何取消链接或标准的更新信息。
+
+除了发送交易收据外，商家还必须通过电子邮件或短信提醒订阅者其免费试用期即将结束，并将在约定的订阅开始日期进行扣费。如果订阅条款有任何变更，例如价格、服务内容或订阅条款变化，商家也必须及时通知订阅者。每次沟通中都应包含取消链接和相关说明。
+
+### 4. 提供争议流程说明和预防措施
+
+为减少争议发生，Visa 订阅规则对以下要素提出要求：
+
+- **独特账单描述：**对于免费试用订阅，账单描述不应仅包含名称和标识。建议使用动态账单描述，明确标注“免费试用”或“试用期”等字样，以便订阅者在账单中准确识别交易性质。
+- **争议处理：**若消费者不知情即被订阅服务，则不应承担相关责任。对此，商户有权通过提供充分的信息披露证明、持卡人接受记录及后续通知凭证进行申诉。
+- **争议响应：**商户应仅提供具有“决定性”的证据，即卡组织认可的可验证信息。根据 Visa 规定，决定性证据包括订阅协议上的持卡人签名（电子或其他形式）、后续支付协议上的持卡人签名，以及证明持卡人至少在试用期结束前 7 日收到通知的凭证。
+
+### 5. 持续合规监控
+
+Visa 将定期抽查提供订阅服务网站的账单地址、账单描述信息是否合规，同时密切关注争议超标网站或欺诈网站，并在怀疑存在滥用情况时进行干预。Visa 还将通过“神秘购物”及数据监控，检查网站是否遵循以下要求：
+
+- 适当的信息披露。
+- 完整的通知机制。
+- 充分的取消流程。
+
+信息来源：
+
+[https://usa.visa.com/dam/VCOM/global/support-legal/documents/visa-new-subscription-rules-flier.pdf](https://usa.visa.com/dam/VCOM/global/support-legal/documents/visa-new-subscription-rules-flier.pdf)
+
+## MasterCard 的 NRO 规则
+
+自 2022 年 10 月 11 日起，MasterCard 对提供订阅类服务，或为实物商品、数字商品提供低金额或免费试用期的商户，修订了相应的商户要求。主要要求如下：
+
+- 在消费者注册或购买时确保对持卡人保持透明。
+- 在消费者注册时发送确认电子邮件。
+- 提供在线取消方式。
+- 每次支付后发送收据。
+
+根据 MasterCard 调查，NRO 交易会增加消费者负担，消费者可能因不打算购买或不想要的产品或服务而重复支付，进而引发大量拒付。上述要求旨在提高订阅类交易透明度，减少客诉，优化持卡人交易体验。
+
+对于年度订阅，MasterCard 要求在账单日前 7 天发送通知。MasterCard 同时要求全球所有收单机构在提交无卡 CIT 交易，即启动一系列定期付款时，填写定期付款标识，并在后续每笔定期付款交易中继续包含该标识。
+
+信息来源：
+
+[https://www.mastercard.us/content/dam/public/mastercardcom/na/global-site/documents/subscription-and-negative-option-billing-model-summary.pdf](https://www.mastercard.us/content/dam/public/mastercardcom/na/global-site/documents/subscription-and-negative-option-billing-model-summary.pdf)
+
+## Visa Account Updater
+
+Account Updater 是由卡组织提供的一项服务，旨在帮助商家自动更新消费者的信用卡或借记卡信息。当持卡人的卡片因过期、丢失或更换而发生信息变更时，Account Updater 会自动向商户提供最新卡片信息，无需持卡人重新提供。对于依赖重复购买、定期扣款、订阅服务的商家来说，Account Updater 有助于减少因卡信息过时而导致的支付失败，提高消费者支付体验的同时也能增加商户收益。
+
+为了使订阅功能正常运作，商户需要留存消费者正确的支付卡数据，以便未来重复订购。但消费者卡信息可能因以下原因发生变更：
+
+- 卡片因丢失或被盗而被更换。
+- 原卡已过期。
+- 持卡人的银行账户已关闭或升级。
+- 消费者姓名或地址发生变更。
+- 发卡行与其他金融机构合并。
+- 发卡行更改了其信用卡网络会员资格。
+
+## Real-Time Account Updater（实时账户更新器）
+
+Real-Time Account Updater 具有即时性特点。在处理付款时，Oceanpayment 会自动向卡组织发起更新请求，并立即使用最新的卡片信息完成付款。该模式仅支持 Visa。
+
+## Batch Account Updater（批量账户更新器）
+
+通过 Batch Account Updater 的方式，Oceanpayment 会定期从卡组织获取最新的卡片信息并保存在系统中，以便消费者下一次交易时系统可直接调取最新卡信息。该模式支持 Visa、MC、Discover。

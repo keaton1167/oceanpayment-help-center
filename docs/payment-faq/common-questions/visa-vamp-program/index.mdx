@@ -1,0 +1,108 @@
+---
+title: "Visa VAMP考核计划"
+sidebar_label: "Visa VAMP考核计划"
+sidebar_position: 10
+---
+
+## 什么是 VAMP
+
+VAMP 全称 Visa Acquirer Monitoring Program，是 Visa 制定的一套标准，用于控制商户和收单行的欺诈交易行为。该标准适用于 CNP（Card-Not-Present）交易，包括本地交易和跨境交易，即 Oceanpayment 商户的所有线上交易均适用。
+
+## VAMP 更新内容
+
+自 2025 年 3 月 31 日起，Visa 终止原有的拒付监控计划（VDMP）和伪冒监控计划（VFMP）。
+
+自 2024 年 3 月 31 日起，Visa 已终止 Visa Digital Goods Merchant Fraud Monitoring Program（适用于虚拟行业的 VFMP 已终止）。
+
+自 2025 年 4 月 1 日起，Visa 启用增强的 Visa 收单机构监控计划（VAMP）。
+
+2025 年 6 月 1 日，Visa 再次更新了 VAMP 的考核标准：
+
+- 收单行层面的 VAMP 考核标准调高为 0.5%-0.7%。
+- 收单行层面，当 TC40 和 TC15 总计超过 1500 笔时才会触发 VAMP 考核标准。
+- 2025 年 10 月 1 日：被判定为 Excessive 的收单行或商户开始收取罚金。
+- 2026 年 1 月 1 日：被判定为 Standard 的收单行或商户开始收取罚金。
+- 2026 年 4 月 1 日：NA/EU/ASIAPAC 地区在商户层面的 Excessive 阈值从 2.2% 下降至 1.5%。
+
+## Visa 历史考核规则介绍
+
+### VDMP
+
+| 级别 | VDMP |
+| --- | --- |
+| Level 1（Early Warning） | 0.65% and 75 chargebacks |
+| Level 2（Standard Program） | 0.9% and 100 chargebacks |
+| Level 3（Excessive Program） | 1.8% and 1000 chargebacks |
+
+### VFMP
+
+| 级别 | VFMP |
+| --- | --- |
+| Level 1（Early Warning） | 0.65% and USD 50,000 |
+| Level 2（Standard Program） | 0.9% and USD 75,000 |
+| Level 3（Excessive Program） | 1.8% and USD 250,000 |
+
+### VAMP
+
+VAMP Chargeback for CNP
+
+| 级别 | VAMP 2021.10.1 之前 | VAMP 2021.10.1 之后 |
+| --- | --- | --- |
+| Level 1（Early Warning） | 0.45% and 375 chargebacks | 0.5% and 375 chargebacks |
+| Level 2（Standard Program） | 0.75% and 750 chargebacks | 1% and 750 chargebacks |
+
+VAMP Fraud for CNP
+
+| 级别 | VAMP 2021.10.1 之前 | VAMP 2021.10.1 之后 |
+| --- | --- | --- |
+| Level 1（Early Warning） | 0.45% and USD 250,000 | 0.5% and USD 250,000 |
+| Level 2（Standard Program） | 0.75% and USD 500,000 | 1% and USD 500,000 |
+
+## VAMP 计算规则
+
+计算公式：
+
+`VAMP = [Count of Reported Fraud (TC 40) + Count of Processed Disputes (TC 15)] / Count of Total Settled Transactions (TC 05)`
+
+公式含义：
+
+`VAMP = [伪冒笔数（TC40）+ 拒付笔数（TC15）] / 成功笔数（TC05）`
+
+- **TC40（伪冒笔数）：**Visa 的伪冒交易，即发卡行向 Visa 报告的欺诈伪冒交易数据。
+- **TC15（拒付笔数）：**Visa 拒付原因分类为 10、11、12 和 13 的拒付订单，也就是 Visa 全部拒付。
+
+| 10. Fraud | 11. Authorization | 12. Processing Errors | 13. Consumer Disputes |
+| --- | --- | --- | --- |
+| 10.1 EMV Liability Shift Counterfeit Fraud<br />10.2 EMV Liability Shift Non-Counterfeit Fraud<br />10.3 Other Fraud-Card Present Environment<br />10.4 Other Fraud-Card Absent Environment<br />10.5 Visa Fraud Monitoring Program | 11.1 Card Recovery Bulletin<br />11.2 Declined Authorization<br />11.3 No Authorization | 12.1 Late Presentment<br />12.2 Incorrect Transaction Code<br />12.3 Incorrect Currency<br />12.4 Incorrect Account Number<br />12.5 Incorrect Amount<br />12.6 Duplicate Processing/Paid by Other Means<br />12.7 Invalid Data | 13.1 Merchandise/Services Not Received<br />13.2 Cancelled Recurring<br />13.3 Not as Described or Defective Merchandise/Services<br />13.4 Counterfeit Merchandise<br />13.5 Misrepresentation<br />13.6 Credit Not Processed<br />13.7 Cancelled Merchandise/Services<br />13.8 Original Credit Transaction Not Accepted<br />13.9 Non-Receipt of Cash or Load Transaction Value |
+
+- **TC05（成功笔数）：**Visa 的成功交易。
+- 收单行层面，当 TC40 和 TC15 总计超过 1500 笔时才会触发 VAMP 考核。
+- 统计时间维度按自然月进行。当月 VAMP 数据会在次月出具。举例：3 月的 VAMP 数据会在 4 月初统计完成并通知，统计范围为 3 月自然月内发生的 TC40、TC15、TC05 数据，其他月份以此类推。
+
+## VAMP 枚举攻击行为评估
+
+与 TC40 和 TC15 的交易计算方式类似，商户的枚举攻击行为（Enumeration）同样会被计入 VAMP 评估。
+
+计算公式：
+
+`VAMP Enumeration = confirmed enumerated authorisation transactions (approved + declined) / authorisation transactions (approved + declined)`
+
+公式含义：
+
+`VAMP Enumeration = 识别为枚举攻击行为的授权笔数（成功 + 失败）/ 授权总笔数（成功 + 失败）`
+
+- `confirmed enumerated authorisation transactions (approved + declined)`：被 VAAI 标记的交易，成功交易和失败交易都会被统计。
+- `authorisation transactions (approved + declined)`：成功交易和失败交易都会被统计。
+- 按自然月进行统计。
+
+| VAMP Enumeration Ratio | 商户 |
+| --- | --- |
+| 阶段 | Excessive |
+| 2025.04.01 起生效 | ≥20% & 300000 笔 enumerated authorisation transactions |
+
+## VAMP 豁免场景
+
+VAMP 的目的是减少交易欺诈和拒付，提升持卡人交易安全性。商户可以通过以下方式降低 VAMP 率：
+
+- 申请 RDR 服务。使用 RDR 服务可以对满足条件的 TC15 拒付订单自动退款；当拒付订单被解决时，该笔拒付不计入 TC15 数据统计，因此这部分交易不计入 VAMP 考核。
+- 按照 CE3.0 建议对欺诈订单提交申诉。若按 Compelling Evidence 3.0 建议申诉成功，则对应订单不计入 TC40 欺诈订单统计，因此这部分交易不计入 VAMP 考核。

@@ -1,0 +1,8 @@
+---
+title: "为什么会收到高风险订单警报邮件？如何处理？"
+date: 2023-11-24
+---
+
+关于高风险订单警报邮件的详情请查看下方指引。
+
+[【ODPM数字平台】Oceanpayment——高欺诈风险警报操作手册 2025-07-25](https://support.oceanpayment.com/wp-content/uploads/2023/11/【ODPM数字平台】Oceanpayment——高欺诈风险警报操作手册-2025-07-25.pdf)

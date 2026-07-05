@@ -1,0 +1,70 @@
+---
+title: "Visa and MasterCard Refund Processing Rules Update"
+sidebar_label: "Visa and MasterCard Refund Processing Rules Update"
+sidebar_position: 1
+---
+
+## 1. Core Background of Rule Update
+
+To bolster the security of refund transactions, enhance cardholders' refund experience, and mitigate fraud and chargeback risks, Visa and MasterCard have rolled out phased updates to their refund processing rules since 2019. Under the revised rules, acquirers and their processors must ensure all refund transactions are authorized online by the issuer before clearing submission.
+
+This update only modifies the technical refund processing workflows on the acquirer side and issuer side. By subjecting refund transactions to real-time issuer authorization, it enables the interception of abnormal and invalid refunds at the source, effectively reducing subsequent chargeback incidents. Merchants can now monitor refund statuses in real time, proactively reach out to consumers with failed refund attempts, and complete refunds through alternative channels. Meanwhile, issuers are required to display pending refund authorization details to cardholders via online banking or mobile apps, allowing cardholders to track refund progress in real time.
+
+### Mandatory Effective Timelines
+
+- **Visa:** Fully implemented globally from April 18, 2020; fines for unauthorized refund transactions will be enforced starting July 1, 2020.
+- **MasterCard:** Effective from October 18, 2024; fines commence from May 1, 2025.
+
+## 2. Comparison of Refund Processes Before and After the Update
+
+<table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Previous refund rule (Direct clearing model)</th>
+        <th>New refund rule (Mandatory authorization model)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Core Workflow</td>
+        <td>Merchant initiates refund -> Acquirer processes clearing -> Issuer credits cardholder's account</td>
+        <td>Merchant initiates refund -> Submit authorization request -> Issuer approves -> Clearing and posting</td>
+      </tr>
+      <tr>
+        <td>Status Visibility &amp; Feedback</td>
+        <td>No real-time feedback; refund outcome only known after clearing</td>
+        <td>Real-time approval result (Approved/Declined) with corresponding reason returned immediately</td>
+      </tr>
+      <tr>
+        <td>Permitted Exceptions of Industries &amp; Scenarios</td>
+        <td>/</td>
+        <td>
+          <p>Visa: Optional for airlines and mass transit merchants.</p>
+          <p>MasterCard:</p>
+          <ul>
+            <li>Additional information on permitted exceptions is found in Section 5.11.3, "Obtain an Authorization," of the Mastercard Rules and Section 3.3, "Obtaining an Authorization," of the Transaction Processing Rules.</li>
+            <li>Collections-only processing</li>
+            <li>Rebates</li>
+            <li>Airline transactions</li>
+            <li>Reversal transactions</li>
+            <li>Bridged transactions</li>
+            <li>Aggregated transit transactions</li>
+            <li>Merchant and acquirer funded installments</li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+</table>
+
+## 3. Merchant Benefits
+
+- Improves customer experience and satisfaction.
+- Reduces customer service inquiries related to lack of real-time information about a refund status.
+- Provides real-time issuer account validation.
+- Minimizes related chargebacks.
+
+## 4. Actions for Oceanpayment Merchants
+
+1. No changes are required to your current refund workflow. Oceanpayment has already completed full system upgrades to ensure full compliance with card scheme requirements.
+2. Refund authorizations may be declined by issuing banks for reasons such as invalid account numbers, invalid account types, or expired cards. Merchants should track failed refund transactions, promptly reach out to affected customers, and perform the refund using another method when necessary.

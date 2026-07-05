@@ -1,0 +1,12 @@
+---
+title: "什么是拒付/伪冒/调单订单？该如何处理？"
+date: 2023-12-29
+---
+
+拒付（chargeback）：持卡人对信用卡账单上的某笔交易有争议，向发卡行申请交易资金强制退回给持卡人。（A chargeback is the reversal of financial transaction,typically initiated by a customer(the cardholder),who disputes a sale on his or her credit card.）
+
+伪冒（Fraud）：各发卡行会将消费者的欺诈行为报告给对应的机构（TC40或SAFE），收单行和发卡行将根据这些机构出具的报告，了解交易的欺诈风险情况，及时调整风控策略，从而确保将欺诈交易控制在合理范围内。Visa的欺诈行为报告为TC40；MasterCard的欺诈行为报告为SAFE。我们把这些报告涉及的交易称为伪冒交易。
+
+调单（Retrieval Request）：当持卡人不确定其发卡行账单上的交易是否本人做出时，他们通常向其发卡行索要一份有关交易单据副本，以确定该笔交易是否是他们所为。以上行为称为调单。
+
+异常交易处理手册：[Oceanpayment-ODPM数字平台操作指引手册-异常交易管理](https://support.oceanpayment.com/wp-content/uploads/2026/06/Oceanpayment-ODPM数字平台操作指引手册-异常交易管理.pdf)

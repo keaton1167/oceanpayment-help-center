@@ -94,6 +94,45 @@ function unescapeMarkdown(value) {
   return value.replace(/\\([\\`*{}\[\]()#+\-.!_])/g, '$1');
 }
 
+function normalizeListMarkers(markdown, stats) {
+  return markdown
+    .split('\n')
+    .map((line) => {
+      const original = line;
+      let next = line.replace(/^(\s*)(\d+)\\([.)])\s+/, '$1$2$3 ');
+      const nestedBullet = next.match(/^(\s*)((?:-\s+){2,})(.+)$/);
+
+      if (nestedBullet) {
+        const depth = nestedBullet[2].trim().split(/\s+/).length;
+        next = `${nestedBullet[1]}${'  '.repeat(depth - 1)}- ${nestedBullet[3].trim()}`;
+      }
+
+      if (next !== original) {
+        stats.normalizedListMarkers += 1;
+      }
+      return next;
+    })
+    .join('\n');
+}
+
+function normalizeBoldMarkup(markdown, stats) {
+  return markdown
+    .split('\n')
+    .map((line) => {
+      const original = line;
+      let next = line;
+
+      next = next.replace(/\*\*([QA]):\s*\*\*\s*/g, '**$1:** ');
+      next = next.replace(/\*\*([^*\n]+?)\s*\*\*\*\s*([^*\n]+?)\*\*/g, '**$1 $2**');
+
+      if (next !== original) {
+        stats.normalizedBoldMarkup += 1;
+      }
+      return next;
+    })
+    .join('\n');
+}
+
 function stripHeadingMarkup(value) {
   return unescapeMarkdown(value)
     .replace(/^\s*#+\s*/, '')
@@ -221,7 +260,6 @@ function rewriteAssetLinks(markdown, assetMap, stats) {
 
 function normalizeHeadings(markdown, doc, stats) {
   const lines = markdown.split('\n');
-  const firstHeading = lines.find((line) => /^#\s+/.test(line));
   const docTitle = normalizeText(doc.title).toLowerCase();
   let titleRemoved = false;
 
@@ -258,7 +296,7 @@ function normalizeHeadings(markdown, doc, stats) {
       }
 
       let text = stripHeadingMarkup(match[2]);
-      if (!text || (firstHeading && text === stripHeadingMarkup(firstHeading) && !titleRemoved)) {
+      if (!text) {
         return '';
       }
 
@@ -406,12 +444,17 @@ function transformMarkdown(doc, sourceDir, assetMap) {
     numberedHeadings: 0,
     removedTitleHeadings: 0,
     demotedHeadings: 0,
+    normalizedListMarkers: 0,
+    normalizedBoldMarkup: 0,
     groupedImageRows: 0,
   };
 
   let markdown = readUtf8(sourceMdPath).replace(/\u00a0/g, ' ');
   markdown = rewriteAssetLinks(markdown, assetMap, stats);
+  markdown = normalizeListMarkers(markdown, stats);
   markdown = unescapeMarkdown(markdown);
+  markdown = normalizeListMarkers(markdown, stats);
+  markdown = normalizeBoldMarkup(markdown, stats);
   markdown = normalizeHeadings(markdown, doc, stats);
   markdown = groupCompactImageRuns(markdown, stats);
   markdown = normalizeSpacing(markdown);
@@ -482,6 +525,8 @@ function main() {
         `fileRefs=${entry.fileRefs}`,
         `headings=${entry.numberedHeadings}`,
         `titleHeadingsRemoved=${entry.removedTitleHeadings}`,
+        `listMarkers=${entry.normalizedListMarkers}`,
+        `bold=${entry.normalizedBoldMarkup}`,
         `imageRows=${entry.groupedImageRows}`,
         `written=${entry.written}`,
       ].join(' | '),

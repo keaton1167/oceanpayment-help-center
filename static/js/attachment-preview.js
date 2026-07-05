@@ -8,7 +8,7 @@
   }
 
   var ASSETS_RE = /\/assets\/files\/.*\.(pdf|pptx|ppt|xlsx|xls)$/i;
-  var HELP_CENTER_RE = /\/files\/help-center\//;
+  var HELP_CENTER_RE = /\/files\/help-center\/.*\.(pdf|docx|doc|pptx|ppt|xlsx|xls)$/i;
 
   function safeDecode(value) {
     try {
@@ -52,6 +52,19 @@
     return HELP_CENTER_RE.test(href) || ASSETS_RE.test(href);
   }
 
+  function isHelpCenterFileLink(href) {
+    return HELP_CENTER_RE.test(href || '');
+  }
+
+  function normalizeHelpCenterFileLinks() {
+    document.querySelectorAll('.theme-doc-markdown a[href]').forEach(function(link) {
+      var href = link.getAttribute('href') || '';
+      if (!isHelpCenterFileLink(href)) return;
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    });
+  }
+
   function getFileType(href) {
     var ext = (href.match(/\.(\w+)$/) || [])[1] || '';
     ext = ext.toLowerCase();
@@ -65,11 +78,87 @@
     return (link.textContent || '').trim() || safeDecode((link.href.match(/[^/]+$/) || ['file'])[0]);
   }
 
+  function isEnglishPage() {
+    var lang = (document.documentElement.getAttribute('lang') || '').toLowerCase();
+    var path = window.location.pathname || '';
+    return lang.indexOf('en') === 0 || /^\/en(?:\/|$)/.test(path);
+  }
+
+  function text(key, value) {
+    var en = isEnglishPage();
+    var map = {
+      download: en ? 'Download' : '\u4e0b\u8f7d',
+      unsupportedPreview: en
+        ? 'This file type cannot be previewed. Please download or open the file.'
+        : '\u8be5\u6587\u4ef6\u7c7b\u578b\u6682\u4e0d\u652f\u6301\u9884\u89c8\uff0c\u8bf7\u4e0b\u8f7d\u6216\u6253\u5f00\u6587\u4ef6\u67e5\u770b\u3002',
+      loadingPdf: en ? 'Loading PDF...' : '\u6b63\u5728\u52a0\u8f7d PDF...',
+      loadingPpt: en ? 'Loading PPT...' : '\u6b63\u5728\u52a0\u8f7d PPT...',
+      loadingExcel: en ? 'Loading Excel...' : '\u6b63\u5728\u52a0\u8f7d Excel...',
+      previewFailed: en
+        ? 'Preview failed. Please download or open the file.'
+        : '\u9884\u89c8\u5931\u8d25\uff0c\u8bf7\u4e0b\u8f7d\u6216\u6253\u5f00\u6587\u4ef6\u67e5\u770b\u3002',
+      previewUnavailable: en
+        ? 'Preview unavailable. Please download or open the file.'
+        : '\u6682\u65e0\u6cd5\u9884\u89c8\uff0c\u8bf7\u4e0b\u8f7d\u6216\u6253\u5f00\u6587\u4ef6\u67e5\u770b\u3002',
+      pptThumbnail: en
+        ? 'Slide preview (thumbnail). Download or open the file for full content.'
+        : '\u5df2\u663e\u793a\u5e7b\u706f\u7247\u7f29\u7565\u9884\u89c8\uff0c\u5b8c\u6574\u5185\u5bb9\u8bf7\u4e0b\u8f7d\u6216\u6253\u5f00\u6587\u4ef6\u67e5\u770b\u3002',
+      pptCover: en
+        ? 'Cover preview loaded. Download or open the file for full content.'
+        : '\u5df2\u663e\u793a\u5c01\u9762\u9884\u89c8\uff0c\u5b8c\u6574\u5185\u5bb9\u8bf7\u4e0b\u8f7d\u6216\u6253\u5f00\u6587\u4ef6\u67e5\u770b\u3002',
+    };
+    if (key === 'pdfPagesLoaded') {
+      return en
+        ? value + ' ' + (value === 1 ? 'page' : 'pages') + ', fully loaded'
+        : '\u5171 ' + value + ' \u9875\uff0c\u5df2\u5168\u90e8\u52a0\u8f7d';
+    }
+    if (key === 'showingRows') {
+      return en
+        ? 'Showing 10 of ' + value + ' rows'
+        : '\u5df2\u663e\u793a 10 / ' + value + ' \u884c';
+    }
+    return map[key] || key;
+  }
+
+  function getDownloadLabel() {
+    return text('download');
+  }
+
   function cleanFileName(fileName) {
     return safeDecode(fileName || 'download')
       .replace(/[\/\\:*?"<>|]/g, '_')
       .replace(/[\x00-\x1f]/g, '')
       .trim() || 'download';
+  }
+
+  function getCurrentAttachmentSlug(href) {
+    var helpCenterMatch = (href || '').match(/\/files\/help-center\/([^/]+)\//);
+    if (helpCenterMatch) return helpCenterMatch[1];
+    var lang = (document.documentElement.getAttribute('lang') || '').toLowerCase();
+    var path = window.location.pathname || '';
+    if (lang.indexOf('en') === 0 || /^\/en(?:\/|$)/.test(path)) {
+      return 'wordpress-attachments-en';
+    }
+    return 'wordpress-attachments';
+  }
+
+  function ensureFileExtension(fileName, href) {
+    var ext = ((href || '').match(/\.(pdf|docx|doc|pptx|ppt|xlsx|xls)(?:[?#].*)?$/i) || [])[1];
+    if (!ext) return fileName;
+    if (new RegExp('\\.' + ext + '$', 'i').test(fileName)) return fileName;
+    return fileName + '.' + ext.toLowerCase();
+  }
+
+  function encodePathSegment(value) {
+    return encodeURIComponent(value).replace(/%20/g, ' ');
+  }
+
+  function getReadableOpenHref(href, fileName) {
+    if (!href) return href;
+    if (!/\/(?:assets\/files|files\/help-center)\//.test(href)) return href;
+    var cleanName = ensureFileExtension(cleanFileName(fileName), href);
+    var slug = getCurrentAttachmentSlug(href);
+    return withBase('/files/help-center/' + slug + '/' + encodePathSegment(cleanName));
   }
 
   function setCardFileName(card, fileName) {
@@ -134,15 +223,17 @@
     card.className = 'att-card';
     var safeName = escapeHtml(fileName);
     var safeHref = escapeHtml(href);
+    var openHref = getReadableOpenHref(href, fileName);
+    var safeOpenHref = escapeHtml(openHref);
+    card.setAttribute('data-att-open-href', openHref);
     card.innerHTML =
       '<div class="att-body"></div>' +
       '<div class="att-footer">' +
         '<span class="att-badge" style="background:' + colors[type] + '">' + icons[type] + '</span>' +
-        '<a class="att-name" href="' + safeHref + '" download="' + safeName + '" data-att-file-name="' + safeName + '">' + safeName + '</a>' +
-        '<a class="att-download" href="' + safeHref + '" download="' + safeName + '" data-att-file-name="' + safeName + '">\u4e0b\u8f7d</a>' +
+        '<a class="att-name" href="' + safeOpenHref + '" target="_blank" rel="noopener noreferrer">' + safeName + '</a>' +
+        '<a class="att-download" href="' + safeHref + '" download="' + safeName + '" data-att-file-name="' + safeName + '">' + getDownloadLabel() + '</a>' +
       '</div>' +
       '<div class="att-status" style="display:none"></div>';
-    card.querySelector('.att-name').addEventListener('click', forceDownload);
     card.querySelector('.att-download').addEventListener('click', forceDownload);
     return card;
   }
@@ -178,19 +269,30 @@
   }
 
   function renderPreview(card, type, href) {
+    var body = card.querySelector('.att-body');
+    var openHref = card.getAttribute('data-att-open-href') || href;
+    if (body && body.getAttribute('data-att-openable') !== 'true') {
+      body.setAttribute('data-att-openable', 'true');
+      body.setAttribute('title', openHref);
+      body.addEventListener('click', function(event) {
+        if (event.target && event.target.closest && event.target.closest('a,button')) return;
+        window.open(openHref, '_blank', 'noopener,noreferrer');
+      });
+    }
+
     if (type === 'pdf') showPDF(card, href);
     else if (type === 'pptx') showPPTX(card, href);
     else if (type === 'xlsx') showXLSX(card, href);
     else {
       var body = card.querySelector('.att-body');
-      body.innerHTML = '<p style="padding:12px;color:#666">This file type cannot be previewed. Please download.</p>';
+      body.innerHTML = '<p style="padding:12px;color:#666">' + text('unsupportedPreview') + '</p>';
     }
   }
 
   function showPDF(card, url) {
     var body = card.querySelector('.att-body');
     body.classList.add('att-body--preview');
-    body.innerHTML = '<p style="text-align:center;color:#666;padding:20px">Loading PDF...</p>';
+    body.innerHTML = '<p style="text-align:center;color:#666;padding:20px">' + text('loadingPdf') + '</p>';
     loadScript(BASE + 'js/vendor/pdf.min.js')
       .then(function() {
         pdfjsLib.GlobalWorkerOptions.workerSrc = BASE + 'js/vendor/pdf.worker.min.js';
@@ -201,7 +303,7 @@
         var total = pdf.numPages;
         var info = document.createElement('p');
         info.className = 'att-page-count';
-        info.textContent = '\u5171 ' + total + ' \u9875\uff0c\u5df2\u5168\u90e8\u52a0\u8f7d';
+        info.textContent = text('pdfPagesLoaded', total);
         body.appendChild(info);
 
         function renderPage(pageNumber) {
@@ -228,7 +330,7 @@
         body.classList.add('collapsed');
         var st = card.querySelector('.att-status');
         st.style.display = 'block';
-        st.innerHTML = '<span style="color:#dc2626">Preview failed. Please download the file.</span>';
+        st.innerHTML = '<span style="color:#dc2626">' + text('previewFailed') + '</span>';
       });
   }
 
@@ -264,7 +366,7 @@
 
       var note = document.createElement('p');
       note.className = 'att-page-count';
-      note.textContent = '\u5df2\u663e\u793a\u5c01\u9762\u9884\u89c8\uff0c\u5b8c\u6574\u5185\u5bb9\u8bf7\u4e0b\u8f7d\u9644\u4ef6\u67e5\u770b';
+      note.textContent = text('pptCover');
       body.appendChild(note);
     }
   }
@@ -283,7 +385,7 @@
   function showPPTX(card, url) {
     var body = card.querySelector('.att-body');
     body.classList.add('att-body--preview');
-    body.innerHTML = '<p style="text-align:center;color:#666;padding:20px">Loading PPT...</p>';
+    body.innerHTML = '<p style="text-align:center;color:#666;padding:20px">' + text('loadingPpt') + '</p>';
 
     var manifestUrl = getManifestUrl(url);
     var manifestPromise = manifestUrl
@@ -305,7 +407,7 @@
       })
       .catch(function(error) {
         console.warn('Attachment PPT preview fell back to runtime renderer.', error);
-        body.innerHTML = '<p style="text-align:center;color:#666;padding:20px">Loading PPT...</p>';
+        body.innerHTML = '<p style="text-align:center;color:#666;padding:20px">' + text('loadingPpt') + '</p>';
         loadScript(BASE + 'js/vendor/pptx-preview.umd.js')
           .then(function() {
             body.innerHTML = '';
@@ -330,13 +432,13 @@
               body.appendChild(clone);
               var note = document.createElement('p');
               note.style.cssText = 'text-align:center;color:#666;font-size:12px;padding:4px';
-              note.textContent = 'Slide preview (thumbnail). Download the file for full content.';
+              note.textContent = text('pptThumbnail');
               body.appendChild(note);
             } else {
               body.classList.add('collapsed');
               var st = card.querySelector('.att-status');
               st.style.display = 'block';
-              st.innerHTML = '<span style="color:#dc2626">Preview unavailable. Please download the file.</span>';
+              st.innerHTML = '<span style="color:#dc2626">' + text('previewUnavailable') + '</span>';
             }
           });
       });
@@ -345,7 +447,7 @@
   function showXLSX(card, url) {
     var body = card.querySelector('.att-body');
     body.classList.add('att-body--preview');
-    body.innerHTML = '<p style="text-align:center;color:#666;padding:20px">Loading Excel...</p>';
+    body.innerHTML = '<p style="text-align:center;color:#666;padding:20px">' + text('loadingExcel') + '</p>';
     loadScript(BASE + 'js/vendor/xlsx.full.min.js')
       .then(function() {
         return fetch(url).then(function(r) { return r.arrayBuffer(); });
@@ -384,7 +486,7 @@
           if (range.e.r - range.s.r > 10) {
             var p = document.createElement('p');
             p.style.cssText = 'text-align:center;color:#999;font-size:12px;padding:6px;border-top:1px solid #e5e7eb';
-            p.textContent = 'Showing 10 of ' + (range.e.r - range.s.r + 1) + ' rows';
+            p.textContent = text('showingRows', range.e.r - range.s.r + 1);
             tbl.appendChild(p);
           }
         }
@@ -394,12 +496,13 @@
         body.classList.add('collapsed');
         var st = card.querySelector('.att-status');
         st.style.display = 'block';
-        st.innerHTML = '<span style="color:#dc2626">Preview failed. Please download the file.</span>';
+        st.innerHTML = '<span style="color:#dc2626">' + text('previewFailed') + '</span>';
       });
   }
 
   function enhance() {
     normalizeDocImagePaths();
+    normalizeHelpCenterFileLinks();
 
     document.querySelectorAll('.theme-doc-markdown a[href]').forEach(function(link) {
       if (link.getAttribute('data-att-enhanced') === 'true') return;
@@ -452,6 +555,7 @@
   css.textContent = [
     '.att-card{border:1px solid #e5e7eb;border-radius:8px;margin:16px 0;overflow:hidden;background:#fff;font-family:system-ui,sans-serif;max-width:860px}',
     '.att-body{background:#fff}',
+    '.att-body[data-att-openable="true"]{cursor:pointer}',
     '.att-body.att-body--preview{max-height:560px;overflow:auto}',
     '.att-body.collapsed{display:none}',
     '.att-body>p{margin:0;text-align:center;color:#666;padding:20px}',

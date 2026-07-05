@@ -1,0 +1,29 @@
+---
+title: "Afterpay针对Shopify网站的支付插件安装介绍"
+sidebar_label: "Afterpay针对Shopify网站的支付插件安装介绍"
+sidebar_position: 12
+---
+
+商户在 Shopify 店铺中，需按申请国家安装对应的 Afterpay 支付插件。
+
+- 网站仅申请 GB，则只安装 Clearpay。
+- 网站仅申请 US，则只安装 CashAppAfterpay。
+- 网站仅申请 AU、CA 或 AU & CA，则只安装 Afterpay。
+- 若网站同时申请多个国家的 Afterpay，则对应的支付插件均需安装。
+
+例如：同时申请 GB、US 时，需要安装 Clearpay 和 CashAppAfterpay。
+
+| 支付方式 | 消费者国家 |
+| --- | --- |
+| Clearpay | GB（英国） |
+| CashAppAfterpay | US（美国） |
+| Afterpay | AU、CA（澳大利亚、加拿大） |
+
+商户在安装多个国家的 Afterpay 支付插件时，可通过 EasyPay Payment Rules、BeSure Checkout Rules 等第三方插件工具，基于消费者的账单国家自动展示对应市场的 Afterpay 品牌图标。可参考如下指引：[https://saas.oceanpayment.com/payment-management/](https://saas.oceanpayment.com/payment-management/)。
+
+若商户为网站开通多国家 Afterpay 服务后未安装如前述第三方插件，网站的支付页面将同时展示多个国家的 Afterpay 支付选项，Afterpay 可能会因此要求网站整改。若 Oceanpayment 接到 Afterpay 的整改通知，请商户及时配合处理：
+
+- 请及时为网站补充安装如前述 EasyPay Payment Rules 或 BeSure Checkout Rules 等第三方插件工具。
+- 若未安装此类工具，则需根据网站各国家交易量数据，在 Shopify 后台仅保留交易量最大国家对应的 Afterpay 支付插件，同时 Oceanpayment 将仅保留该国家的 Afterpay 支付通道。
+
+例如：网站同时申请四个国家的 Afterpay 通道，其中 US 交易量最大，则网站只安装 CashAppAfterpay，并卸载 Clearpay 和 Afterpay。

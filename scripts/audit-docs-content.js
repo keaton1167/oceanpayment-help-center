@@ -14,6 +14,7 @@ const ENGLISH_DOC_IDS = [
   'odpm-guide/section-guide/opccount-guideline',
   'odpm-guide/section-guide/reconciliation-guide',
   'odpm-guide/section-guide/reconciliation-guideline',
+  'odpm-guide/section-guide/merchant-batch-representment-submission-guide',
   'odpm-guide/section-guide/whitelist-operation-manual',
 ];
 const PHASE2_ZH_DOC_IDS = [
@@ -132,7 +133,7 @@ function checkStaticAssets(issues, file, content) {
 
 function checkHeadingNumberHierarchy(issues, file, body) {
   const seen = new Set();
-  const headingPattern = /^(#{2,6})\s+(\d+(?:\.\d+)+)\s+/gm;
+  const headingPattern = /^(#{2,6})\s+(\d+(?:\.\d+)*)(?:[.)])?\s+/gm;
   let match;
 
   while ((match = headingPattern.exec(body))) {
@@ -151,6 +152,22 @@ function checkHeadingNumberHierarchy(issues, file, body) {
     }
 
     seen.add(number);
+  }
+}
+
+function checkManagedMarkdownFormatting(issues, file, body) {
+  const checks = [
+    [/^\s*\d+\\[.)]\s+/gm, 'escaped ordered-list marker; expected plain "1. item"'],
+    [/^\s*-\s+-\s+/gm, 'collapsed nested bullet marker; expected indented "- item"'],
+    [/\*\*[QA]:\s*\*\*\*/g, 'malformed Q/A bold marker from Feishu export'],
+    [/^#{2,6}\s+.*\*\*\*\*/gm, 'malformed bold marker in heading'],
+  ];
+
+  for (const [pattern, message] of checks) {
+    let match;
+    while ((match = pattern.exec(body))) {
+      report(issues, file, lineNumber(body, match.index), message);
+    }
   }
 }
 
@@ -185,6 +202,7 @@ for (const root of DOC_ROOTS) {
 
     if (isManagedPage) {
       checkHeadingNumberHierarchy(issues, file, body);
+      checkManagedMarkdownFormatting(issues, file, body);
     }
 
     checkStaticAssets(issues, file, content);

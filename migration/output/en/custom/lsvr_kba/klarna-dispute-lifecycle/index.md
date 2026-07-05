@@ -1,0 +1,77 @@
+---
+title: "Klarna Dispute Lifecycle"
+date: 2026-04-30
+---
+
+1. ## **No-Response-Required Dispute**
+    
+
+**Definition:** When the Klarna customer files a complaint, Klarna will immediately notify the Merchant of the dispute. The disputed amount will be placed on hold at this stage, and Klarna will provide targeted guidance to the customer based on the specific dispute scenario:
+
+- Return the items following the Partner return policy in case of returns
+    
+- Reach out to the merchant in case of other dispute reasons (goods not received, faulty goods and incorrect invoice)
+    
+
+**Merchant Processing Timeframe:** For general dispute scenarios, merchants are granted a 21-day negotiation window to communicate and settle with consumers directly without Klarna’s intervention. For “Unauthorized purchases”, however, merchants are only provided with a 3-day handling timeframe.
+
+|   **Dispute Reason**   |   **Timeframe for No-Response-Required**   |
+| --- | --- |
+|   Return   |   21 Days   |
+|   Good not received   |   21 Days   |
+|   Faulty Goods   |   21 Days   |
+|   Incorrect Invoice   |   21 Days   |
+|   Already Paid   |   21 Days   |
+|   High risk order   |   21 Days   |
+|   Pandemic impact   |   21 Days   |
+|   Unauthorized purchases   |   3 Days   |
+
+2. ### **Response-Required Dispute**
+    
+
+**Definition:** If the merchant and the consumer fail to reach a resolution within the No-Response-Required period, the dispute remains unresolved, Klarna moves into the investigation phase. The platform will first review the evidence submitted by the consumer to rule on whether the dispute is valid or rejected. Where the dispute is deemed legitimate, Klarna will send a request for further information, mandating the merchant to submit relevant documents for dispute defense.
+
+**Dispute Submission Limits and Timeframes：**A consumer may file up to 3 disputes per order, with no restrictions on the dispute reason. Dispute eligibility timeframes are calculated from the date of its transaction time, as detailed in the table below:
+
+|   **Dispute Reason**   |   **1st Dispute (from capture)**   |
+| --- | --- |
+|   Return   |   180 days   |
+|   Good not received   |   180 days   |
+|   Faulty Goods   |   180 days   |
+|   Incorrect Invoice   |   180 days   |
+|   Already Paid   |   180 days   |
+
+**Merchant Processing Timeframe:** Merchants must respond within the required period. No further defense will be allowed if the deadline is missed.
+
+|   **Klarna Request Times**   |   **Merchant Response Deadline**   |
+| --- | --- |
+|   First request   |   14 days (7 days for unauthorized transactions)   |
+|   Follow-up request   |   7 days   |
+
+**There are different scenarios why an invoice gets disputed several times:**
+
+- The customer wants to present new evidence to defend a dispute.
+    
+- The customer disputes the invoice for different reasons.
+    
+- Connected to a concern and reevaluation of the case.
+    
+
+**The following special circumstances allow disputes to be initiated in excess of the number of limitations:**
+
+- Unauthorized Purchases.
+    
+- Legal claims raised via an external authority, such as the Central Arbitration Committee or National Board for Consumer Disputes.
+    
+- Local legal consumer protection rules, i.e. the right to object in Sweden an agent is required to reopen a dispute again.
+    
+
+3. ### **Dispute Resolution and Closure**
+    
+
+After receiving the necessary information from the merchant, Klarna’s support team will make a decision and resolve the dispute.
+
+|   **Result**   |   **Scenario**   |   **Klarna Status**   |   **Case Closure Procedures**   |
+| --- | --- | --- | --- |
+|   Merchant Won   |   Customer:  1. Is deemed to be at fault.      2. Cannot provide the information requested by Klarna to proceed.      3. Cancels the dispute on their own accord.        |   Resolved   |   The customer's invoice will be re-activated and dispute closed   |
+|   Merchant Lost   |   Merchant:  1. Is deemed to be at fault.      2. Do not responds.      3. Accept dispute.        |   Reversal-Merchant Lost   |   Merchant receives chargeback and dispute closed   |

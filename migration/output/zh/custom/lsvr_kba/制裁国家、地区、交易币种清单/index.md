@@ -1,0 +1,37 @@
+---
+title: "受管控国家、地区与交易币种清单"
+date: 2026-02-13
+---
+
+为遵循国际监管要求及风险合规政策，Oceanpayment将对涉及管控国家、地区及其对应交易币种的交易，通过实时风控系统进行自动拦截处理。
+
+##### **管控国家清单（发卡国、IP国、账单国、收货国）**
+
+| 国家简称 | 国家全称 | 国家名称 | 交易币种 |
+| --- | --- | --- | --- |
+| SY | Syria | 叙利亚 | SYP |
+| IR | Iran | 伊朗 | IRR |
+| KP | Korea (North Korea) | 朝鲜 | KPW |
+| MM | Myanmar | 缅甸 | MMK |
+| RU | Russian Federation | 俄罗斯联邦 | RUB |
+| CU | Cuba | 古巴 | CUP |
+| SS | South Sudan | 南苏丹 | SSP |
+| SD | Sudan | 苏丹 | SDD |
+| BY | Byelorussia | 白俄罗斯 | BYN |
+| VE | Venezuela (Bolivarian Republic of) | 委内瑞拉 | VES |
+| SO | Somalia | 索马里 | SOS |
+| LY | Libya | 利比亚 | LYD |
+| YE | Yemen | 也门 | YER |
+| CD | Congo (Democratic Republic of the) | 刚果民主共和国 | CDF |
+
+##### **管控地区清单（账单地址、收货地址）**
+
+| Luhansk Region | Luhansk |
+| --- | --- |
+| Kosovo | Kosovo |
+| Gaza Strip | Gaza Strip |
+| Crimea Region | Crimea |
+| Zaporizhzhia Region | Zaporizhzhia |
+| Kherson Region | Kherson |
+| Donetsk Region | Donetsk |
+| Sevastopol | Sevastopol |
