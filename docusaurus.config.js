@@ -78,11 +78,11 @@ const ENGLISH_CATEGORY_LABELS = {
   '信息更新专区': 'Information Update Center',
   '常见问题': 'FAQ',
   '账户划款、提现、代付指引': 'Settlement, Withdrawal, POBO Guide',
-  'OP Card 常见FAQ': 'OP Card FAQ',
+  'OP Card 常见 FAQ': 'OP Card FAQ',
   '条款和条件': 'Terms and Conditions',
-  '支持Google Pay FAQ': 'Google Pay Support FAQ',
+  '支持 Google Pay FAQ': 'Google Pay Support FAQ',
   '产品与服务': 'Products and Services',
-  'Oceanpayment产品与服务': 'Oceanpayment Products and Services',
+  'Oceanpayment 产品与服务': 'Oceanpayment Products and Services',
   '合规与认证': 'Compliance and Verification',
   '企业认证常见问题': 'Business Verification FAQ',
   '准入与合规管理': 'Merchant Onboarding and Compliance Management',
@@ -130,7 +130,7 @@ const config = {
   tagline: '',
   favicon: 'img/favicon.ico',
   scripts: [
-    localizedStaticPath('js/attachment-preview.js?v=20260702-2'),
+    localizedStaticPath('js/attachment-preview.js?v=20260706-3'),
     localizedStaticPath('js/language-switcher.js?v=20260706-1'),
   ],
   titleDelimiter: '|',
@@ -226,7 +226,10 @@ const config = {
         logo: {
           alt: 'Oceanpayment Logo',
           src: 'img/op-logo.svg',
-          href: '/docs/intro',
+          href:
+            currentLocale === 'en'
+              ? `${baseUrl}en/docs/intro`
+              : `${baseUrl}docs/intro`,
         },
         items: [
           {

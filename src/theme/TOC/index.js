@@ -12,10 +12,19 @@ const LINK_ACTIVE_CLASS_NAME = 'table-of-contents__link--active';
 const introLinks = {
   zh: [
     {label: 'ODPM 操作指引', href: '/docs/odpm-guide/section-guide/account-application-guide/'},
-    {label: 'Payment FAQ', href: '/docs/payment-faq/account-transfer/opccount-platform-manual/'},
+    {label: 'Payment FAQ', href: '/docs/payment-faq/info-update/mastercard-chargeback-assessment-criteria/'},
+    {label: 'OP Card FAQ', href: '/docs/op-card-faq/common-questions/transaction-amount-limit-rules/'},
+    {label: '产品与服务', href: '/docs/products-services/oceanpayment-products/oceanpayment-recurring-introduction/'},
+    {label: '合规与认证', href: '/docs/compliance-certification/access-compliance/prohibited-and-restricted-businesses/'},
+    {label: '客户服务', href: '/docs/customer-service/customer-service-faq/oceanpayment-complaints-and-suggestions-contact/'},
   ],
   en: [
-    {label: 'ODPM Guide', href: '/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/'},
+    {label: 'ODPM Guide', href: '/en/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/'},
+    {label: 'Payment FAQ', href: '/en/docs/payment-faq/info-update/mastercard-chargeback-assessment-criteria/'},
+    {label: 'OP Card FAQ', href: '/en/docs/op-card-faq/terms-conditions/terms-and-conditions/'},
+    {label: 'Products and Services', href: '/en/docs/products-services/oceanpayment-products/oceanpayment-recurring-introduction/'},
+    {label: 'Compliance and Verification', href: '/en/docs/compliance-certification/access-compliance/prohibited-and-restricted-businesses/'},
+    {label: 'Customer Support', href: '/en/docs/customer-service/customer-service-faq/multiple-account-logins/'},
   ],
 };
 

@@ -34,7 +34,17 @@
     if (!url) return url;
     if (/^(?:[a-z]+:)?\/\//i.test(url)) return url;
     if (url.charAt(0) === '/') {
-      return BASE.replace(/\/$/, '') + url;
+      var baseUrl;
+      try {
+        baseUrl = new URL(BASE, window.location.origin);
+      } catch (e) {
+        return url;
+      }
+      var basePath = baseUrl.pathname.replace(/\/$/, '');
+      if (basePath && basePath !== '/' && url.indexOf(basePath + '/') === 0) {
+        return baseUrl.origin + url;
+      }
+      return baseUrl.origin + basePath + url;
     }
     return BASE + url.replace(/^\.\//, '');
   }
@@ -75,7 +85,9 @@
   }
 
   function getFileName(link) {
-    return (link.textContent || '').trim() || safeDecode((link.href.match(/[^/]+$/) || ['file'])[0]);
+    return normalizeDisplayFileName(
+      (link.textContent || '').trim() || safeDecode((link.href.match(/[^/]+$/) || ['file'])[0])
+    );
   }
 
   function isEnglishPage() {
@@ -125,10 +137,17 @@
   }
 
   function cleanFileName(fileName) {
-    return safeDecode(fileName || 'download')
+    return normalizeDisplayFileName(safeDecode(fileName || 'download'))
       .replace(/[\/\\:*?"<>|]/g, '_')
       .replace(/[\x00-\x1f]/g, '')
       .trim() || 'download';
+  }
+
+  function normalizeDisplayFileName(fileName) {
+    return safeDecode(fileName || '')
+      .replace(/^【风控】\s*/i, '')
+      .replace(/^\[Risk Control\]\s*/i, '')
+      .trim();
   }
 
   function getCurrentAttachmentSlug(href) {
@@ -154,15 +173,15 @@
   }
 
   function getReadableOpenHref(href, fileName) {
-    if (!href) return href;
-    if (!/\/(?:assets\/files|files\/help-center)\//.test(href)) return href;
-    var cleanName = ensureFileExtension(cleanFileName(fileName), href);
-    var slug = getCurrentAttachmentSlug(href);
-    return withBase('/files/help-center/' + slug + '/' + encodePathSegment(cleanName));
+    return withBase(href);
   }
 
   function setCardFileName(card, fileName) {
-    var cleanName = cleanFileName(fileName);
+    var href =
+      (card.querySelector('.att-download') && card.querySelector('.att-download').getAttribute('href')) ||
+      card.getAttribute('data-att-open-href') ||
+      '';
+    var cleanName = ensureFileExtension(cleanFileName(fileName), href);
     var nameEl = card.querySelector('.att-name');
     var dlEl = card.querySelector('.att-download');
     [nameEl, dlEl].forEach(function(el) {
@@ -221,9 +240,11 @@
     var colors = { pdf: '#dc2626', pptx: '#ea580c', xlsx: '#16a34a', unknown: '#6b7280' };
     var card = document.createElement('div');
     card.className = 'att-card';
-    var safeName = escapeHtml(fileName);
-    var safeHref = escapeHtml(href);
-    var openHref = getReadableOpenHref(href, fileName);
+    var fileHref = withBase(href);
+    var cleanName = ensureFileExtension(cleanFileName(fileName), fileHref);
+    var safeName = escapeHtml(cleanName);
+    var safeHref = escapeHtml(fileHref);
+    var openHref = getReadableOpenHref(fileHref, fileName);
     var safeOpenHref = escapeHtml(openHref);
     card.setAttribute('data-att-open-href', openHref);
     card.innerHTML =
@@ -270,7 +291,8 @@
 
   function renderPreview(card, type, href) {
     var body = card.querySelector('.att-body');
-    var openHref = card.getAttribute('data-att-open-href') || href;
+    var fileHref = withBase(href);
+    var openHref = card.getAttribute('data-att-open-href') || fileHref;
     if (body && body.getAttribute('data-att-openable') !== 'true') {
       body.setAttribute('data-att-openable', 'true');
       body.setAttribute('title', openHref);
@@ -280,9 +302,9 @@
       });
     }
 
-    if (type === 'pdf') showPDF(card, href);
-    else if (type === 'pptx') showPPTX(card, href);
-    else if (type === 'xlsx') showXLSX(card, href);
+    if (type === 'pdf') showPDF(card, fileHref);
+    else if (type === 'pptx') showPPTX(card, fileHref);
+    else if (type === 'xlsx') showXLSX(card, fileHref);
     else {
       var body = card.querySelector('.att-body');
       body.innerHTML = '<p style="padding:12px;color:#666">' + text('unsupportedPreview') + '</p>';

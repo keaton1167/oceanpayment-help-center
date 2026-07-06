@@ -46,6 +46,70 @@ body {
   font-weight: 600;
 }
 
+.navbar__items--right {
+  align-items: center;
+  gap: 14px;
+}
+
+.navbar__search {
+  display: flex;
+  align-items: center;
+}
+
+.navbar__search-input {
+  width: 320px;
+  height: 46px;
+  padding-left: 44px;
+  padding-right: 82px;
+  border: 1px solid #d7dfe6;
+  border-radius: 999px;
+  background-color: #f8fafc;
+  box-shadow: none;
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease,
+    background-color 160ms ease;
+}
+
+.navbar__search-input:hover,
+.navbar__search-input:focus {
+  border-color: rgba(2, 152, 59, 0.4);
+  background-color: #ffffff;
+  box-shadow: 0 0 0 4px rgba(2, 152, 59, 0.08);
+}
+
+.navbar__search {
+  margin-left: 0;
+}
+
+[class*='searchHintContainer'] {
+  right: 14px;
+}
+
+.searchHint {
+  border-color: #d7dfe6;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #94a3b8;
+  box-shadow: none;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  min-width: 28px;
+  padding: 0 0.4rem;
+}
+
+.searchBar .dropdownMenu {
+  margin-top: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+}
+
+.searchBar .dropdownMenu .suggestion {
+  border-radius: 10px;
+  box-shadow: none;
+}
+
 .theme-doc-sidebar-menu,
 .menu {
   font-size: 13px;
@@ -231,4 +295,21 @@ body {
 
 .footer {
   --ifm-footer-background-color: #111827;
+}
+
+@media (max-width: 996px) {
+  .navbar__items--right {
+    gap: 10px;
+  }
+
+  .navbar__search-input {
+    width: 240px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar__search-input {
+    width: 2.75rem;
+    padding-right: 0;
+  }
 }

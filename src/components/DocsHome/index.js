@@ -6,21 +6,11 @@ const content = {
   zh: {
     eyebrow: 'Oceanpayment Help Center',
     title: '欢迎使用 Oceanpayment 帮助中心',
-    quickTitle: '快速入口',
+    description:
+      '查找产品指引、FAQ、资料与信息更新，快速定位所需帮助。',
+    searchNote: '可直接输入关键词，如：账户、划款、Google Pay、风控。',
     sectionTitle: '文档分类',
-    featuredTitle: '推荐文档',
-    heroLinks: [
-      {
-        title: 'ODPM 操作指引',
-        description: '账户后台与板块操作指引',
-        href: '/docs/odpm-guide/section-guide/account-application-guide/',
-      },
-      {
-        title: 'Payment FAQ',
-        description: '信息更新、常见问题与账户操作',
-        href: '/docs/payment-faq/account-transfer/opccount-platform-manual/',
-      },
-    ],
+    featuredTitle: '热门文档',
     categories: [
       {
         title: 'ODPM 账户后台操作指引',
@@ -30,7 +20,27 @@ const content = {
       {
         title: 'Payment 收单常见 FAQ',
         description: '信息更新、常见问题、账户划款、提现和代付指引。',
-        href: '/docs/payment-faq/account-transfer/opccount-platform-manual/',
+        href: '/docs/payment-faq/info-update/mastercard-chargeback-assessment-criteria/',
+      },
+      {
+        title: 'OP Card 常见 FAQ',
+        description: '涵盖发卡账户、卡片管理、条款与 Google Pay 支持。',
+        href: '/docs/op-card-faq/common-questions/transaction-amount-limit-rules/',
+      },
+      {
+        title: '产品与服务',
+        description: '查看 Oceanpayment 产品能力、支付方式与平台支持范围。',
+        href: '/docs/products-services/oceanpayment-products/oceanpayment-recurring-introduction/',
+      },
+      {
+        title: '合规与认证',
+        description: '企业认证、准入要求与合规管理相关说明。',
+        href: '/docs/compliance-certification/access-compliance/prohibited-and-restricted-businesses/',
+      },
+      {
+        title: '客户服务',
+        description: '登录、密码、账户与客服联络等常见问题。',
+        href: '/docs/customer-service/customer-service-faq/oceanpayment-complaints-and-suggestions-contact/',
       },
     ],
     featured: [
@@ -50,36 +60,57 @@ const content = {
   },
   en: {
     eyebrow: 'Oceanpayment Help Center',
-    title: 'Oceanpayment Help Center',
-    quickTitle: 'Quick Access',
+    title: 'Welcome to Oceanpayment Help Center',
+    description:
+      'Find product guides, FAQs, resources, and service updates for Oceanpayment.',
+    searchNote:
+      'Try keywords like: account, settlement, chargeback, Google Pay.',
     sectionTitle: 'Document Categories',
-    featuredTitle: 'Available English Documents',
-    heroLinks: [
-      {
-        title: 'ODPM Guide',
-        description: 'Account backend and section operations',
-        href: '/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
-      },
-    ],
+    featuredTitle: 'Popular Documents',
     categories: [
       {
-        title: 'ODPM Account Backend Operation Guide',
-        description: 'Account backend, section operations, and related process guidance.',
-        href: '/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
+        title: 'ODPM Operation Guide',
+        description: 'Guides for account backend setup, module operations, and platform workflows.',
+        href: '/en/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
+      },
+      {
+        title: 'Payment Acquiring FAQ',
+        description: 'Policy updates, payment FAQs, settlement, withdrawal, and POBO guidance.',
+        href: '/en/docs/payment-faq/info-update/mastercard-chargeback-assessment-criteria/',
+      },
+      {
+        title: 'OP Card FAQ',
+        description: 'Common questions, terms and conditions, and Google Pay support for OP Card.',
+        href: '/en/docs/op-card-faq/terms-conditions/terms-and-conditions/',
+      },
+      {
+        title: 'Products and Services',
+        description: 'Product capabilities, payment methods, and supported platform scenarios.',
+        href: '/en/docs/products-services/oceanpayment-products/oceanpayment-recurring-introduction/',
+      },
+      {
+        title: 'Compliance and Verification',
+        description: 'Business verification, onboarding requirements, and compliance guidance.',
+        href: '/en/docs/compliance-certification/access-compliance/prohibited-and-restricted-businesses/',
+      },
+      {
+        title: 'Customer Support',
+        description: 'Help with login, password, account access, and support contacts.',
+        href: '/en/docs/customer-service/customer-service-faq/multiple-account-logins/',
       },
     ],
     featured: [
       {
         title: 'New- Oceanpayment-ODPM Digital Platform Guidelines Manual',
-        href: '/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
+        href: '/en/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
       },
       {
         title: 'Assign Account Setting',
-        href: '/docs/odpm-guide/section-guide/assign-account-setting/',
+        href: '/en/docs/odpm-guide/section-guide/assign-account-setting/',
       },
       {
         title: 'Guideline of Reconciliation',
-        href: '/docs/odpm-guide/section-guide/reconciliation-guideline/',
+        href: '/en/docs/odpm-guide/section-guide/reconciliation-guideline/',
       },
     ],
   },
@@ -87,6 +118,7 @@ const content = {
 
 export default function DocsHome({locale = 'zh'}) {
   const page = content[locale] ?? content.zh;
+  const featuredCta = locale === 'en' ? 'View guide' : '查看文档';
 
   return (
     <div className={styles.docsHome}>
@@ -94,17 +126,7 @@ export default function DocsHome({locale = 'zh'}) {
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>{page.eyebrow}</p>
           <h1>{page.title}</h1>
-        </div>
-        <div className={styles.heroPanel}>
-          <div className={styles.panelHeader}>{page.quickTitle}</div>
-          <div className={styles.panelLinks}>
-            {page.heroLinks.map((item) => (
-              <Link className={styles.panelLink} to={item.href} key={item.href}>
-                <span>{item.title}</span>
-                <small>{item.description}</small>
-              </Link>
-            ))}
-          </div>
+          <p className={styles.description}>{page.description}</p>
         </div>
       </section>
 
@@ -125,7 +147,8 @@ export default function DocsHome({locale = 'zh'}) {
         <div className={styles.featuredList}>
           {page.featured.map((item) => (
             <Link className={styles.featuredItem} to={item.href} key={item.href}>
-              {item.title}
+              <span>{item.title}</span>
+              <small>{featuredCta}</small>
             </Link>
           ))}
         </div>

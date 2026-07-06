@@ -110,7 +110,12 @@
     var locale = 'zh-Hans';
     var docId = 'intro';
 
-    if (path.indexOf('en/docs/') === 0) {
+    if (path === '' || path === 'index.html') {
+      docId = '__home__';
+    } else if (path === 'en' || path === 'en/' || path === 'en/index.html') {
+      locale = 'en';
+      docId = '__home__';
+    } else if (path.indexOf('en/docs/') === 0) {
       locale = 'en';
       docId = trimSlashes(path.slice('en/docs/'.length));
     } else if (path.indexOf('docs/') === 0) {
@@ -122,6 +127,10 @@
   }
 
   function buildDocUrl(locale, docId) {
+    if (docId === '__home__') {
+      return siteBase.replace(/\/?$/, '/') + (locale === 'en' ? 'en/' : '');
+    }
+
     var prefix = locale === 'en' ? 'en/docs/' : 'docs/';
     return siteBase.replace(/\/?$/, '/') + prefix + trimSlashes(docId || 'intro');
   }
@@ -144,6 +153,13 @@
     if (current.locale === targetLocale) {
       return {
         docId: current.docId,
+        isExact: true
+      };
+    }
+
+    if (current.docId === '__home__') {
+      return {
+        docId: '__home__',
         isExact: true
       };
     }
