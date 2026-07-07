@@ -24,27 +24,34 @@
 
 .socials {
   display: flex;
-  gap: 12px;
+  gap: 16px;
 }
 
 .socials a {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
-  border-radius: 50%;
+  border-radius: 999px;
   background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  font-size: 0.875rem;
-  font-weight: 700;
+  color: #ffffff;
   text-decoration: none;
+  transition:
+    transform 160ms ease,
+    background-color 160ms ease;
 }
 
 .socials a:hover {
-  background: rgba(2, 152, 59, 0.9);
-  color: #fff;
+  background: rgb(2, 153, 59);
   text-decoration: none;
+  transform: translateY(-3px);
+}
+
+.socials svg {
+  width: 18px;
+  height: 18px;
+  fill: #ffffff;
 }
 
 .columns {

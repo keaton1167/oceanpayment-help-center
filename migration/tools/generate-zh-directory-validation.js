@@ -79,6 +79,11 @@ const EXCLUDED_REVIEW_TITLES = [
   '拒付处理说明',
 ];
 
+const RESOLVED_ELSEWHERE_TITLES = new Set([
+  'IAM申请OPCCOUNT全球账户业务操作手册',
+  'OPCard操作教程',
+]);
+
 const EXISTING_RETAINED_DOCS = [
   {
     auditTitle: 'OPCCOUNT操作教程',
@@ -218,6 +223,7 @@ function getExpectedRows(auditRows, dir) {
 
   const rows = auditRows
     .filter((row) => row.action === 'migrate' && row.target_directory === dir)
+    .filter((row) => !RESOLVED_ELSEWHERE_TITLES.has(row.title))
     .map((row) => {
       const retainedDoc = retained.find((doc) => doc.auditTitle === row.title);
       if (retainedDoc) {

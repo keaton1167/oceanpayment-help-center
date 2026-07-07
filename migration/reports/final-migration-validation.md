@@ -1,11 +1,11 @@
 # 最终迁移收尾校验报告
 
-生成时间：2026-07-06T07:23:09.397Z
+生成时间：2026-07-07T01:39:54.658Z
 
 ## 结论
 
-- 阻塞项：0
-- 中文目录校验：10/10 passed, 0 review, expected 112, actual 112
+- 阻塞项：1
+- 中文目录校验：6/10 passed, 4 review, expected 110, actual 110
 - 英文构建文档：48/48
 - 中英文对齐文档：31
 - 英文-only 文档：17
@@ -17,7 +17,7 @@
 
 ## 阻塞明细
 
-- 无
+- Chinese directory validation failed: 6/10 passed, 4 review, expected 110, actual 110
 
 ## 英文-only 文档
 

@@ -3,4 +3,48 @@ title: "Mastercard 拒付原因更新"
 sidebar_label: "Mastercard 拒付原因更新"
 sidebar_position: 2
 ---
-Mastercard计划从2025年4月11日起启用新版拒付原因，新版拒付原因分类做了简化：按Mastercard调整后的拒付原因体系（如欺诈、消费纠纷、交互错误、授权四大类）重新梳理，减少因拒付原因混淆导致的误操作。详情请参考：[Mastercard 拒付原因更新](/files/help-center/wordpress-attachments/Mastercard-拒付原因更新.pdf)
+
+Mastercard 计划从 2025 年 4 月 11 日起启用新版拒付原因。新版拒付原因分类做了简化：按 Mastercard 调整后的拒付原因体系重新梳理为授权、消费者争议、交互终端错误、欺诈四大类，以减少因拒付原因混淆导致的误操作。
+
+## Mastercard 新旧拒付原因分类
+
+| 类别 | Mastercard 拒付原因（旧版） | Mastercard 拒付原因（更新） |
+|---|---|---|
+| 授权 Authorization | Account Number Not On File | Authorization-Related Chargeback |
+| 授权 Authorization | Authorization-Related Chargeback | Authorization-Related Chargeback |
+| 授权 Authorization | Warning Bulletin File | Authorization-Related Chargeback |
+| 消费者争议 Cardholder Disputes | Credit Not Processed | Cardholder Disputes |
+| 消费者争议 Cardholder Disputes | Addendum, No-show, or ATM Dispute | Cardholder Disputes |
+| 消费者争议 Cardholder Disputes | Goods or Services Not Provided | Cardholder Disputes |
+| 消费者争议 Cardholder Disputes | Cardholder Dispute Defective/Not as Described | Cardholder Disputes |
+| 消费者争议 Cardholder Disputes | Canceled Recurring or Digital Goods Transactions | Cardholder Disputes |
+| 交互终端错误 Point-of-Interaction Error | Correct Transaction Currency Code Not Provided | Duplicate Processing |
+| 交互终端错误 Point-of-Interaction Error | Late Presentment | Duplicate Processing |
+| 交互终端错误 Point-of-Interaction Error | Duplicate Processing of Transaction | Duplicate Processing |
+| 交互终端错误 Point-of-Interaction Error | Transaction Amount Differs | Duplicate Processing |
+| 欺诈 Fraud | Chip Liability Shift-Lost / Stolen / Never Received Issue (NRI) Fraud | Chip Liability Shift-Lost / Stolen / Never Received Issue (NRI) Fraud |
+| 欺诈 Fraud | Chip Liability Shift | Chip Liability Shift |
+| 欺诈 Fraud | Questionable Merchant Activity | Questionable Merchant Activity |
+| 欺诈 Fraud | No Cardholder Authorization | No Cardholder Authorization |
+
+## Oceanpayment 对应中英文拒付原因调整
+
+为适应 Mastercard 拒付原因调整，Oceanpayment 对应中英文拒付原因也做了同步调整，变化如下：
+
+| 类别 | 旧版拒付原因 | 新版拒付原因 | Oceanpayment 英文拒付原因 |
+|---|---|---|---|
+| 授权 Authorization | 持卡人未授权 | 授权问题拒付 | Authorization-Related Chargeback |
+| 消费者争议 Cardholder Disputes | 未收到退款 | 持卡人争议 | Cardholder Disputes |
+| 消费者争议 Cardholder Disputes | 服务未提供或未收到商品 | 持卡人争议 | Cardholder Disputes |
+| 消费者争议 Cardholder Disputes | 货物损坏/货不对版 | 持卡人争议 | Cardholder Disputes |
+| 消费者争议 Cardholder Disputes | 已取消的循环交易 | 持卡人争议 | Cardholder Disputes |
+| 交互终端错误 Point-of-Interaction Error | 错误交易币种 | 重复处理 | Duplicate Processing |
+| 交互终端错误 Point-of-Interaction Error | 交易清算延迟 | 重复处理 | Duplicate Processing |
+| 交互终端错误 Point-of-Interaction Error | 重复处理 | 重复处理 | Duplicate Processing |
+| 交互终端错误 Point-of-Interaction Error | 交易金额或账户错误 | 重复处理 | Duplicate Processing |
+| 欺诈 Fraud | 欺诈交易 | 欺诈交易 | Chip Liability Shift-Lost / Stolen / Never Received Issue (NRI) Fraud |
+| 欺诈 Fraud | 欺诈交易 | 欺诈交易 | Chip Liability Shift |
+| 欺诈 Fraud | 欺诈交易 | 欺诈交易 | Questionable Merchant Activity |
+| 欺诈 Fraud | 欺诈交易 | 欺诈交易 | No Cardholder Authorization |
+
+以上调整仅针对 Mastercard 按新的拒付原因报出的拒付，不影响旧的拒付原因申诉处理，具体实施以 Mastercard 的实际更新时间为准。

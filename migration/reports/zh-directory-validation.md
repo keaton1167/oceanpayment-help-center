@@ -1,14 +1,14 @@
 # 中文目录与顺序校验报告
 
-生成时间：2026-07-02T07:19:45.599Z
+生成时间：2026-07-07T02:04:29.667Z
 
 ## 结论
 
 - 校验新二级目录数：10
-- 通过目录数：10
-- 存在待确认项目录数：0
-- 迁移审计期望文章数：112
-- 当前实际文章数：112
+- 通过目录数：7
+- 存在待确认项目录数：3
+- 迁移审计期望文章数：110
+- 当前实际文章数：110
 - 不计入本次迁移的未归类文章数：6
 - ODPM 旧目录：按规则跳过，不重复迁移。
 
@@ -17,7 +17,7 @@
 ### 产品与服务 / Oceanpayment产品与服务
 
 - 目录：`docs/products-services/oceanpayment-products`
-- 分类标签：Oceanpayment 产品
+- 分类标签：Oceanpayment 产品与服务
 - 期望 / 实际：5 / 5
 - 状态：通过
 
@@ -86,7 +86,7 @@
 - 目录：`docs/payment-faq/common-questions`
 - 分类标签：常见问题
 - 期望 / 实际：22 / 22
-- 状态：通过
+- 状态：需复核
 
 | 顺序 | 标题 | slug | 文件 |
 |---:|---|---|---|
@@ -96,46 +96,58 @@
 | 4 | Visa、MasterCard退款处理规则更新 | `visa-mastercard-refund-rules-update` | `docs/payment-faq/common-questions/visa-mastercard-refund-rules-update/index.mdx` |
 | 5 | 受管控国家、地区与交易币种清单 | `restricted-countries-regions-currencies` | `docs/payment-faq/common-questions/restricted-countries-regions-currencies/index.mdx` |
 | 6 | Bancontact品牌升级的相关事宜 | `bancontact-brand-upgrade` | `docs/payment-faq/common-questions/bancontact-brand-upgrade/index.mdx` |
+| 6 | 为什么会收到高风险订单警报邮件？如何处理？ | `high-risk-order-alert-email` | `docs/payment-faq/common-questions/high-risk-order-alert-email/index.mdx` |
+| 7 | 什么是拒付/伪冒/调单订单？该如何处理？ | `chargeback-fraud-retrieval-orders` | `docs/payment-faq/common-questions/chargeback-fraud-retrieval-orders/index.mdx` |
 | 7 | MasterCard 潜在欺诈商户管控规则介绍 | `mastercard-potential-scam-merchant-monitoring` | `docs/payment-faq/common-questions/mastercard-potential-scam-merchant-monitoring/index.mdx` |
 | 8 | Afterpay 限额介绍 | `afterpay-limit-introduction` | `docs/payment-faq/common-questions/afterpay-limit-introduction/index.mdx` |
 | 9 | Visa VIRP规则介绍 | `visa-virp-rules` | `docs/payment-faq/common-questions/visa-virp-rules/index.mdx` |
 | 10 | Visa VAMP考核计划 | `visa-vamp-program` | `docs/payment-faq/common-questions/visa-vamp-program/index.mdx` |
-| 11 | Klarna消费者端账单展示 | `klarna-consumer-bill-sample` | `docs/payment-faq/common-questions/klarna-consumer-bill-sample/index.mdx` |
 | 12 | Afterpay针对Shopify网站的支付插件安装介绍 | `afterpay-shopify-plugin-installation` | `docs/payment-faq/common-questions/afterpay-shopify-plugin-installation/index.mdx` |
+| 12 | 英国对 Klarna 广告的监管要求 | `uk-klarna-advertising-requirements` | `docs/payment-faq/common-questions/uk-klarna-advertising-requirements/index.mdx` |
 | 13 | iDEAL商户运营端注意事项 | `ideal-merchant-operation-notes` | `docs/payment-faq/common-questions/ideal-merchant-operation-notes/index.mdx` |
 | 14 | Klarna挪威市场更新 | `klarna-norway-market-update` | `docs/payment-faq/common-questions/klarna-norway-market-update/index.mdx` |
 | 15 | Klarna争议改善指南 | `klarna-dispute-improvement-guide` | `docs/payment-faq/common-questions/klarna-dispute-improvement-guide/index.mdx` |
-| 16 | 英国对 Klarna 广告的监管要求 | `uk-klarna-advertising-requirements` | `docs/payment-faq/common-questions/uk-klarna-advertising-requirements/index.mdx` |
-| 17 | 什么是拒付/伪冒/调单订单？该如何处理？ | `chargeback-fraud-retrieval-orders` | `docs/payment-faq/common-questions/chargeback-fraud-retrieval-orders/index.mdx` |
-| 18 | 为什么会收到高风险订单警报邮件？如何处理？ | `high-risk-order-alert-email` | `docs/payment-faq/common-questions/high-risk-order-alert-email/index.mdx` |
+| 16 | Klarna消费者端账单展示 | `klarna-consumer-bill-sample` | `docs/payment-faq/common-questions/klarna-consumer-bill-sample/index.mdx` |
 | 19 | Oceanpayment信用卡通道支持哪些币种？ | `credit-card-channel-supported-currencies` | `docs/payment-faq/common-questions/credit-card-channel-supported-currencies/index.mdx` |
 | 20 | 有风险的成功交易应该怎么处理？ | `risky-successful-transaction-handling` | `docs/payment-faq/common-questions/risky-successful-transaction-handling/index.mdx` |
 | 21 | 订单被风控拦截显示10000：Payment is declined，该如何处理？ | `payment-declined-10000-risk-control` | `docs/payment-faq/common-questions/payment-declined-10000-risk-control/index.mdx` |
 | 22 | Oceanpayment可以支持哪些结算币种？ | `supported-settlement-currencies` | `docs/payment-faq/common-questions/supported-settlement-currencies/index.mdx` |
+
+待复核项：
+- 顺序不一致：`klarna-consumer-bill-sample` 期望 11，实际 16
+- 顺序不一致：`uk-klarna-advertising-requirements` 期望 16，实际 12
+- 顺序不一致：`chargeback-fraud-retrieval-orders` 期望 17，实际 7
+- 顺序不一致：`high-risk-order-alert-email` 期望 18，实际 6
+- 顺序重复：sidebar_position 6 -> Bancontact品牌升级的相关事宜 / 为什么会收到高风险订单警报邮件？如何处理？
+- 顺序重复：sidebar_position 7 -> 什么是拒付/伪冒/调单订单？该如何处理？ / MasterCard 潜在欺诈商户管控规则介绍
+- 顺序重复：sidebar_position 12 -> Afterpay针对Shopify网站的支付插件安装介绍 / 英国对 Klarna 广告的监管要求
 
 ### Payment收单常见FAQ / 账户划款、提现、代付指引
 
 - 目录：`docs/payment-faq/account-transfer`
 - 分类标签：账户划款、提现、代付指引
 - 期望 / 实际：3 / 3
-- 状态：通过
+- 状态：需复核
 
 | 顺序 | 标题 | slug | 文件 |
 |---:|---|---|---|
+| 1 | 如何掌握账户资金动态并进行对账？ | `account-funds-and-reconciliation` | `docs/payment-faq/account-transfer/account-funds-and-reconciliation/index.mdx` |
 | 1 | OPCCOUNT平台操作手册-2026-4-23 | `opccount-platform-manual` | `docs/payment-faq/account-transfer/opccount-platform-manual/index.mdx` |
 | 2 | 成功交易资金如何进行结算？ | `successful-transaction-settlement` | `docs/payment-faq/account-transfer/successful-transaction-settlement/index.mdx` |
-| 3 | 如何掌握账户资金动态并进行对账？ | `account-funds-and-reconciliation` | `docs/payment-faq/account-transfer/account-funds-and-reconciliation/index.mdx` |
+
+待复核项：
+- 顺序不一致：`account-funds-and-reconciliation` 期望 3，实际 1
+- 顺序重复：sidebar_position 1 -> 如何掌握账户资金动态并进行对账？ / OPCCOUNT平台操作手册-2026-4-23
 
 ### OP Card 常见FAQ / 常见问题
 
 - 目录：`docs/op-card-faq/common-questions`
 - 分类标签：常见问题
-- 期望 / 实际：58 / 58
+- 期望 / 实际：56 / 56
 - 状态：通过
 
 | 顺序 | 标题 | slug | 文件 |
 |---:|---|---|---|
-| 1 | IAM申请OPCCOUNT全球账户业务操作手册 | `iam-opccount-global-account-application-guide` | `docs/op-card-faq/common-questions/iam-opccount-global-account-application-guide/index.mdx` |
 | 2 | 交易金额限制生效规则 | `transaction-amount-limit-rules` | `docs/op-card-faq/common-questions/transaction-amount-limit-rules/index.mdx` |
 | 3 | OP Card限额是多少？ | `op-card-limits` | `docs/op-card-faq/common-questions/op-card-limits/index.mdx` |
 | 4 | OP Card是什么？ | `what-is-op-card` | `docs/op-card-faq/common-questions/what-is-op-card/index.mdx` |
@@ -189,7 +201,6 @@
 | 52 | 为什么卡片被冻结/取消后，交易仍然成功了？ | `transaction-success-after-card-freeze-or-cancel` | `docs/op-card-faq/common-questions/transaction-success-after-card-freeze-or-cancel/index.mdx` |
 | 53 | 如何保护自己免遭诈骗和卡片欺诈 | `protect-against-card-fraud` | `docs/op-card-faq/common-questions/protect-against-card-fraud/index.mdx` |
 | 54 | 如果我的多张卡片上都发生了欺诈怎么办？ | `fraud-on-multiple-cards` | `docs/op-card-faq/common-questions/fraud-on-multiple-cards/index.mdx` |
-| 55 | OPCard操作教程 | `opcard-operation-guide` | `docs/op-card-faq/common-questions/opcard-operation-guide/index.mdx` |
 | 56 | OP Card禁入行业清单 | `op-card-prohibited-industries` | `docs/op-card-faq/common-questions/op-card-prohibited-industries/index.mdx` |
 | 57 | OP Card业务申请资料说明 | `op-card-application-materials` | `docs/op-card-faq/common-questions/op-card-application-materials/index.mdx` |
 | 58 | Oceanpayment Card价格 | `oceanpayment-card-pricing` | `docs/op-card-faq/common-questions/oceanpayment-card-pricing/index.mdx` |
@@ -199,11 +210,14 @@
 - 目录：`docs/op-card-faq/terms-conditions`
 - 分类标签：条款和条件
 - 期望 / 实际：1 / 1
-- 状态：通过
+- 状态：需复核
 
 | 顺序 | 标题 | slug | 文件 |
 |---:|---|---|---|
-| 1 | Terms and Conditions条款 | `terms-and-conditions` | `docs/op-card-faq/terms-conditions/terms-and-conditions/index.mdx` |
+| 1 | Oceanpayment 卡条款和条件 | `terms-and-conditions` | `docs/op-card-faq/terms-conditions/terms-and-conditions/index.mdx` |
+
+待复核项：
+- 标题不一致：`terms-and-conditions` 期望「Terms and Conditions条款」，实际「Oceanpayment 卡条款和条件」
 
 ### OP Card 常见FAQ / 支持Google Pay FAQ
 
@@ -242,7 +256,7 @@
 ### ODPM后台板块操作指引
 
 - ODPM账户后台操作指引 / 板块操作指引：`docs/odpm-guide/section-guide`，该目录中英文内容已完成迁移，本次按规则跳过，避免重复迁移。
-- 当前本地目录文章数：25
+- 当前本地目录文章数：26
 
 ## 后续建议
 
