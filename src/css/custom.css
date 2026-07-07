@@ -267,6 +267,12 @@ body {
   list-style-type: lower-alpha;
 }
 
+.theme-doc-markdown ul,
+.theme-doc-markdown ul ul,
+.theme-doc-markdown ul ul ul {
+  list-style-type: disc;
+}
+
 .markdown img {
   border: 1px solid #e5e7eb;
   border-radius: 6px;

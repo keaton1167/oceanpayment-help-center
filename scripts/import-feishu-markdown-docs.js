@@ -94,17 +94,38 @@ function unescapeMarkdown(value) {
   return value.replace(/\\([\\`*{}\[\]()#+\-.!_])/g, '$1');
 }
 
+function normalizeWhitespaceArtifacts(markdown, stats) {
+  return markdown
+    .split('\n')
+    .map((line) => {
+      const original = line;
+      const next = line
+        .replace(/[\u200B-\u200D\uFEFF]/g, '')
+        .replace(/\u00A0/g, ' ')
+        .replace(/\u3000/g, '  ')
+        .replace(/[ \t]+$/g, '');
+
+      if (next !== original) {
+        stats.normalizedWhitespace += 1;
+      }
+      return next;
+    })
+    .join('\n');
+}
+
 function normalizeListMarkers(markdown, stats) {
   return markdown
     .split('\n')
     .map((line) => {
       const original = line;
-      let next = line.replace(/^(\s*)(\d+)\\([.)])\s+/, '$1$2$3 ');
-      const nestedBullet = next.match(/^(\s*)((?:-\s+){2,})(.+)$/);
+      let next = line
+        .replace(/^(\s*)(\d+)\\([.)])\s+/, '$1$2$3 ')
+        .replace(/^(\s*)[-*•]\s+/, '$1- ')
+        .replace(/^(\s+)    /, '$1  ');
+      const nestedBullet = next.match(/^(\s*)(?:-\s+){2,}(.+)$/);
 
       if (nestedBullet) {
-        const depth = nestedBullet[2].trim().split(/\s+/).length;
-        next = `${nestedBullet[1]}${'  '.repeat(depth - 1)}- ${nestedBullet[3].trim()}`;
+        next = `${nestedBullet[1]}- ${nestedBullet[2].trim()}`;
       }
 
       if (next !== original) {
@@ -133,6 +154,30 @@ function normalizeBoldMarkup(markdown, stats) {
     .join('\n');
 }
 
+function normalizeHeadingMarkup(markdown, stats) {
+  return markdown
+    .split('\n')
+    .map((line) => {
+      const original = line;
+      const match = line.match(/^(#{1,6})\s+(.+?)\s*$/);
+      if (!match) {
+        return line;
+      }
+
+      const text = stripHeadingMarkup(match[2])
+        .replace(/\*{2,}/g, '')
+        .replace(/\s{2,}/g, ' ')
+        .trim();
+
+      const next = text ? `${match[1]} ${text}` : '';
+      if (next !== original) {
+        stats.normalizedHeadingMarkup += 1;
+      }
+      return next;
+    })
+    .join('\n');
+}
+
 function stripHeadingMarkup(value) {
   return unescapeMarkdown(value)
     .replace(/^\s*#+\s*/, '')
@@ -144,6 +189,12 @@ function stripHeadingMarkup(value) {
 
 function removeLeadingNumber(value) {
   return value.replace(/^\s*(?:chapter\s+)?\d+(?:\.\d+)*[.)、:：]?\s*/i, '').trim();
+}
+
+function hasExplicitSectionLabel(value) {
+  return /^(?:[一二三四五六七八九十]+、|第[一二三四五六七八九十]+[章节部分]|[（(][一二三四五六七八九十]+[）)])/u.test(
+    value.trim(),
+  );
 }
 
 function isSentenceMisreadAsHeading(text) {
@@ -326,6 +377,11 @@ function normalizeHeadings(markdown, doc, stats) {
       }
 
       text = removeLeadingNumber(text);
+      if (hasExplicitSectionLabel(text)) {
+        stats.preservedExplicitHeadings += 1;
+        return `${'#'.repeat(level)} ${text}`;
+      }
+
       const prefix =
         level === 2
           ? `${counters[2]}.`
@@ -446,15 +502,20 @@ function transformMarkdown(doc, sourceDir, assetMap) {
     demotedHeadings: 0,
     normalizedListMarkers: 0,
     normalizedBoldMarkup: 0,
+    normalizedHeadingMarkup: 0,
+    normalizedWhitespace: 0,
+    preservedExplicitHeadings: 0,
     groupedImageRows: 0,
   };
 
   let markdown = readUtf8(sourceMdPath).replace(/\u00a0/g, ' ');
+  markdown = normalizeWhitespaceArtifacts(markdown, stats);
   markdown = rewriteAssetLinks(markdown, assetMap, stats);
   markdown = normalizeListMarkers(markdown, stats);
   markdown = unescapeMarkdown(markdown);
   markdown = normalizeListMarkers(markdown, stats);
   markdown = normalizeBoldMarkup(markdown, stats);
+  markdown = normalizeHeadingMarkup(markdown, stats);
   markdown = normalizeHeadings(markdown, doc, stats);
   markdown = groupCompactImageRuns(markdown, stats);
   markdown = normalizeSpacing(markdown);
@@ -524,9 +585,12 @@ function main() {
         `refs=${entry.imageRefs}`,
         `fileRefs=${entry.fileRefs}`,
         `headings=${entry.numberedHeadings}`,
+        `explicitHeadings=${entry.preservedExplicitHeadings}`,
         `titleHeadingsRemoved=${entry.removedTitleHeadings}`,
         `listMarkers=${entry.normalizedListMarkers}`,
         `bold=${entry.normalizedBoldMarkup}`,
+        `headingMarkup=${entry.normalizedHeadingMarkup}`,
+        `whitespace=${entry.normalizedWhitespace}`,
         `imageRows=${entry.groupedImageRows}`,
         `written=${entry.written}`,
       ].join(' | '),
