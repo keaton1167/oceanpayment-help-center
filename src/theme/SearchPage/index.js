@@ -7,10 +7,6 @@ import {usePluralForm} from '@docusaurus/theme-common';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import useSearchQuery from '@easyops-cn/docusaurus-search-local/dist/client/client/theme/hooks/useSearchQuery';
-import {
-  fetchIndexesByWorker,
-  searchByWorker,
-} from '@easyops-cn/docusaurus-search-local/dist/client/client/theme/searchByWorker';
 import {SearchDocumentType} from '@easyops-cn/docusaurus-search-local/dist/client/shared/interfaces';
 import {highlight} from '@easyops-cn/docusaurus-search-local/dist/client/client/utils/highlight';
 import {highlightStemmed} from '@easyops-cn/docusaurus-search-local/dist/client/client/utils/highlightStemmed';
@@ -23,6 +19,176 @@ import {
 } from '@easyops-cn/docusaurus-search-local/dist/client/client/utils/proxiedGenerated';
 import {normalizeContextByPath} from '@easyops-cn/docusaurus-search-local/dist/client/client/utils/normalizeContextByPath';
 import styles from './styles.module.css';
+
+const searchIndexCache = new Map();
+const SEARCH_INDEX_BASENAME = 'search-index';
+
+function getQueryFromLocation() {
+  if (typeof window === 'undefined') {
+    return '';
+  }
+
+  return new URLSearchParams(window.location.search).get('q') ?? '';
+}
+
+function replaceQueryInLocation(searchQuery) {
+  if (typeof window === 'undefined') {
+    return;
+  }
+
+  const currentQuery = getQueryFromLocation();
+
+  if (currentQuery === searchQuery) {
+    return;
+  }
+
+  const params = new URLSearchParams(window.location.search);
+
+  if (searchQuery) {
+    params.set('q', searchQuery);
+  } else {
+    params.delete('q');
+  }
+
+  const nextSearch = params.toString();
+  const nextUrl = `${window.location.pathname}${
+    nextSearch ? `?${nextSearch}` : ''
+  }${window.location.hash}`;
+
+  window.history.replaceState(null, '', nextUrl);
+}
+
+async function loadSearchDocuments(baseUrl, searchContext) {
+  const cacheKey = `${baseUrl}${searchContext}`;
+
+  if (searchIndexCache.has(cacheKey)) {
+    return searchIndexCache.get(cacheKey);
+  }
+
+  const url = `${baseUrl}${SEARCH_INDEX_BASENAME}${
+    searchContext ? `-${searchContext.replace(/\//g, '-')}` : ''
+  }.json`;
+
+  const indexPromise = (async () => {
+    const response = await fetch(url);
+    return response.json();
+  })();
+
+  searchIndexCache.set(cacheKey, indexPromise);
+  return indexPromise;
+}
+
+function findPositions(content, token) {
+  const positions = [];
+  const lowerContent = content.toLowerCase();
+  const lowerToken = token.toLowerCase();
+  let index = lowerContent.indexOf(lowerToken);
+
+  while (index >= 0) {
+    positions.push([index, token.length]);
+    index = lowerContent.indexOf(lowerToken, index + token.length);
+  }
+
+  return positions;
+}
+
+function createMetadata(content, token) {
+  const positions = findPositions(content, token);
+
+  return positions.length > 0
+    ? {
+        [token]: {
+          t: {
+            position: positions,
+          },
+        },
+      }
+    : {};
+}
+
+function getMatchRank(document, page, query) {
+  const title = document.t ?? '';
+  const description = document.s ?? '';
+  const pageTitle = page?.t ?? '';
+  const text = `${title} ${description} ${pageTitle}`.toLowerCase();
+  const lowerQuery = query.toLowerCase();
+
+  if (title.toLowerCase().includes(lowerQuery)) {
+    return 0;
+  }
+
+  if (pageTitle.toLowerCase().includes(lowerQuery)) {
+    return 1;
+  }
+
+  if (description.toLowerCase().includes(lowerQuery)) {
+    return 2;
+  }
+
+  if (text.includes(lowerQuery)) {
+    return 3;
+  }
+
+  return title.toLowerCase().includes(lowerQuery) ? 4 : 5;
+}
+
+async function runSearch(baseUrl, searchContext, input, limit) {
+  const query = input.trim();
+
+  if (!query) {
+    return [];
+  }
+
+  const indexes = await loadSearchDocuments(baseUrl, searchContext);
+  const titleDocuments = indexes[SearchDocumentType.Title]?.documents ?? [];
+  const titleById = new Map(titleDocuments.map((document) => [document.i, document]));
+  const results = [];
+  const seenKeys = new Set();
+  const lowerQuery = query.toLowerCase();
+
+  for (const [type, {documents}] of indexes.entries()) {
+    for (const document of documents) {
+      const page = type === SearchDocumentType.Title ? document : titleById.get(document.p);
+      const searchableText = [
+        document.t,
+        document.s,
+        page?.t,
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+
+      if (!searchableText.includes(lowerQuery)) {
+        continue;
+      }
+
+      const key =
+        type === SearchDocumentType.Title
+          ? `title:${document.i}`
+          : `${type}:${document.i}`;
+
+      if (seenKeys.has(key)) {
+        continue;
+      }
+
+      seenKeys.add(key);
+      results.push({
+        document,
+        type,
+        page,
+        metadata: createMetadata(`${document.s ?? ''} ${document.t ?? ''}`, query),
+        tokens: [query],
+        score: getMatchRank(document, page, query),
+      });
+
+      if (results.length >= limit * 2) {
+        break;
+      }
+    }
+  }
+
+  return results.sort((a, b) => a.score - b.score).slice(0, limit);
+}
 
 function BackIcon() {
   return (
@@ -61,12 +227,12 @@ function SearchPageContent() {
     searchValue,
     searchContext,
     searchVersion,
-    updateSearchPath,
     updateSearchContext,
   } = useSearchQuery();
-  const [searchQuery, setSearchQuery] = useState(searchValue);
+  const [searchQuery, setSearchQuery] = useState(() => getQueryFromLocation() || searchValue || '');
   const [searchResults, setSearchResults] = useState();
-  const [searchWorkerReady, setSearchWorkerReady] = useState(false);
+  const [hasHydratedQuery, setHasHydratedQuery] = useState(false);
+  const [isSearching, setIsSearching] = useState(false);
   const versionUrl = `${baseUrl}${searchVersion}`;
   const backLabel = currentLocale === 'en' ? 'Go back' : '返回上一页';
   const fallbackPath =
@@ -93,44 +259,61 @@ function SearchPageContent() {
   );
 
   useEffect(() => {
-    updateSearchPath(searchQuery);
+    const locationQuery = getQueryFromLocation();
+    const nextQuery = locationQuery || searchValue || '';
+
+    setSearchQuery((currentQuery) =>
+      currentQuery === nextQuery ? currentQuery : nextQuery,
+    );
+    setHasHydratedQuery(true);
+  }, [searchValue]);
+
+  useEffect(() => {
+    if (!hasHydratedQuery) {
+      return undefined;
+    }
+
+    replaceQueryInLocation(searchQuery);
 
     if (searchQuery) {
+      let cancelled = false;
+      setIsSearching(true);
+
       (async () => {
-        const results = await searchByWorker(
-          versionUrl,
-          searchContext,
-          searchQuery,
-          100,
-        );
-        setSearchResults(results);
+        try {
+          const results = await runSearch(
+            versionUrl,
+            searchContext,
+            searchQuery,
+            100,
+          );
+
+          if (!cancelled) {
+            setSearchResults(results);
+            setIsSearching(false);
+          }
+        } catch (error) {
+          if (!cancelled) {
+            setSearchResults([]);
+            setIsSearching(false);
+          }
+        }
       })();
+
+      return () => {
+        cancelled = true;
+      };
     } else {
       setSearchResults(undefined);
+      setIsSearching(false);
     }
-  }, [searchQuery, versionUrl, searchContext, updateSearchPath]);
-
-  useEffect(() => {
-    if (searchValue && searchValue !== searchQuery) {
-      setSearchQuery(searchValue);
-    }
-  }, [searchValue, searchQuery]);
-
-  useEffect(() => {
-    async function doFetchIndexes() {
-      if (
-        !Array.isArray(searchContextByPaths) ||
-        searchContext ||
-        useAllContextsWithNoSearchContext
-      ) {
-        await fetchIndexesByWorker(versionUrl, searchContext);
-      }
-
-      setSearchWorkerReady(true);
-    }
-
-    doFetchIndexes();
-  }, [searchContext, versionUrl]);
+    return undefined;
+  }, [
+    hasHydratedQuery,
+    searchQuery,
+    versionUrl,
+    searchContext,
+  ]);
 
   const handleBack = useCallback(() => {
     if (typeof window !== 'undefined' && window.history.length > 1) {
@@ -223,7 +406,7 @@ function SearchPageContent() {
           ) : null}
         </div>
 
-        {!searchWorkerReady && searchQuery && (
+        {isSearching && searchQuery && (
           <div className={styles.loadingState}>
             <span className={styles.loadingSpinner} aria-hidden="true" />
             <span>
@@ -234,7 +417,8 @@ function SearchPageContent() {
           </div>
         )}
 
-        {searchResults &&
+        {!isSearching &&
+          searchResults &&
           (searchResults.length > 0 ? (
             <p>
               {selectMessage(
@@ -263,9 +447,13 @@ function SearchPageContent() {
           ))}
 
         <section>
-          {searchResults &&
+          {!isSearching &&
+            searchResults &&
             searchResults.map((item) => (
-              <SearchResultItem key={item.document.i} searchResult={item} />
+              <SearchResultItem
+                key={`${item.type}:${item.document.i}`}
+                searchResult={item}
+              />
             ))}
         </section>
       </div>
@@ -282,10 +470,19 @@ function SearchResultItem({
   const isDescriptionOrKeywords = isDescription || isKeywords;
   const isTitleRelated = isTitle || isDescriptionOrKeywords;
   const isContent = type === SearchDocumentType.Content;
-  const pathItems = (isTitle ? document.b : page.b).slice();
-  const articleTitle = isContent || isDescriptionOrKeywords ? document.s : document.t;
+  const pageDocument = isTitle ? document : page;
+  const pathItems = (pageDocument?.b ?? []).slice();
+  const articleTitle =
+    (isContent || isDescriptionOrKeywords ? document.s : document.t) ||
+    pageDocument?.t ||
+    document.t;
+  const titlePositions = getStemmedPositions(metadata, 't');
 
-  if (!isTitleRelated) {
+  if (!articleTitle) {
+    return null;
+  }
+
+  if (!isTitleRelated && page?.t) {
     pathItems.push(page.t);
   }
 
@@ -308,14 +505,9 @@ function SearchResultItem({
           to={document.u + search + (document.h || '')}
           dangerouslySetInnerHTML={{
             __html:
-              isContent || isDescriptionOrKeywords
-                ? highlight(articleTitle, tokens)
-                : highlightStemmed(
-                    articleTitle,
-                    getStemmedPositions(metadata, 't'),
-                    tokens,
-                    100,
-                  ),
+              titlePositions.length > 0
+                ? highlightStemmed(articleTitle, titlePositions, tokens, 100)
+                : highlight(articleTitle, tokens),
           }}
         />
       </h2>
@@ -330,12 +522,10 @@ function SearchResultItem({
         <p
           className={styles.searchResultItemSummary}
           dangerouslySetInnerHTML={{
-            __html: highlightStemmed(
-              document.t,
-              getStemmedPositions(metadata, 't'),
-              tokens,
-              100,
-            ),
+            __html:
+              titlePositions.length > 0
+                ? highlightStemmed(document.t, titlePositions, tokens, 100)
+                : highlight(document.t, tokens),
           }}
         />
       )}

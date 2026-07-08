@@ -71,8 +71,9 @@ const socialLinks = [
   },
 ];
 
-function FooterLink({item}) {
-  const {href, to, label} = item;
+function FooterLink({item, currentLocale}) {
+  const {href, to, label, localeTo} = item;
+  const resolvedTo = localeTo?.[currentLocale] ?? to;
 
   if (href) {
     return (
@@ -82,7 +83,7 @@ function FooterLink({item}) {
     );
   }
 
-  return <Link to={to}>{label}</Link>;
+  return <Link to={resolvedTo}>{label}</Link>;
 }
 
 export default function Footer() {
@@ -133,8 +134,8 @@ export default function Footer() {
                 <h2>{column.title}</h2>
                 <ul>
                   {column.items.map((item) => (
-                    <li key={item.href ?? item.to}>
-                      <FooterLink item={item} />
+                    <li key={item.href ?? item.to ?? `${item.label}-${currentLocale}`}>
+                      <FooterLink item={item} currentLocale={currentLocale} />
                     </li>
                   ))}
                 </ul>
@@ -148,7 +149,11 @@ export default function Footer() {
           {legalColumn && (
             <div className={styles.legal}>
               {legalColumn.items.map((item) => (
-                <FooterLink item={item} key={item.href ?? item.to} />
+                <FooterLink
+                  item={item}
+                  currentLocale={currentLocale}
+                  key={item.href ?? item.to ?? `${item.label}-${currentLocale}`}
+                />
               ))}
             </div>
           )}

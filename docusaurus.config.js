@@ -60,6 +60,7 @@ const TRANSLATED_DOC_IDS = [
   'payment-faq/info-update/mastercard-chargeback-assessment-criteria',
   'payment-faq/info-update/mastercard-chargeback-reason-update',
   'payment-faq/info-update/visa-vamp-policy',
+  'op-card-faq/common-questions/op-card-application-materials',
   'op-card-faq/terms-conditions/terms-and-conditions',
 ];
 
@@ -213,12 +214,12 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      docs: {
-        sidebar: {
-          hideable: true,
-          autoCollapseCategories: false,
+        docs: {
+          sidebar: {
+            hideable: true,
+            autoCollapseCategories: true,
+          },
         },
-      },
       tableOfContents: {
         minHeadingLevel: 2,
         maxHeadingLevel: 3,
@@ -258,33 +259,45 @@ const config = {
         style: 'dark',
         links: [
           {
-            title: '产品',
+            title: '帮助中心',
             items: [
               {
-                label: '全球收单',
-                href: 'https://dev.oceanpayment.com/docs/payment/introduction',
+                label: 'ODPM 操作指引',
+                to: '/docs/odpm-guide/section-guide/account-application-guide/',
+                localeTo: {
+                  'zh-Hans': '/docs/odpm-guide/section-guide/account-application-guide/',
+                  en: '/en/docs/odpm-guide/section-guide/digital-platform-guidelines-manual/',
+                },
               },
               {
-                label: 'SAAS集成',
-                href: 'https://dev.oceanpayment.com/docs/saas',
+                label: 'Payment FAQ',
+                to: '/docs/payment-faq/info-update/mastercard-chargeback-assessment-criteria/',
+                localeTo: {
+                  'zh-Hans': '/docs/payment-faq/info-update/mastercard-chargeback-assessment-criteria/',
+                  en: '/en/docs/payment-faq/info-update/mastercard-chargeback-assessment-criteria/',
+                },
               },
               {
-                label: 'OPCard',
-                href: 'https://dev.oceanpayment.com/docs/opcard/introduction',
+                label: 'OP Card FAQ',
+                to: '/docs/op-card-faq/common-questions/transaction-amount-limit-rules/',
+                localeTo: {
+                  'zh-Hans': '/docs/op-card-faq/common-questions/transaction-amount-limit-rules/',
+                  en: '/en/docs/op-card-faq/terms-conditions/terms-and-conditions/',
+                },
               },
               {
-                label: 'OPCCOUNT',
-                href: 'https://dev.oceanpayment.com/docs/opccount/introduction',
+                label: '客户服务',
+                to: '/docs/customer-service/customer-service-faq/oceanpayment-complaints-and-suggestions-contact/',
+                localeTo: {
+                  'zh-Hans': '/docs/customer-service/customer-service-faq/oceanpayment-complaints-and-suggestions-contact/',
+                  en: '/en/docs/customer-service/customer-service-faq/multiple-account-logins/',
+                },
               },
             ],
           },
           {
             title: '资源',
             items: [
-              {
-                label: '文档',
-                href: 'https://dev.oceanpayment.com/docs/get-start',
-              },
               {
                 label: 'API 参考',
                 href: 'https://dev.oceanpayment.com/docs/payment-api',
@@ -294,7 +307,7 @@ const config = {
                 href: 'https://dev.oceanpayment.com/',
               },
               {
-                label: '支付Logo下载',
+                label: '支付 Logo 下载',
                 href: 'https://download.oceanpayment.com.cn',
               },
             ],
