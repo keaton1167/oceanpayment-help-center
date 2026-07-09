@@ -3,6 +3,10 @@
 
   var scriptEl = document.currentScript;
   var BASE = '/';
+  var PREVIEW_ROOT_MARGIN = '300px 0px';
+  var PDF_RETRY_LIMIT = 2;
+  var previewObserver = null;
+  var pdfPreviewQueue = Promise.resolve();
   if (scriptEl && scriptEl.src) {
     BASE = scriptEl.src.replace(/js\/attachment-preview\.js(\?.*)?$/, '');
   }
@@ -106,6 +110,7 @@
       loadingPdf: en ? 'Loading PDF...' : '\u6b63\u5728\u52a0\u8f7d PDF...',
       loadingPpt: en ? 'Loading PPT...' : '\u6b63\u5728\u52a0\u8f7d PPT...',
       loadingExcel: en ? 'Loading Excel...' : '\u6b63\u5728\u52a0\u8f7d Excel...',
+      loadingPreview: en ? 'Preview will load when this card comes into view.' : '\u6ed1\u52a8\u5230\u6b64\u533a\u57df\u540e\u5c06\u81ea\u52a8\u52a0\u8f7d\u9884\u89c8\u3002',
       previewFailed: en
         ? 'Preview failed. Please download or open the file.'
         : '\u9884\u89c8\u5931\u8d25\uff0c\u8bf7\u4e0b\u8f7d\u6216\u6253\u5f00\u6587\u4ef6\u67e5\u770b\u3002',
@@ -118,6 +123,7 @@
       pptCover: en
         ? 'Cover preview loaded. Download or open the file for full content.'
         : '\u5df2\u663e\u793a\u5c01\u9762\u9884\u89c8\uff0c\u5b8c\u6574\u5185\u5bb9\u8bf7\u4e0b\u8f7d\u6216\u6253\u5f00\u6587\u4ef6\u67e5\u770b\u3002',
+      retryPreview: en ? 'Retry preview' : '\u91cd\u8bd5\u9884\u89c8',
     };
     if (key === 'pdfPagesLoaded') {
       return en
@@ -272,21 +278,82 @@
     });
   }
 
-  function toggleCard(card, type, href) {
-    var toggle = card.querySelector('.att-toggle');
-    var body = card.querySelector('.att-body');
-    var isOpen = !body.classList.contains('collapsed');
-    if (isOpen) {
-      body.classList.add('collapsed');
-      toggle.textContent = 'Preview';
-    } else {
-      body.classList.remove('collapsed');
-      toggle.textContent = 'Collapse';
-      if (!body.hasChildNodes() || body.dataset.loaded !== 'true') {
-        renderPreview(card, type, href);
-        body.dataset.loaded = 'true';
-      }
+  function delay(ms) {
+    return new Promise(function(resolve) {
+      setTimeout(resolve, ms);
+    });
+  }
+
+  function fetchArrayBuffer(url) {
+    return fetch(url).then(function(response) {
+      if (!response.ok) throw new Error('fetch failed');
+      return response.arrayBuffer();
+    });
+  }
+
+  function setStatus(card, kind, message, retryHandler) {
+    var st = card.querySelector('.att-status');
+    if (!st) return;
+    st.style.display = message ? 'block' : 'none';
+    st.className = 'att-status' + (kind ? ' att-status--' + kind : '');
+    if (!message) {
+      st.innerHTML = '';
+      return;
     }
+    st.innerHTML = '<span>' + message + '</span>';
+    if (retryHandler) {
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'att-retry';
+      button.textContent = text('retryPreview');
+      button.addEventListener('click', function(event) {
+        event.preventDefault();
+        retryHandler();
+      });
+      st.appendChild(button);
+    }
+  }
+
+  function ensurePreviewObserver() {
+    if (previewObserver || typeof IntersectionObserver === 'undefined') return previewObserver;
+    previewObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var card = entry.target;
+        if (previewObserver) previewObserver.unobserve(card);
+        triggerPreview(card);
+      });
+    }, { rootMargin: PREVIEW_ROOT_MARGIN });
+    return previewObserver;
+  }
+
+  function queuePreview(card) {
+    if (!card) return;
+    var observer = ensurePreviewObserver();
+    if (observer) {
+      observer.observe(card);
+      return;
+    }
+    setTimeout(function() {
+      triggerPreview(card);
+    }, 0);
+  }
+
+  function triggerPreview(card, force) {
+    if (!card) return;
+    if (card.dataset.attRendering === 'true') return;
+    if (!force && card.dataset.attLoaded === 'true') return;
+    card.dataset.attLoaded = 'false';
+    card.dataset.attFailed = 'false';
+    renderPreview(card, card.getAttribute('data-att-type'), card.getAttribute('data-att-href'));
+  }
+
+  function enqueuePdfPreview(work) {
+    var nextTask = pdfPreviewQueue.then(function() {
+      return work();
+    });
+    pdfPreviewQueue = nextTask.catch(function() {});
+    return nextTask;
   }
 
   function renderPreview(card, type, href) {
@@ -301,24 +368,37 @@
         window.open(openHref, '_blank', 'noopener,noreferrer');
       });
     }
+    setStatus(card, '', '');
+    card.dataset.attRendering = 'true';
 
-    if (type === 'pdf') showPDF(card, fileHref);
-    else if (type === 'pptx') showPPTX(card, fileHref);
-    else if (type === 'xlsx') showXLSX(card, fileHref);
+    if (type === 'pdf') {
+      body.innerHTML = '<p style="text-align:center;color:#666;padding:20px">' + text('loadingPdf') + '</p>';
+      enqueuePdfPreview(function() {
+        if (!document.body.contains(card)) {
+          card.dataset.attRendering = 'false';
+          return Promise.resolve();
+        }
+        return showPDF(card, fileHref, href);
+      });
+    }
+    else if (type === 'pptx') showPPTX(card, fileHref, href);
+    else if (type === 'xlsx') showXLSX(card, fileHref, href);
     else {
       var body = card.querySelector('.att-body');
       body.innerHTML = '<p style="padding:12px;color:#666">' + text('unsupportedPreview') + '</p>';
+      card.dataset.attRendering = 'false';
+      card.dataset.attLoaded = 'true';
     }
   }
 
-  function showPDF(card, url) {
+  function showPDF(card, url, rawHref) {
     var body = card.querySelector('.att-body');
     body.classList.add('att-body--preview');
     body.innerHTML = '<p style="text-align:center;color:#666;padding:20px">' + text('loadingPdf') + '</p>';
-    loadScript(BASE + 'js/vendor/pdf.min.js')
+    return loadScript(BASE + 'js/vendor/pdf.min.js')
       .then(function() {
         pdfjsLib.GlobalWorkerOptions.workerSrc = BASE + 'js/vendor/pdf.worker.min.js';
-        return pdfjsLib.getDocument(url).promise;
+        return attemptLoadPdf(url);
       })
       .then(function(pdf) {
         body.innerHTML = '';
@@ -348,11 +428,33 @@
 
         return renderPage(1);
       })
+      .then(function() {
+        card.dataset.attRendering = 'false';
+        card.dataset.attLoaded = 'true';
+      })
       .catch(function() {
+        card.dataset.attRendering = 'false';
+        card.dataset.attLoaded = 'false';
+        card.dataset.attFailed = 'true';
         body.classList.add('collapsed');
-        var st = card.querySelector('.att-status');
-        st.style.display = 'block';
-        st.innerHTML = '<span style="color:#dc2626">' + text('previewFailed') + '</span>';
+        setStatus(card, 'error', text('previewFailed'), function() {
+          body.classList.remove('collapsed');
+          triggerPreview(card, true);
+        });
+      });
+  }
+
+  function attemptLoadPdf(url, attempt) {
+    var currentAttempt = attempt || 0;
+    return fetchArrayBuffer(url)
+      .then(function(buf) {
+        return pdfjsLib.getDocument({ data: new Uint8Array(buf) }).promise;
+      })
+      .catch(function(error) {
+        if (currentAttempt >= PDF_RETRY_LIMIT) throw error;
+        return delay(250 * (currentAttempt + 1)).then(function() {
+          return attemptLoadPdf(url, currentAttempt + 1);
+        });
       });
   }
 
@@ -426,6 +528,8 @@
         } else {
           throw new Error('manifest has no images');
         }
+        card.dataset.attRendering = 'false';
+        card.dataset.attLoaded = 'true';
       })
       .catch(function(error) {
         console.warn('Attachment PPT preview fell back to runtime renderer.', error);
@@ -445,6 +549,10 @@
               return pv.preview(buf);
             });
           })
+          .then(function() {
+            card.dataset.attRendering = 'false';
+            card.dataset.attLoaded = 'true';
+          })
           .catch(function() {
             body.innerHTML = '';
             var thumb = findThumbnailImg(card);
@@ -456,11 +564,17 @@
               note.style.cssText = 'text-align:center;color:#666;font-size:12px;padding:4px';
               note.textContent = text('pptThumbnail');
               body.appendChild(note);
+              card.dataset.attRendering = 'false';
+              card.dataset.attLoaded = 'true';
             } else {
+              card.dataset.attRendering = 'false';
+              card.dataset.attLoaded = 'false';
+              card.dataset.attFailed = 'true';
               body.classList.add('collapsed');
-              var st = card.querySelector('.att-status');
-              st.style.display = 'block';
-              st.innerHTML = '<span style="color:#dc2626">' + text('previewUnavailable') + '</span>';
+              setStatus(card, 'error', text('previewUnavailable'), function() {
+                body.classList.remove('collapsed');
+                triggerPreview(card, true);
+              });
             }
           });
       });
@@ -513,12 +627,18 @@
           }
         }
         render(wb.Sheets[names[0]]);
+        card.dataset.attRendering = 'false';
+        card.dataset.attLoaded = 'true';
       })
       .catch(function() {
+        card.dataset.attRendering = 'false';
+        card.dataset.attLoaded = 'false';
+        card.dataset.attFailed = 'true';
         body.classList.add('collapsed');
-        var st = card.querySelector('.att-status');
-        st.style.display = 'block';
-        st.innerHTML = '<span style="color:#dc2626">' + text('previewFailed') + '</span>';
+        setStatus(card, 'error', text('previewFailed'), function() {
+          body.classList.remove('collapsed');
+          triggerPreview(card, true);
+        });
       });
   }
 
@@ -537,6 +657,12 @@
       var type = getFileType(href);
       var name = getFileName(link);
       var card = createCard(type, href, name);
+      var body = card.querySelector('.att-body');
+      card.setAttribute('data-att-type', type);
+      card.setAttribute('data-att-href', href);
+      card.dataset.attLoaded = 'false';
+      card.dataset.attRendering = 'false';
+      body.innerHTML = '<p class="att-placeholder">' + text('loadingPreview') + '</p>';
 
       var parent = link.parentElement;
       if (parent && parent.tagName === 'P' && parent.childNodes.length === 1) {
@@ -545,7 +671,7 @@
         link.replaceWith(card);
       }
 
-      renderPreview(card, type, href);
+      queuePreview(card);
     });
   }
 
@@ -589,7 +715,11 @@
     '.att-download{font-size:12px;color:#02983b;text-decoration:none;white-space:nowrap}',
     '.att-download:hover{text-decoration:underline}',
     '.att-status{padding:8px 16px;font-size:12px}',
+    '.att-status--error{display:flex;align-items:center;justify-content:space-between;gap:12px;color:#dc2626}',
     '.att-page-count{margin:0!important;text-align:center;color:#8a8f98!important;font-size:12px!important;padding:8px 0!important;background:#fff;position:sticky;top:0;z-index:1;border-bottom:1px solid #f1f5f9}',
+    '.att-placeholder{margin:0;text-align:center;color:#8a8f98;padding:20px}',
+    '.att-retry{border:1px solid #16a34a;background:#fff;color:#16a34a;border-radius:999px;padding:4px 10px;font-size:12px;cursor:pointer;white-space:nowrap}',
+    '.att-retry:hover{background:#f0fdf4}',
     '.att-cover{text-align:center;background:#fff}',
     '.theme-doc-markdown .att-cover img{display:block;width:100%;max-width:100%;height:auto;border:0;border-radius:0;box-shadow:none;margin:0 auto}',
     '.att-slide-list{display:flex;flex-direction:column;gap:0;padding:0;background:#fff}',
