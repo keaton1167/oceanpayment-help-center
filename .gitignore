@@ -1,5 +1,7 @@
 # Dependencies
 /node_modules
+/.npm-cache
+/_local-trash
 
 # Production
 /build
@@ -31,9 +33,25 @@ deploy.log
 debug.log
 preview-*.log
 preview-manual.log
+docusaurus-*.log
+python-preview-*.log
+tmp-serve-*.log
+gcm-diagnose.log
 .docusaurus.zip
 tmp-*
 start-preview.bat
+start-build-*-preview.bat
+start-build-*-preview.ps1
+start-dev-preview.cmd
+build-oceanpayment-help-center-*.zip
+project-handoff-*.md
+帮助中心文档清单_主维护版_*.csv
+工作进度-*.md
+提交前文件清单-*.md
+文件保留与删除清单-*.md
+项目进度总结-*.md
+github-pages-upload-instructions.md
+github-pages-update-*.zip
 
 # Local Codex/editor state
 /.codex
