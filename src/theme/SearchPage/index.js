@@ -7,6 +7,7 @@ import {usePluralForm} from '@docusaurus/theme-common';
 import clsx from 'clsx';
 import Layout from '@theme/Layout';
 import useSearchQuery from '@easyops-cn/docusaurus-search-local/dist/client/client/theme/hooks/useSearchQuery';
+import {searchByWorker} from '@easyops-cn/docusaurus-search-local/dist/client/client/theme/searchByWorker';
 import {SearchDocumentType} from '@easyops-cn/docusaurus-search-local/dist/client/shared/interfaces';
 import {highlight} from '@easyops-cn/docusaurus-search-local/dist/client/client/utils/highlight';
 import {highlightStemmed} from '@easyops-cn/docusaurus-search-local/dist/client/client/utils/highlightStemmed';
@@ -19,9 +20,6 @@ import {
 } from '@easyops-cn/docusaurus-search-local/dist/client/client/utils/proxiedGenerated';
 import {normalizeContextByPath} from '@easyops-cn/docusaurus-search-local/dist/client/client/utils/normalizeContextByPath';
 import styles from './styles.module.css';
-
-const searchIndexCache = new Map();
-const SEARCH_INDEX_BASENAME = 'search-index';
 
 function getQueryFromLocation() {
   if (typeof window === 'undefined') {
@@ -56,138 +54,6 @@ function replaceQueryInLocation(searchQuery) {
   }${window.location.hash}`;
 
   window.history.replaceState(null, '', nextUrl);
-}
-
-async function loadSearchDocuments(baseUrl, searchContext) {
-  const cacheKey = `${baseUrl}${searchContext}`;
-
-  if (searchIndexCache.has(cacheKey)) {
-    return searchIndexCache.get(cacheKey);
-  }
-
-  const url = `${baseUrl}${SEARCH_INDEX_BASENAME}${
-    searchContext ? `-${searchContext.replace(/\//g, '-')}` : ''
-  }.json`;
-
-  const indexPromise = (async () => {
-    const response = await fetch(url);
-    return response.json();
-  })();
-
-  searchIndexCache.set(cacheKey, indexPromise);
-  return indexPromise;
-}
-
-function findPositions(content, token) {
-  const positions = [];
-  const lowerContent = content.toLowerCase();
-  const lowerToken = token.toLowerCase();
-  let index = lowerContent.indexOf(lowerToken);
-
-  while (index >= 0) {
-    positions.push([index, token.length]);
-    index = lowerContent.indexOf(lowerToken, index + token.length);
-  }
-
-  return positions;
-}
-
-function createMetadata(content, token) {
-  const positions = findPositions(content, token);
-
-  return positions.length > 0
-    ? {
-        [token]: {
-          t: {
-            position: positions,
-          },
-        },
-      }
-    : {};
-}
-
-function getMatchRank(document, page, query) {
-  const title = document.t ?? '';
-  const description = document.s ?? '';
-  const pageTitle = page?.t ?? '';
-  const text = `${title} ${description} ${pageTitle}`.toLowerCase();
-  const lowerQuery = query.toLowerCase();
-
-  if (title.toLowerCase().includes(lowerQuery)) {
-    return 0;
-  }
-
-  if (pageTitle.toLowerCase().includes(lowerQuery)) {
-    return 1;
-  }
-
-  if (description.toLowerCase().includes(lowerQuery)) {
-    return 2;
-  }
-
-  if (text.includes(lowerQuery)) {
-    return 3;
-  }
-
-  return title.toLowerCase().includes(lowerQuery) ? 4 : 5;
-}
-
-async function runSearch(baseUrl, searchContext, input, limit) {
-  const query = input.trim();
-
-  if (!query) {
-    return [];
-  }
-
-  const indexes = await loadSearchDocuments(baseUrl, searchContext);
-  const titleDocuments = indexes[SearchDocumentType.Title]?.documents ?? [];
-  const titleById = new Map(titleDocuments.map((document) => [document.i, document]));
-  const results = [];
-  const seenKeys = new Set();
-  const lowerQuery = query.toLowerCase();
-
-  for (const [type, {documents}] of indexes.entries()) {
-    for (const document of documents) {
-      const page = type === SearchDocumentType.Title ? document : titleById.get(document.p);
-      const searchableText = [
-        document.t,
-        document.s,
-        page?.t,
-      ]
-        .filter(Boolean)
-        .join(' ')
-        .toLowerCase();
-
-      if (!searchableText.includes(lowerQuery)) {
-        continue;
-      }
-
-      const key =
-        type === SearchDocumentType.Title
-          ? `title:${document.i}`
-          : `${type}:${document.i}`;
-
-      if (seenKeys.has(key)) {
-        continue;
-      }
-
-      seenKeys.add(key);
-      results.push({
-        document,
-        type,
-        page,
-        metadata: createMetadata(`${document.s ?? ''} ${document.t ?? ''}`, query),
-        tokens: [query],
-        score: getMatchRank(document, page, query),
-      });
-
-      if (results.length >= limit * 2) {
-        break;
-      }
-    }
-  }
-
-  return results.sort((a, b) => a.score - b.score).slice(0, limit);
 }
 
 function BackIcon() {
@@ -281,7 +147,7 @@ function SearchPageContent() {
 
       (async () => {
         try {
-          const results = await runSearch(
+          const results = await searchByWorker(
             versionUrl,
             searchContext,
             searchQuery,
@@ -505,9 +371,9 @@ function SearchResultItem({
           to={document.u + search + (document.h || '')}
           dangerouslySetInnerHTML={{
             __html:
-              titlePositions.length > 0
-                ? highlightStemmed(articleTitle, titlePositions, tokens, 100)
-                : highlight(articleTitle, tokens),
+              isContent || isDescriptionOrKeywords
+                ? highlight(articleTitle, tokens)
+                : highlightStemmed(articleTitle, titlePositions, tokens, 100),
           }}
         />
       </h2>

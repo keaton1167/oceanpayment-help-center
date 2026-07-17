@@ -5,31 +5,45 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
+import fs from 'node:fs';
 import remarkStrongInline from './plugins/remark-strong-inline.js';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+const documentRegistry = JSON.parse(
+  fs.readFileSync(new URL('./content/document-registry.json', import.meta.url), 'utf8'),
+);
+const registryEnglishOnlyDocIds = documentRegistry.documents
+  .filter((document) => document.publicationMode === 'english-only' && document.language === 'en')
+  .map((document) => document.docId);
+const registryTranslatedDocIds = documentRegistry.documents
+  .filter((document) => document.publicationMode === 'translated' && document.language === 'en')
+  .map((document) => document.docId);
+
 const ENGLISH_ONLY_DOC_IDS = [
   'odpm-guide/section-guide/klarna-payment-operations-guide',
-  'odpm-guide/section-guide/blacklist-operation-manual',
   'odpm-guide/section-guide/digital-platform-guidelines-manual',
   'odpm-guide/section-guide/digital-platform-guidelines-manual-all-exceptions',
-  'odpm-guide/section-guide/high-fraud-risk-alert-manual',
-  'odpm-guide/section-guide/merchant-initiated-chargeback-recall-guidelines',
   'odpm-guide/section-guide/reconciliation-guide',
-  'odpm-guide/section-guide/whitelist-operation-manual',
   'odpm-guide/section-guide/opccount-guideline',
   'odpm-guide/section-guide/assign-account-setting',
   'odpm-guide/section-guide/reconciliation-guideline',
-  'odpm-guide/section-guide/merchant-batch-representment-submission-guide',
   'payment-faq/common-questions/reduce-fraudulent-chargeback-transactions',
   'payment-faq/account-transfer/opasst-guideline',
   'payment-faq/common-questions/klarna-apr-range-update-for-consumers',
   'products-services/oceanpayment-products/supported-local-payment-products',
   'products-services/oceanpayment-products/change-domain-reapply-channel',
+  ...registryEnglishOnlyDocIds,
 ];
 
 const TRANSLATED_DOC_IDS = [
+  'odpm-guide/section-guide/batch-chargeback-representment-guide',
+  'odpm-guide/section-guide/blacklist-operation-manual',
+  'odpm-guide/section-guide/chargeback-recall-verification-guide',
+  'odpm-guide/section-guide/chargeback-document-submission-guide',
+  'odpm-guide/section-guide/common-transaction-response-codes-logistics-upload-guide',
+  'odpm-guide/section-guide/high-fraud-risk-alert-manual',
+  'odpm-guide/section-guide/whitelist-operation-manual',
   'customer-service/customer-service-faq/multiple-account-logins',
   'customer-service/customer-service-faq/reset-oceanpayment-dashboard-password',
   'payment-faq/account-transfer/account-funds-and-reconciliation',
@@ -62,6 +76,7 @@ const TRANSLATED_DOC_IDS = [
   'payment-faq/info-update/visa-vamp-policy',
   'op-card-faq/common-questions/op-card-application-materials',
   'op-card-faq/terms-conditions/terms-and-conditions',
+  ...registryTranslatedDocIds,
 ];
 
 const ENGLISH_DOC_IDS = [...ENGLISH_ONLY_DOC_IDS, ...TRANSLATED_DOC_IDS];
@@ -132,7 +147,8 @@ const config = {
   favicon: 'img/favicon.ico',
   scripts: [
     localizedStaticPath('js/attachment-preview.js?v=20260706-3'),
-    localizedStaticPath('js/language-switcher.js?v=20260706-1'),
+    localizedStaticPath('js/document-locale-registry.js?v=20260717-1'),
+    localizedStaticPath('js/language-switcher.js?v=20260716-1'),
   ],
   titleDelimiter: '|',
 

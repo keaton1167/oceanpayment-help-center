@@ -3,18 +3,23 @@ const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
 const DOC_ROOTS = ['docs', path.join('i18n', 'en', 'docusaurus-plugin-content-docs', 'current')];
+const CONFIG_PATH = path.join(ROOT, 'docusaurus.config.js');
+const LANGUAGE_SWITCHER_PATH = path.join(ROOT, 'static', 'js', 'language-switcher.js');
+const DOCUMENT_REGISTRY_PATH = path.join(ROOT, 'content', 'document-registry.json');
 const ENGLISH_DOC_IDS = [
+  'odpm-guide/section-guide/batch-chargeback-representment-guide',
   'odpm-guide/section-guide/blacklist-operation-manual',
+  'odpm-guide/section-guide/chargeback-document-submission-guide',
+  'odpm-guide/section-guide/chargeback-recall-verification-guide',
+  'odpm-guide/section-guide/common-transaction-response-codes-logistics-upload-guide',
   'odpm-guide/section-guide/digital-platform-guidelines-manual',
   'odpm-guide/section-guide/digital-platform-guidelines-manual-all-exceptions',
   'odpm-guide/section-guide/high-fraud-risk-alert-manual',
   'odpm-guide/section-guide/klarna-payment-operations-guide',
-  'odpm-guide/section-guide/merchant-initiated-chargeback-recall-guidelines',
   'odpm-guide/section-guide/assign-account-setting',
   'odpm-guide/section-guide/opccount-guideline',
   'odpm-guide/section-guide/reconciliation-guide',
   'odpm-guide/section-guide/reconciliation-guideline',
-  'odpm-guide/section-guide/merchant-batch-representment-submission-guide',
   'odpm-guide/section-guide/whitelist-operation-manual',
 ];
 const PHASE2_ZH_DOC_IDS = [
@@ -22,6 +27,11 @@ const PHASE2_ZH_DOC_IDS = [
   'odpm-guide/section-guide/digital-platform-guide-exception-transaction-management',
 ];
 const MANAGED_DOC_IDS = new Set([...ENGLISH_DOC_IDS, ...PHASE2_ZH_DOC_IDS]);
+const REQUIRED_NUMBERED_HEADING_DOC_IDS = new Set([
+  'odpm-guide/section-guide/high-fraud-risk-alert-manual',
+  'odpm-guide/section-guide/blacklist-operation-manual',
+  'odpm-guide/section-guide/whitelist-operation-manual',
+]);
 const BAD_MARKERS = [
   ['\u65e0\u6cd5\u63d0\u53d6\u4e0b\u8f7d\u94fe\u63a5', 'contains Feishu bad attachment placeholder'],
   ['\u65e0\u6cd5\u63d0\u53d6\u9644\u4ef6', 'contains failed attachment extraction placeholder'],
@@ -57,6 +67,37 @@ function parseFrontmatter(content) {
 function report(issues, file, line, message) {
   const relative = path.relative(ROOT, file).replace(/\\/g, '/');
   issues.push(`${relative}:${line}: ${message}`);
+}
+
+function parseStringArray(source, name) {
+  const match = source.match(new RegExp(`(?:const|var)\\s+${name}\\s*=\\s*\\[([\\s\\S]*?)\\]`));
+  if (!match) {
+    return [];
+  }
+  return [...match[1].matchAll(/'([^']+)'/g)].map((item) => item[1]);
+}
+
+function parseLanguageSwitcherTranslatedDocIds(source) {
+  const match = source.match(/var\s+translatedDocIds\s*=\s*makeSet\(\[([\s\S]*?)\]\);/);
+  if (!match) {
+    return [];
+  }
+  return [...match[1].matchAll(/'([^']+)'/g)].map((item) => item[1]);
+}
+
+function parseYamlString(value) {
+  const trimmed = value.trim();
+  if (
+    (trimmed.startsWith('"') && trimmed.endsWith('"')) ||
+    (trimmed.startsWith("'") && trimmed.endsWith("'"))
+  ) {
+    try {
+      return JSON.parse(trimmed);
+    } catch (error) {
+      return trimmed.slice(1, -1);
+    }
+  }
+  return trimmed;
 }
 
 function lineNumber(content, index) {
@@ -155,6 +196,20 @@ function checkHeadingNumberHierarchy(issues, file, body) {
   }
 }
 
+function checkRequiredHeadingNumbers(issues, file, body) {
+  const headingPattern = /^(#{2,4})\s+(?!\d+(?:\.\d+)*\.?\s+)(.+)$/gm;
+  let match;
+
+  while ((match = headingPattern.exec(body))) {
+    report(
+      issues,
+      file,
+      lineNumber(body, match.index),
+      `heading "${match[2]}" is missing its required section number`,
+    );
+  }
+}
+
 function checkManagedMarkdownFormatting(issues, file, body) {
   const checks = [
     [/^\s*\d+\\[.)]\s+/gm, 'escaped ordered-list marker; expected plain "1. item"'],
@@ -172,6 +227,61 @@ function checkManagedMarkdownFormatting(issues, file, body) {
 }
 
 const issues = [];
+const configSource = fs.readFileSync(CONFIG_PATH, 'utf8');
+const languageSwitcherSource = fs.readFileSync(LANGUAGE_SWITCHER_PATH, 'utf8');
+const registryDocuments = loadDocumentRegistry();
+const registryDocumentIds = new Set(registryDocuments.map((document) => document.docId));
+const registryEnglishOnlyDocIds = new Set(
+  registryDocuments
+    .filter((document) => document.publicationMode === 'english-only')
+    .map((document) => document.docId),
+);
+const registryRequiredNumberedHeadingDocIds = new Set(
+  registryDocuments
+    .filter((document) => document.requireNumberedHeadings)
+    .map((document) => document.docId),
+);
+const configEnglishOnlyDocIds = new Set(parseStringArray(configSource, 'ENGLISH_ONLY_DOC_IDS'));
+const configTranslatedDocIds = new Set(parseStringArray(configSource, 'TRANSLATED_DOC_IDS'));
+const languageSwitcherTranslatedDocIds = new Set(parseLanguageSwitcherTranslatedDocIds(languageSwitcherSource));
+
+for (const docId of configTranslatedDocIds) {
+  if (!languageSwitcherTranslatedDocIds.has(docId)) {
+    issues.push(
+      `static/js/language-switcher.js:1: missing translated doc id from docusaurus.config.js: ${docId}`,
+    );
+  }
+}
+
+function checkMarkdownTables(issues, file, body) {
+  const lines = body.split(/\r?\n/);
+
+  for (let index = 0; index < lines.length - 1; index += 1) {
+    if (!/^\|.+\|\s*$/.test(lines[index]) || !/^\|(?:\s*:?-{3,}:?\s*\|)+\s*$/.test(lines[index + 1])) {
+      continue;
+    }
+
+    const columns = lines[index].split('|').slice(1, -1).length;
+    let rowIndex = index + 2;
+    while (rowIndex < lines.length && /^\|.+\|\s*$/.test(lines[rowIndex])) {
+      const rowColumns = lines[rowIndex].split('|').slice(1, -1).length;
+      if (rowColumns !== columns) {
+        report(issues, file, rowIndex + 1, `table has ${rowColumns} columns; expected ${columns}`);
+      }
+      rowIndex += 1;
+    }
+    index = rowIndex - 1;
+  }
+}
+
+function loadDocumentRegistry() {
+  if (!fs.existsSync(DOCUMENT_REGISTRY_PATH)) {
+    return [];
+  }
+
+  const registry = JSON.parse(fs.readFileSync(DOCUMENT_REGISTRY_PATH, 'utf8'));
+  return Array.isArray(registry.documents) ? registry.documents : [];
+}
 
 for (const root of DOC_ROOTS) {
   for (const file of walk(path.join(ROOT, root))) {
@@ -190,14 +300,29 @@ for (const root of DOC_ROOTS) {
       .relative(path.join(ROOT, root), path.dirname(file))
       .replace(/\\/g, '/');
 
-    const isManagedPage = MANAGED_DOC_IDS.has(docId);
+    const isManagedPage = MANAGED_DOC_IDS.has(docId) || registryDocumentIds.has(docId);
+    const titleMatch = frontmatter.match(/^title:\s*(.+)$/m);
+    const title = titleMatch ? parseYamlString(titleMatch[1]) : '';
+
+    if (
+      root === 'docs' &&
+      docId.startsWith('odpm-guide/section-guide/') &&
+      title &&
+      !/[\u3400-\u9FFF]/.test(title) &&
+      !configEnglishOnlyDocIds.has(docId) &&
+      !registryEnglishOnlyDocIds.has(docId) &&
+      !configTranslatedDocIds.has(docId)
+    ) {
+      report(
+        issues,
+        file,
+        1,
+        'English-titled ODPM page is in the Chinese docs tree but is not configured as English-only or translated',
+      );
+    }
 
     if (isManagedPage && h1Match) {
       report(issues, file, lineNumber(body, h1Match.index), 'contains H1 in body; right TOC only supports H2/H3');
-    }
-
-    if (isManagedPage && !/^hide_title:\s*true\s*$/m.test(frontmatter)) {
-      report(issues, file, 1, 'managed page is missing hide_title: true');
     }
 
     if (isManagedPage) {
@@ -205,7 +330,26 @@ for (const root of DOC_ROOTS) {
       checkManagedMarkdownFormatting(issues, file, body);
     }
 
+    if (REQUIRED_NUMBERED_HEADING_DOC_IDS.has(docId) || registryRequiredNumberedHeadingDocIds.has(docId)) {
+      checkRequiredHeadingNumbers(issues, file, body);
+    }
+
+    if (isManagedPage) {
+      checkMarkdownTables(issues, file, body);
+    }
+
     checkStaticAssets(issues, file, content);
+  }
+}
+
+for (const docId of registryEnglishOnlyDocIds) {
+  const sourcePath = path.join(ROOT, 'docs', docId, 'index.mdx');
+  const englishPath = path.join(ROOT, 'i18n', 'en', 'docusaurus-plugin-content-docs', 'current', docId, 'index.mdx');
+  if (!fs.existsSync(sourcePath)) {
+    issues.push(`content/document-registry.json: ${docId} is missing docs source file`);
+  }
+  if (!fs.existsSync(englishPath)) {
+    issues.push(`content/document-registry.json: ${docId} is missing English MDX file`);
   }
 }
 
