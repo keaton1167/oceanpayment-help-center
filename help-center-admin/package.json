@@ -1,0 +1,23 @@
+{
+  "name": "oceanpayment-help-center-admin",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Oceanpayment help center operations agent workspace",
+  "workspaces": [
+    "client",
+    "server",
+    "packages/help-center-core"
+  ],
+  "scripts": {
+    "check": "node scripts/check-workspace.mjs",
+    "dev:client": "npm run dev --workspace @oceanpayment/help-center-admin-client",
+    "dev:server": "npm run dev --workspace @oceanpayment/help-center-admin-server",
+    "build:client": "npm run build --workspace @oceanpayment/help-center-admin-client",
+    "start:server": "npm run start --workspace @oceanpayment/help-center-admin-server"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}
+

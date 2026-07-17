@@ -15,6 +15,13 @@
   }
 
   var translatedDocIds = makeSet([
+    'odpm-guide/section-guide/batch-chargeback-representment-guide',
+    'odpm-guide/section-guide/blacklist-operation-manual',
+    'odpm-guide/section-guide/chargeback-recall-verification-guide',
+    'odpm-guide/section-guide/chargeback-document-submission-guide',
+    'odpm-guide/section-guide/common-transaction-response-codes-logistics-upload-guide',
+    'odpm-guide/section-guide/high-fraud-risk-alert-manual',
+    'odpm-guide/section-guide/whitelist-operation-manual',
     'customer-service/customer-service-faq/multiple-account-logins',
     'customer-service/customer-service-faq/reset-oceanpayment-dashboard-password',
     'payment-faq/account-transfer/account-funds-and-reconciliation',
@@ -45,8 +52,36 @@
     'payment-faq/info-update/mastercard-chargeback-assessment-criteria',
     'payment-faq/info-update/mastercard-chargeback-reason-update',
     'payment-faq/info-update/visa-vamp-policy',
+    'op-card-faq/common-questions/op-card-application-materials',
     'op-card-faq/terms-conditions/terms-and-conditions'
   ]);
+
+  var generatedDocumentLocales = window.__HELP_CENTER_DOCUMENT_LOCALES__ || {};
+  (generatedDocumentLocales.translatedDocIds || []).forEach(function(docId) {
+    translatedDocIds[docId] = true;
+  });
+
+  var crossLocaleDocIds = {
+    en: {
+      'odpm-guide/section-guide/digital-platform-guide':
+        'odpm-guide/section-guide/digital-platform-guidelines-manual',
+      'odpm-guide/section-guide/financial-reconciliation-guide':
+        'odpm-guide/section-guide/reconciliation-guide'
+    },
+    'zh-Hans': {
+      'odpm-guide/section-guide/digital-platform-guidelines-manual':
+        'odpm-guide/section-guide/digital-platform-guide',
+      'odpm-guide/section-guide/reconciliation-guide':
+        'odpm-guide/section-guide/financial-reconciliation-guide'
+    }
+  };
+
+  ['en', 'zh-Hans'].forEach(function(locale) {
+    Object.assign(
+      crossLocaleDocIds[locale],
+      (generatedDocumentLocales.crossLocaleDocIds || {})[locale] || {}
+    );
+  });
 
   var enSectionFallbacks = {
     'compliance-certification/access-compliance':
@@ -167,6 +202,13 @@
     if (current.docId === 'intro') {
       return {
         docId: 'intro',
+        isExact: true
+      };
+    }
+
+    if (crossLocaleDocIds[targetLocale] && crossLocaleDocIds[targetLocale][current.docId]) {
+      return {
+        docId: crossLocaleDocIds[targetLocale][current.docId],
         isExact: true
       };
     }

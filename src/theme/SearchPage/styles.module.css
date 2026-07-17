@@ -80,7 +80,10 @@
 }
 
 .searchResultItemSummary {
-  font-style: italic;
+  color: var(--ifm-font-color-base);
+  font-size: 1rem;
+  font-style: normal;
+  line-height: 1.65;
   margin: 0.5rem 0 0;
 }
 

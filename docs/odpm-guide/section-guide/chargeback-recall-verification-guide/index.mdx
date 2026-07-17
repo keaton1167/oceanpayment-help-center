@@ -1,12 +1,56 @@
 ---
-title: "拒付撤销核实指引"
-sidebar_label: "拒付撤销核实指引"
-sidebar_position: 18
-hide_title: true
+title: "Oceanpayment 商户发起拒付撤销指引"
+sidebar_label: "Oceanpayment 商户发起拒付撤销指引"
+sidebar_position: 21
+hide_title: false
 ---
 
-## 拒付撤销核实指引
+## 拒付撤销功能介绍
 
-发起拒付撤销核实指引，请参考以下附件：
+### 1. 拒付撤销与申诉的区别
 
-[Oceanpayment 商户发起拒付撤销指引](/files/help-center/wordpress-attachments-odpm/attachment-12-%E6%8B%92%E4%BB%98%E6%92%A4%E9%94%80%E6%A0%B8%E5%AE%9E%E6%8C%87%E5%BC%95.pdf)
+- **拒付申诉**：商家对拒付有异议，提供相关资料证明拒付无效或不合理，最终申诉结果由发卡行决定。
+- **拒付撤销**：消费者主动向发卡行取消拒付并同意返还资金，商家需提供相关撤销证明资料，以便收单行向发卡行确认拒付状态。
+
+### 2. 操作路径
+
+进入 `ODPM > Payment > 异常交易管理 > 拒付交易`，在拒付处理板块的条件筛选器中，可见“拒付撤销状态”筛选条件。
+
+![拒付撤销状态筛选条件](/img/help-center/chargeback-recall-verification-guide/image6.png)
+
+### 3. 发起拒付撤销的条件
+
+基于不同卡种的拒付流程，拒付撤销功能不完全适用于所有订单。仅当订单同时满足以下条件时，才会显示拒付撤销按钮并允许发起请求：
+
+- 支付方式为 Credit Card、Google Pay 或 Apple Pay。
+- 拒付金额大于 0。
+- 拒付类型为“拒付”。
+- 拒付状态为“待处理”或“无需处理”。
+- 当前时间在拒付发生后的 15 天内。
+- 拒付撤销状态为“未申请”，或距离首次撤销失败的申请时间已超过 7 天。
+
+### 4. 如何发起拒付撤销申请
+
+1. 将拒付撤销状态筛选为“未申请”。
+2. 在“操作”中点击“拒付撤销”，进入撤销凭证提交页面。
+
+![进入拒付撤销凭证提交页面](/img/help-center/chargeback-recall-verification-guide/image7.png)
+
+提交要求如下：
+
+- **撤销凭证（必填）**：支持 `.doc`、`.docx`、`.pdf`、`.jpg`、`.jpeg`。
+- **沟通记录（选填）**：支持 `.doc`、`.docx`、`.pdf`、`.jpg`、`.jpeg`。
+- **文件限制**：单个文件最大 3 MB，最多上传 5 个文件。
+- **发起时间**：拒付发生后的 15 天内。
+- **发起次数**：最多提交 2 次，两次申请时间间隔需超过 7 天。
+- **发起笔数**：仅支持单笔发起，不支持批量发起。
+
+![拒付撤销凭证提交要求](/img/help-center/chargeback-recall-verification-guide/image8.png)
+
+### 5. 拒付撤销结果反馈
+
+- **反馈时间**：5 个工作日内。
+- **撤销失败**：消费者未撤销拒付，维持当前状态；7 天后可发起第 2 次申请。
+- **撤销成功**：消费者已撤销拒付，资金通过“申诉成功”状态返还。
+
+![拒付撤销结果](/img/help-center/chargeback-recall-verification-guide/image9.png)

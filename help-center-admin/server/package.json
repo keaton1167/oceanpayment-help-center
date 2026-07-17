@@ -1,0 +1,12 @@
+{
+  "name": "@oceanpayment/help-center-admin-server",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node src/main.js",
+    "start": "node src/main.js"
+  },
+  "dependencies": {}
+}
+

@@ -8,14 +8,17 @@
     "start:zh": "docusaurus start --locale zh-Hans",
     "start:en": "docusaurus start --locale en",
     "build": "docusaurus build",
+    "postbuild": "node scripts/generate-chatbase-sitemap.mjs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "import:feishu-md": "node scripts/import-feishu-markdown-docs.js",
-    "audit:docs": "node scripts/audit-docs-content.js"
+    "import:feishu-md": "node scripts/import-feishu-markdown-docs.js --legacy",
+    "import:documents": "node scripts/import-feishu-markdown-docs.js --manifest content/document-registry.json",
+    "audit:docs": "node scripts/audit-docs-content.js",
+    "verify:docs": "npm run audit:docs && npm run build"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.1",

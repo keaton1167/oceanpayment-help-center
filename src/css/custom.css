@@ -159,48 +159,8 @@ body {
   background: #f8fafc;
 }
 
-.theme-doc-sidebar-container button[class*='collapseSidebarButton'] {
-  right: 18px;
-  bottom: 18px;
-  width: 52px;
-  height: 52px;
-  border: 1px solid rgba(2, 152, 59, 0.16);
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.96);
-  box-shadow:
-    0 10px 24px rgba(15, 23, 42, 0.08),
-    0 2px 8px rgba(15, 23, 42, 0.05);
-  backdrop-filter: blur(12px);
-  transition:
-    transform 160ms ease,
-    border-color 160ms ease,
-    box-shadow 160ms ease,
-    background-color 160ms ease;
-}
-
-.theme-doc-sidebar-container button[class*='collapseSidebarButton']:hover {
-  border-color: rgba(2, 152, 59, 0.3);
-  background: #ffffff;
-  box-shadow:
-    0 14px 30px rgba(15, 23, 42, 0.1),
-    0 4px 12px rgba(2, 152, 59, 0.08);
-  transform: translateY(-2px);
-}
-
-.theme-doc-sidebar-container button[class*='collapseSidebarButton'] svg {
-  width: 22px;
-  height: 22px;
-  color: #02983b;
-  opacity: 0.9;
-}
-
-.theme-doc-sidebar-container button[class*='collapseSidebarButton']:hover svg {
-  color: #017a30;
-  opacity: 1;
-}
-
 .theme-doc-sidebar-containerHidden {
-  border-right: 0;
+  border-right-color: #e5e7eb;
 }
 
 .theme-doc-title {

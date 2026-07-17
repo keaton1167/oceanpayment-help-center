@@ -1,0 +1,68 @@
+---
+title: "Understanding Visa MERP: What Merchants Need to Know"
+sidebar_label: "Understanding Visa MERP: What Merchants Need to Know"
+sidebar_position: 19
+hide_title: true
+toc_max_heading_level: 3
+---
+## 1. What is Visa Merchant Elevated Risk Program (MERP)
+
+- **VIRP vs. MERP:** VIRP targets large-scale violations and requires in-depth investigation; MERP relies on clear quantitative indicators and focuses on single-merchant risk verification.
+
+- **VAMP vs. MERP:** VAMP conducts long-term monitoring of the overall merchant pool and large merchants for acquirers; MERP targets merchants with low transaction volume but exceptionally prominent risks, with independent assessment criteria.
+
+## 2. MERP Implementation Timeline
+
+- April 2026: Pilot program launched
+
+- October 2026: Official enforcement begins, and penalties start to apply
+
+## 3. MERP Identification Rules
+
+1. Applicable to Asia-Pacific acquirers (merchants using Hong Kong and Singapore payment channels)
+
+2. Visa completes merchant risk assessment for the previous calendar month during the first week of each month; MERP monitors and identifies merchants based on the URL descriptor (URL billing address) dimension.
+
+3. Visa MERP assessment indicators are as follows:
+
+|**Assessment Indicator**|**Description**|
+|---|---|
+|**Transaction Count**|Number of settled transactions within a calendar month, based on the **Central Processing Date (CPD)** (TC05)|
+|**Transaction Volume**|Total amount of settled transactions within a calendar month, based on the **Central Processing Date (CPD)** (TC05)|
+|**Fraud Volume**|Total amount of fraudulent transactions reported by issuers within a calendar month (TC40), counted by the **Fraud Post-Date**|
+|**Non-Fraud Chargeback Volume**|Total amount of non-fraud chargebacks submitted under Reason Codes 11, 12, and 13 (TC15), based on the **Central Processing Date (CPD)**, including Rapid Dispute Resolution (RDR) orders|
+|**Declined Authorisation Count**|Number of failed authorisation transactions within a calendar month, counted based on VisaNet authorisation de-duplication rules|
+|**Authorisation Count**|Total number of all authorisation transactions (including successful and failed) within a calendar month, counted based on VisaNet Authorisation De-duplication Rules 3.0|
+|**Fraud Rate**|Fraud Volume ÷ Transaction Volume|
+|**Non-Fraud Chargeback Rate**|Non-Fraud Chargeback Volume ÷ Transaction Volume|
+|**Decline Rate**|Declined Authorisation Count ÷ Authorisation Count|
+
+4. Visa MERP does not specify explicit quantitative thresholds for program entry. However, merchants with **significant increases in chargebacks, counterfeit fraud, declined transactions, or transaction volume may be enrolled in the program**. This includes spikes in fraud and chargeback volume, fraud and chargeback rates, decline rates, and abnormal activity. New merchants are at higher risk of being flagged.
+
+5. MERP rules may overlap with Visa's existing VAMP, VIRP, and TLD programs. However, Visa will not flag a merchant under all programs simultaneously for the same period. Instead, Visa will select one or two of these programs to identify the merchant.
+
+## 4. MERP Response Rules
+
+1. Investigation and response must be completed within 10 business days of receiving the MERP notification from Visa.
+
+2. Merchant termination: If the merchant is terminated, it will be added to the VMSS (Visa Merchant Screening Service); corresponding control measures must be implemented to prevent re-entry into MERP.
+
+3. If the merchant is not terminated, supporting documentation and corresponding control measures must be provided.
+
+    1. If the appeal fails, the merchant will lose liability shift protection for fraud chargebacks. Issuers may initiate 10.5: Visa Fraud Monitoring Program fraud chargebacks, and the merchant will bear all fraud chargeback losses.
+
+    2. If the appeal fails, the merchant will be assessed penalties based on the URL descriptor.
+
+    3. If the appeal fails, the merchant must be terminated and added to VMSS; corresponding control measures must be implemented to prevent re-entry into MERP.
+
+4. Implement corresponding control measures to prevent re-entry into MERP.
+
+## 5. How Merchants Should Respond to MERP
+
+- Do not artificially inflate transaction volume: When investing heavily in website advertising, ensure adequate inventory is prepared in advance; avoid entering MERP due to subsequent chargeback increases. A gradual ramp-up approach to transaction volume is recommended.
+
+- Control failed consumer retry attempts: Based on the reasons for consumer transaction failures, reasonably configure the number of retry attempts; avoid entering MERP due to increased issuer decline rates.
+
+- Do not abuse 3DS: Do not use 3D Secure as an insurance policy for fraudulent transactions. Use 3DS reasonably and appropriately. When a transaction is clearly identified as fraudulent, reject the order directly through risk controls; avoid entering MERP due to increased issuer decline rates.
+
+- Reduce consumer chargebacks: Ship orders promptly, respond proactively to consumer needs, and provide refunds in a timely manner. Avoid entering MERP due to chargeback increases.

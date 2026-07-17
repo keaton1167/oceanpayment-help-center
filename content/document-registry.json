@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "documents": [
+    {
+      "docId": "payment-faq/common-questions/understanding-visa-merp",
+      "title": "Understanding Visa MERP: What Merchants Need to Know",
+      "language": "en",
+      "publicationMode": "english-only",
+      "sidebarPosition": 19,
+      "tocMaxHeadingLevel": 3,
+      "requireNumberedHeadings": true,
+      "sourceFile": "D:/AI_Workspace/oceanpayment-help-center-markdown/Understanding Visa MERP_ What Merchants Need to Know.md"
+    },
+    {
+      "docId": "payment-faq/common-questions/understanding-visa-virp",
+      "title": "Understanding Visa VIRP: What Merchants Need to Know",
+      "language": "en",
+      "publicationMode": "english-only",
+      "sidebarPosition": 20,
+      "tocMaxHeadingLevel": 3,
+      "requireNumberedHeadings": true,
+      "headingLevelMap": {
+        "1": 2,
+        "3": 3
+      },
+      "sourceFile": "D:/AI_Workspace/oceanpayment-help-center-markdown/Understanding Visa VIRP_ What Merchants Need to Know.md"
+    }
+  ]
+}

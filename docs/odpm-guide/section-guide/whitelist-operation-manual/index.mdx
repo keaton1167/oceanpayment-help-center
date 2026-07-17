@@ -1,113 +1,124 @@
 ---
-title: "Oceanpayment ODPM - Whitelist Operation Manual 2025-07-25"
-sidebar_label: "Oceanpayment ODPM - Whitelist Operation Manual 2025-07-25"
-sidebar_position: 7
-hide_title: true
+title: "Ocenapayment ODPM数字平台——白名单操作手册 2025-07-25"
+sidebar_label: "Ocenapayment ODPM数字平台——白名单操作手册 2025-07-25"
+sidebar_position: 19
+hide_title: false
 ---
-## 1. Whitelist Function
 
-**Path: **Payment \> Risk\&Fruad \> Whitelist
+## 1. 白名单功能
 
-In this section, merchants can add their customers’ information into the whitelist. The Oceanpayment risk control system will relax the restrictions on transactions for consumers on the whitelist.
+商户可以通过【 Payment \> 风控管理 \> 白名单管理】添加消费者信息白名单； Oceanpayment风控系统会对白名单的消费者的交易放宽风控的限制。
 
-- Caution: Please be aware that consumers on the whitelist are exempt from Oceanpayment’s risk control restrictions, and merchants voluntarily assume any adverse effects and economic losses that may result from this. If Oceanpayment verifies that a consumer is a delinquent consumer or that there are anomalies in whitelist transactions, Oceanpayment reserves the right to directly deactivate the consumer information on the whitelist.
+- 提示：我们知悉白名单消费者不再受oceanpayment风控系统的限制，我们自愿承担因此造成的任何不良影响和经济损失。若经oceanpayment核实消费者为不良消费者或白名单交易异常，oceanpayment有权直接对白名单的消费者信息进行直接停用处理。
 
-### 1.1 Search
+### 1.1 查询
 
-![image6.jpeg](/img/help-center/whitelist-operation-manual/image6.jpeg)
+![image6\.png](/img/help-center/whitelist-operation-manual/image6.png)
 
-- Whitelist Element: Card Number, Email, IP address
+- 白名单元素：卡号、电子邮箱、IP地址
 
-- Time Frame: Start datetime \~ End datetime(default to the current datetime)
+- 时间范围：开始时间——结束时间（默认为当天）
 
-- Whitelist Status: Active/Disabled
+- 白名单状态：正常，停用
 
-- Terminal No.: Allow multiple selection on terminals or search the whole account.
+- 匹配范围：多选，当前账户或终端号
 
-- Whitelist Value: Input the text, and the system will conduct a precise match query.
+- 白名单值：文本输入，精准匹配查询
 
-- Operator: Input the text, and the system will conduct a fuzzy match query.
+- 操作人：文本输入，模糊匹配查询
 
-- Remarks: Input the text, and the system will conduct a fuzzy match query.
+- 备注：文本输入，模糊匹配查询
 
-### 1.2 Add
 
-Click the **[Add] **button to enter the page for adding consumer whitelist information.
 
-![image7.jpeg](/img/help-center/whitelist-operation-manual/image7.jpeg)
+### 1.2 新增
 
-The page for adding consumer whitelist information are as follows:
+点击【新增】按钮，进入添加消费者白名单信息的页面。
 
-![image8.jpeg](/img/help-center/whitelist-operation-manual/image8.jpeg)
+![image7\.png](/img/help-center/whitelist-operation-manual/image7.png)
 
-![image9.jpeg](/img/help-center/whitelist-operation-manual/image9.jpeg)
+添加消费者白名单信息的页面如下：
 
-![image10.jpeg](/img/help-center/whitelist-operation-manual/image10.jpeg)
+![image8\.png](/img/help-center/whitelist-operation-manual/image8.png)
 
-![image11.jpeg](/img/help-center/whitelist-operation-manual/image11.jpeg)
+![image9\.png](/img/help-center/whitelist-operation-manual/image9.png)
 
-#### 1.2.1 Whitelist Element
+![image10\.png](/img/help-center/whitelist-operation-manual/image10.png)
 
-- OP Payment ID: Input an OP Payment ID into the whitelist, its corresponding email address, card number, IP address will be added into the whitelist simultaneously.
+![image11\.png](/img/help-center/whitelist-operation-manual/image11.png)
 
-- Email: Add the email address into the whitelist.
+#### 1.2.1 白名单元素
 
-- Card Number: Add the HASH value of this card number to the whitelist; display the first 6 and last 4 digits of the card number.
+- 支付ID：将此支付ID对应的邮箱、卡号、IP地址，同时添加进白名单。
 
-- IP address: Add the IP address to the whitelist; both IPv4 and IPv6 addresses can be added.
+- 邮箱：将此邮箱添加进白名单。
 
-#### 1.2.2 Whitelist Status
+- 卡号：将此卡号HASH值添加进白名单；展示卡号前6后4。
 
-- Active: The consumer whitelist takes effect within the Oceanpayment risk control system. When processing transactions for consumers on the whitelist, the Oceanpayment risk control system relaxes its risk control restrictions.
+- IP地址：将此IP地址添加进白名单；IPv4或者IPv6均可以添加。
 
-- Disabled: The consumer whitelist does not take effect in the Oceanpayment risk control system, and the Oceanpayment risk control system maintains its original risk control restrictions.
+#### 1.2.2 白名单状态
 
-#### 1.2.3 Whitelist Value
+- 正常：消费者白名单在Oceanpayment风控系统中生效，Oceanpayment风控系统对白名单的消费者交易时会放松风控限制。
 
-- Merchants can enter multiple values of whitelist elements, and press Enter and newline separate them. A maximum of 1000 values can be added at a time.
+- 停用：消费者白名单在Oceanpayment风控系统中不生效，Oceanpayment风控系统维持原有的风控限制。
 
-#### 1.2.4 Terminals No. (Required Field)
+#### 1.2.3 白名单值
 
-- Account number: If select an account number, the whitelist value takes effect for all transactions associated with the current account number.
+- 白名单值可输入多个，多个白名单值用回车换行隔开添加，单次最多只能添加1000白名单值。
 
-- Terminals: If select a terminal number, the whitelist value only takes effect for transactions associated with the current terminal.
+#### 1.2.4 匹配范围 （必填项）
 
-#### 1.2.5 Remarks
+- 账户号：白名单值对当前账户号的所有交易生效。
 
-- This is a required field. Please enter text (up to 1,000 characters). Suggested note content: OP Payment ID + Reason for Addition.
+- 终端号：白名单值仅对此终端号的交易生效。
 
-### 1.3 Modify
+#### 1.2.5 备注
 
-Select the whitelist record and click the **[Modify] **button to enter the page for modifying consumer whitelist information.
+- 文本框输入，必填项，最多1000个字符，建议备注内容：支付ID \+ 添加原因”。
 
-![image12.jpeg](/img/help-center/whitelist-operation-manual/image12.jpeg)
 
-The page for modifying consumer whitelist information is as follows:
 
-![image13.jpeg](/img/help-center/whitelist-operation-manual/image13.jpeg)
 
-- When selecting a whitelist record, only a single record can be modified at a time; multiple records cannot be modified simultaneously.
 
-- Modifications are only permitted for records with an active whitelist status. The fields that can be modified include Whitelist Status, Terminal No., and Remarks.
+### 1.3 修改
 
-### 1.4 The whitelist is disabled in batches
+选择白名单记录，并点击【修改】按钮，进入修改消费者白名单信息的页面。
 
-Select whitelist records and click **[The whitelist is disabled in batches] **button to proceed to the next operation page.
+![image12\.png](/img/help-center/whitelist-operation-manual/image12.png)
 
-![image14.jpeg](/img/help-center/whitelist-operation-manual/image14.jpeg)
+修改消费者白名单信息的页面如下：
 
-The page for disabling consumer whitelist information is as follows:
+![image13\.png](/img/help-center/whitelist-operation-manual/image13.png)
 
-![image15.jpeg](/img/help-center/whitelist-operation-manual/image15.jpeg)
+**注意****：**
 
-- When selecting whitelist records, merchants can disable the whitelist status of a single record, or disable the whitelist status of multiple records simultaneously.
+- 选择白名单记录时，仅可以对单条记录进行修改，不可以同时对多条记录进行修改。
 
-- When updating the whitelist status of multiple records, all selected records will be simultaneously updated to a disabled status.
+- 只可以对白名单状态为正常的记录进行修改，可以修改【白名单状态、匹配范围、备注】 。
 
-## 2. Restrictions for Whitelist Addition
 
-- Consumers on the blacklist are restricted from being added to the whitelist.
 
-- Consumers who have already been added to the whitelist are not supported for repeated addition to the whitelist.
+### 1.4 白名单批量停用
 
-- If a whitelist value has been disabled, it cannot be re-added to the whitelist.
+选择白名单记录，并点击【白名单批量停用】按钮，进入批量停用白名单的界面。
+
+![image14\.png](/img/help-center/whitelist-operation-manual/image14.png)
+
+批量停用白名单的页面如下：
+
+![image15\.png](/img/help-center/whitelist-operation-manual/image15.png)
+
+- 选择白名单记录时，可以对单条记录进行白名单状态进行停用，也可以同时对多条记录进行白名单状态进行停用。
+
+- 对多条记录进行白名单状态更新时，统一将所选择的记录的白名单状态更新为停用。
+
+
+
+## 2. 白名单限制
+
+- 黑名单的消费者，限制添加白名单。
+
+- 已经添加的白名单的消费者，不支持重复添加白名单。
+
+- 白名单信息已停用，限制继续添加白名单。

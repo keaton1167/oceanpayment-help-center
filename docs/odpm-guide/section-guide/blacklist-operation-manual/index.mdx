@@ -1,147 +1,154 @@
 ---
-title: "Oceanpayment ODPM - Blacklist Operation Manual 2025-07-25"
-sidebar_label: "Oceanpayment ODPM - Blacklist Operation Manual 2025-07-25"
-sidebar_position: 6
-hide_title: true
+title: "Ocenapayment ODPM数字平台——黑名单操作手册 2025-07-25"
+sidebar_label: "Ocenapayment ODPM数字平台——黑名单操作手册 2025-07-25"
+sidebar_position: 18
+hide_title: false
 ---
-## 1. Blacklist Function
 
-**Path: **Payment \> Risk\&Fraud \> Blacklist
+## 1. 黑名单功能
 
-Consumers on the blacklist will be unable to conduct transactions through the Oceanpayment platform, as they will be directly blocked by the Oceanpayment risk control system.
+商户可以通过【 Payment \> 风控管理 \> 黑名单管理】添加消费者信息黑名单；在黑名单的消费者后续无法通过Oceanpayment平台进交易，会被Oceanpayment风控系统直接拦截。
 
-### 1.1 Search
+### 1.1 查询
 
-![image6.jpeg](/img/help-center/blacklist-operation-manual/image6.jpeg)
+![image6\.png](/img/help-center/blacklist-operation-manual/image6.png)
 
-- Blacklist Element: Card Number, Email, IP address, Phone, Full name, Address
+- 黑名单元素：卡号、电子邮箱、IP地址、电话、姓名、地址
 
-- Time Frame: Start datetime \~ End datetime(default to the current datetime)
+- 时间范围：开始时间——结束时间（默认为当天）
 
-- Blacklist Status: Active/Disabled
+- 黑名单状态：正常，停用
 
-- Terminal No.: Allow multiple selection on terminals or search the whole account.
+- 匹配范围：多选，当前账户或终端号
 
-- Blacklist Value: Input the text, and the system will conduct a precise match query.
+- 黑名单值：文本输入，精准匹配查询
 
-- Operator: Input the text, and the system will conduct a fuzzy match query.
+- 操作人：文本输入，模糊匹配查询
 
-- Remarks: Input the text, and the system will conduct a fuzzy match query.
+- 备注：文本输入，模糊匹配查询
 
-### 1.2 Add
+### 1.2 新增
 
-Click the **[Add] **button to enter the page for adding consumer blacklist information.
+点击【新增】按钮，进入添加消费者黑名单信息的页面。
 
-![image7.jpeg](/img/help-center/blacklist-operation-manual/image7.jpeg)
+![image7\.png](/img/help-center/blacklist-operation-manual/image7.png)
 
-The page for adding consumer blacklist information are as follows:
+添加消费者黑名单信息的页面如下：
 
-![image8.png](/img/help-center/blacklist-operation-manual/image8.png)
+![image8\.png](/img/help-center/blacklist-operation-manual/image8.png)
 
-![image9.png](/img/help-center/blacklist-operation-manual/image9.png)
+![image9\.png](/img/help-center/blacklist-operation-manual/image9.png)
 
-![image10.jpeg](/img/help-center/blacklist-operation-manual/image10.jpeg)
+![image10\.png](/img/help-center/blacklist-operation-manual/image10.png)
 
-![image11.jpeg](/img/help-center/blacklist-operation-manual/image11.jpeg)
 
-![image12.jpeg](/img/help-center/blacklist-operation-manual/image12.jpeg)
 
-#### 1.2.1 Blacklist Element
+![image11\.png](/img/help-center/blacklist-operation-manual/image11.png)
 
-- OP Payment ID: Input an OP Payment ID into the blacklist, its corresponding email address, card number, IP address will be added into the blacklist simultaneously.
+![image12\.png](/img/help-center/blacklist-operation-manual/image12.png)
 
-- Email: Add the email address into the blacklist.
+#### 1.2.1 黑名单元素
 
-- Card Number: Add the HASH value of this card number to the blacklist; display the first 6 and last 4 digits of the card number.
+- 支付ID：将此支付ID对应的邮箱、卡号、IP地址，同时添加进黑名单。
 
-- IP address: Add the IP address to the blacklist; both IPv4 and IPv6 addresses can be added.
+- 邮箱：将此邮箱添加进黑名单。
 
-- Phone: Add the phone number to the blacklist.
+- 卡号：将此卡号HASH值添加进黑名单；展示卡号前6后4。
 
-- Full name: Add the full name to the blacklist, saving it in the format 'FirstName,LastName', e.g., Ashley,Ferguson.
+- IP地址：将此IP地址添加进黑名单；IPv4或者IPv6均可以添加。
 
-- Address: Add the address to the blacklist and save it in the format ‘Country,State,City,Zipcode,Address’.E.g. US,CA,San Francisco,94115,Market Street 2025
+- 电话：将此电话添加进黑名单。
 
-#### 1.2.2 Blacklist Status
+- 姓名：将此姓名添加进黑名单；按“FirstName,LastName”进行保存，如：Ashley,Ferguson
 
-- Active: The consumer blacklist takes effect within the Oceanpayment risk control system. Consumers on the blacklist will be blocked by the Oceanpayment risk control system when placing orders.
+- 地址：将此地址添加进黑名单；按“国家,州,城市,邮编,地址详情”进行保存，如US,CA,San Francisco,94115,Market Street 2025
 
-- Disabled: The consumer blacklist does not take effect in the Oceanpayment risk control system, and consumers will not be directly blocked by the Oceanpayment risk control system due to being on the blacklist when conducting transactions.
+#### 1.2.2 黑名单状态
 
-#### 1.2.3 Blacklist Value
+- 正常：消费者黑名单在Oceanpayment风控系统中生效，消费者交易时会被Oceanpayment风控系统直接拦截。
 
-- Merchants can enter multiple values of blacklist elements, and press Enter and newline separate them. A maximum of 1000 values can be added at a time.
+- 停用：消费者黑名单在Oceanpayment风控系统中不生效，消费者交易时不会因黑名单被Oceanpayment风控系统直接拦截。
 
-- Address: Ensure the correct filling format by adding information in the order of “Country,State,City,Zipcode,Address”. If the information is not added in this format, the addition will not be successful.
+#### 1.2.3 黑名单值
 
-E.g. br,1600013,alfenas,37137620,r jeferson cabral 52
+- 黑名单值可输入多个，多个黑名单值用回车换行隔开添加，单次最多只能添加1000黑名单值。
 
-![image13.jpeg](/img/help-center/blacklist-operation-manual/image13.jpeg)
+- 地址：确保正确的填写格式，按“国家,州,城市,邮编,地址详情”进行添加，如br,1600013,alfenas,37137620, r jeferson cabral 52；若不按照此格式添加，则无法新增成功。
 
-#### 1.2.4 Terminals No. (Required Field)
+![image13\.png](/img/help-center/blacklist-operation-manual/image13.png)
 
-- Account number: If select an account number, the blacklist value takes effect for all transactions associated with the current account number.
 
-- Terminals: If select a terminal number, the blacklist value only takes effect for transactions associated with the current terminal.
 
-#### 1.2.5 Remarks
+#### 1.2.4 匹配范围 （必填项）
 
-- This is a required field. Please enter text (up to 1,000 characters). Suggested note content: OP Payment ID + Reason for Addition.
+- 账户号：黑名单值对当前账户号的所有交易生效
 
-### 1.3 Modify
+- 终端号：黑名单值仅对此终端号的交易生效。
 
-Select the blacklist record and click the **[Modify] **button to enter the page for modifying consumer blacklist information.
+#### 1.2.5 备注
 
-![image14.png](/img/help-center/blacklist-operation-manual/image14.png)
+- 文本框输入，必填项，最多1000个字符。建议备注内容：支付ID \+ 添加原因”。
 
-The page for modifying consumer blacklist information is as follows:
 
-![image15.jpeg](/img/help-center/blacklist-operation-manual/image15.jpeg)
 
-- When selecting a blacklist record, only a single record can be modified at a time; multiple records cannot be modified simultaneously.
+### 1.3 修改
 
-- Merchants can modify individual blacklist records, including Blacklist Status, Terminal No., and Remarks.
+选择黑名单记录，并点击【修改】按钮，进入修改消费者黑名单信息的页面。
 
-### 1.4 The blacklist status is updated
+![image14\.png](/img/help-center/blacklist-operation-manual/image14.png)
 
-Select whitelist records and click **[The blacklist status is updated] **button to proceed to the next operation page.
+修改消费者黑名单信息的页面如下：
 
-![image16.jpeg](/img/help-center/blacklist-operation-manual/image16.jpeg)
+![image15\.png](/img/help-center/blacklist-operation-manual/image15.png)
 
-The page for modifying consumer blacklist information is as follows:
+- 选择黑名单记录时，仅可以对单条记录进行修改，不可以同时对多条记录进行修改。
 
-![image17.jpeg](/img/help-center/blacklist-operation-manual/image17.jpeg)
+- 可以对单条黑名单记录进行修改【黑名单状态、匹配范围、备注】
 
-- Select All: It refers to selecting all the queried blacklist records.
+### 1.4 黑名单状态更新
 
-- When selecting blacklist records, merchants can update the blacklist status of a single record, or update the blacklist status of multiple records simultaneously.
+选择黑名单记录，并点击【黑名单状态更新】按钮，进入修改消费者黑名单状态的页面。
 
-- When updating the blacklist status of multiple records, all selected records will be simultaneously updated to an active or disabled status.
+![image16\.png](/img/help-center/blacklist-operation-manual/image16.png)
 
-## 2. Restrictions for Blacklist Addition
+修改消费者黑名单状态的页面如下：
 
-- Consumers on the whitelist are restricted from being added to the blacklist.
+![image17\.png](/img/help-center/blacklist-operation-manual/image17.png)
 
-- Consumers who have already been added to the blacklist are not supported for repeated addition to the blacklist.
+- 全选：是指对所查询的黑名单记录进行全部选择。
 
-- If the blacklist information has been disabled, further additions to the blacklist are restricted.
+- 选择黑名单记录时，可以对单条记录进行黑名单状态更新，也可以同时对多条记录进行黑名单状态更新。
 
-## 3. Blacklist Logic
+- 对多条记录进行黑名单状态更新时，统一将所选择的记录的黑名单状态更新为停用或正常。
 
-1. **[Add]**: It refers to adding blacklist data on the ODPM platform.
 
-    - Email: The system saves data in its original form; the underlying database for the email blacklist is saved.
 
-    - Card Number: Save the HASH value of this card number; display the first 6 and last 4 digits of the card number.
+## 2. 黑名单限制
 
-    - IP address: There are no restrictions on the IP format; both IPv4 and IPv6 addresses can be added.
+- 白名单的消费者，限制添加黑名单。
 
-    - OP Payment ID: Input an OP Payment ID into the blacklist, its corresponding email address, card number, IP address will be added into the blacklist simultaneously.
+- 已经添加的黑名单的消费者，不支持重复添加黑名单。
 
-    - Phone: The system saves data in its original form.
+- 黑名单信息已停用，限制继续添加黑名单。
 
-    - Full name: The system saves data in the format of “FirstName,LastName”, e.g. Ashley,Ferguson.
 
-    - Address: The system saves data in the format of “Country,State,City,Zipcode,Address”, e.g. “br,1600013,alfenas,37137620, r jeferson cabral 52”.
 
-2. Blacklists added on the ODPM platform are all categorized as fraudulent blacklists.
+## 3. 黑名单逻辑
+
+1. 【新增】：在ODPM平台新增黑名单数据。
+
+- 邮箱：查询原样保存；邮箱黑名单底层数据库保存。
+
+- 卡号：卡号保存HASH值，展示卡号前6后4。
+
+- IP地址：对IP的格式不做限制，IPv4或者IPv6均可以添加。
+
+- 支付ID：同时添加此支付ID对应的邮箱、卡号、IP地址；添加逻辑见上述邮箱、卡号、IP地址。
+
+- 电话：原样保存。
+
+- 姓名：按“FirstName,LastName”进行保存，如：Ashley,Ferguson。
+
+- 地址：按“国家,州,城市,邮编,地址详情”进行保存，如br,1600013,alfenas,37137620, r jeferson cabral 52。
+
+2. ODPM平台新增的黑名单，黑名单类型均为【欺诈性黑名单】。

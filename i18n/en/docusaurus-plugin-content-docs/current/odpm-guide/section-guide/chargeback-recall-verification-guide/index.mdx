@@ -1,0 +1,55 @@
+---
+title: "Oceanpayment-Guidelines for Merchant Initiated Chargeback Recall"
+sidebar_label: "Oceanpayment-Guidelines for Merchant Initiated Chargeback Recall"
+sidebar_position: 21
+hide_title: false
+---
+
+## 【Chargeback Recall Function Description】
+
+### 1. Difference Between Chargeback Recall and Representment
+
+Chargeback Representment is initiated by merchants who dispute a chargeback by providing evidence that the chargeback is invalid or unjustified, with the outcome determined by the issuing bank.
+
+Chargeback Recall is a process where consumers proactively cancel a chargeback with the issuing bank and agree to return the funds. Merchants must supply the necessary recall documentation for the acquiring bank to confirm the status with the issuing bank.
+
+### 2. Operation Path
+
+Navigate to `ODPM > Payment > All Exceptions > Chargeback`. The **Chargeback Recall Status** filter is available within the filter options.
+
+![Chargeback Recall Status filter](/img/help-center/merchant-initiated-chargeback-recall-guidelines/image3.png)
+
+### 3. Conditions for Initiating Chargeback Recall
+
+Depending on the chargeback process for different card types, the chargeback recall function may not be fully applicable to all orders. A chargeback recall request can be initiated if all the following conditions are met. Otherwise, the Chargeback Recall button will not be displayed.
+
+- Payment method is Credit Card, Google Pay, or Apple Pay.
+- Chargeback amount is greater than 0.
+- Chargeback type is classified as "chargeback".
+- Chargeback status is either "Unresolved" or "No response required".
+- The request is made within 15 days of the chargeback date.
+- The chargeback recall status is "Not applied", or it has been more than 7 days since the first unsuccessful recall attempt.
+
+### 4. How to Initiate a Chargeback Recall Application
+
+- Set the recall status filter to "Not Applied".
+- Under **Operation**, select **Chargeback Recall** to open the recall proof submission page.
+
+![Chargeback Recall entry](/img/help-center/merchant-initiated-chargeback-recall-guidelines/image4.png)
+
+- **Proof of chargeback recall** (required): supports DOC, DOCX, PDF, JPG, and JPEG formats.
+- **Communication record** (optional): supports the same formats as the proof.
+- **File limit**: 3 MB per file, with a maximum of 5 files.
+- **Initiation timeframe**: within 15 days of the chargeback date.
+- **Number of submissions**: up to 2 attempts, with at least 7 days between attempts.
+- **Supported order initiation quantity**: only single transactions can be initiated; batch initiation is not supported.
+
+![Chargeback Recall proof submission](/img/help-center/merchant-initiated-chargeback-recall-guidelines/image5.png)
+
+### 5. Feedback on Chargeback Recall Outcome
+
+- Feedback is provided within 5 business days.
+- **Recall failed**: if the consumer does not cancel the chargeback, the current status is maintained. A second attempt can be initiated after 7 days.
+- **Recall successful**: if the consumer cancels the chargeback, the funds are returned through the successful representment status.
+
+![Chargeback Recall outcome](/img/help-center/merchant-initiated-chargeback-recall-guidelines/image6.png)

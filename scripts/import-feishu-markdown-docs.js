@@ -3,7 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 const ROOT = path.resolve(__dirname, '..');
-const SOURCE_ROOT = 'D:\\AI_Workspace\\markdown';
+const LEGACY_SOURCE_ROOT = 'D:\\AI_Workspace\\markdown';
+const DEFAULT_REGISTRY_PATH = path.join(ROOT, 'content', 'document-registry.json');
 
 const DOCS = [
   {
@@ -73,6 +74,84 @@ const DOCS = [
 ];
 
 const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.webp', '.svg']);
+
+function optionValue(name) {
+  const index = process.argv.indexOf(name);
+  return index === -1 ? null : process.argv[index + 1] || null;
+}
+
+function resolveManifestPath(manifestPath, value) {
+  return path.isAbsolute(value) ? value : path.resolve(path.dirname(manifestPath), value);
+}
+
+function normalizeManifestDocument(document, manifestPath) {
+  const normalized = {...document};
+  const validModes = new Set(['english-only', 'translated']);
+
+  if (!/^[a-z0-9][a-z0-9/-]*[a-z0-9]$/i.test(normalized.docId || '')) {
+    throw new Error(`Invalid docId in ${manifestPath}: ${normalized.docId || '(missing)'}`);
+  }
+  if (!normalized.title || !normalized.language || !normalized.publicationMode) {
+    throw new Error(`Document ${normalized.docId} must define title, language, and publicationMode`);
+  }
+  if (!['en', 'zh-CN'].includes(normalized.language)) {
+    throw new Error(`Document ${normalized.docId} has unsupported language: ${normalized.language}`);
+  }
+  if (!validModes.has(normalized.publicationMode)) {
+    throw new Error(`Document ${normalized.docId} has unsupported publicationMode: ${normalized.publicationMode}`);
+  }
+  if (normalized.publicationMode === 'english-only' && normalized.language !== 'en') {
+    throw new Error(`English-only document ${normalized.docId} must use language "en"`);
+  }
+  if (!Number.isInteger(normalized.sidebarPosition) || normalized.sidebarPosition < 1) {
+    throw new Error(`Document ${normalized.docId} must define a positive integer sidebarPosition`);
+  }
+  if (!normalized.sourceDir && !normalized.sourceFile) {
+    throw new Error(`Document ${normalized.docId} must define sourceDir or sourceFile`);
+  }
+
+  if (normalized.sourceDir) {
+    normalized.sourceDir = resolveManifestPath(manifestPath, normalized.sourceDir);
+  }
+  if (normalized.sourceFile) {
+    normalized.sourceFile = resolveManifestPath(manifestPath, normalized.sourceFile);
+  }
+  if (normalized.assetsDir) {
+    normalized.assetsDir = resolveManifestPath(manifestPath, normalized.assetsDir);
+  }
+  normalized.slug = normalized.slug || normalized.docId.split('/').at(-1);
+
+  return normalized;
+}
+
+function loadRegistry(manifestPath) {
+  const content = JSON.parse(readUtf8(manifestPath));
+  if (!Array.isArray(content.documents) || content.documents.length === 0) {
+    throw new Error(`Registry ${manifestPath} must contain a non-empty documents array`);
+  }
+  const documents = content.documents.map((document) => normalizeManifestDocument(document, manifestPath));
+  const documentsById = new Map();
+
+  for (const document of documents) {
+    const existing = documentsById.get(document.docId) || [];
+    if (existing.some((item) => item.language === document.language)) {
+      throw new Error(`Document ${document.docId} is registered more than once for language ${document.language}`);
+    }
+    existing.push(document);
+    documentsById.set(document.docId, existing);
+  }
+
+  for (const [docId, entries] of documentsById) {
+    if (entries.some((entry) => entry.publicationMode === 'translated')) {
+      const languages = new Set(entries.map((entry) => entry.language));
+      if (!languages.has('zh-CN') || !languages.has('en')) {
+        throw new Error(`Translated document ${docId} must have both zh-CN and en registry entries`);
+      }
+    }
+  }
+
+  return documents;
+}
 
 function ensureDir(dirPath) {
   fs.mkdirSync(dirPath, {recursive: true});
@@ -239,7 +318,7 @@ function removeTargetDir(dirPath) {
 }
 
 function buildAssetMap(doc, sourceDir) {
-  const sourceAssetDir = path.join(sourceDir, '图片和附件');
+  const sourceAssetDir = doc.assetsDir || path.join(sourceDir, '图片和附件');
   const imgTargetDir = path.join(ROOT, 'static', 'img', 'help-center', doc.slug);
   const fileTargetDir = path.join(ROOT, 'static', 'files', 'help-center', doc.slug);
   const map = new Map();
@@ -356,8 +435,12 @@ function normalizeHeadings(markdown, doc, stats) {
         return text;
       }
 
-      let level = match[1].length;
-      if (hasH1) {
+      const sourceLevel = match[1].length;
+      let level = doc.headingLevelMap?.[sourceLevel];
+      if (!level) {
+        level = sourceLevel;
+      }
+      if (!doc.headingLevelMap && hasH1) {
         level += 1;
       }
       level = Math.max(2, Math.min(level, 4));
@@ -481,19 +564,23 @@ function normalizeSpacing(markdown) {
 }
 
 function buildFrontmatter(doc) {
-  return [
+  const frontmatter = [
     '---',
     `title: ${yamlString(doc.title)}`,
     `sidebar_label: ${yamlString(doc.title)}`,
     `sidebar_position: ${doc.sidebarPosition}`,
     'hide_title: true',
-    '---',
-    '',
-  ].join('\n');
+  ];
+
+  if (doc.tocMaxHeadingLevel) {
+    frontmatter.push(`toc_max_heading_level: ${doc.tocMaxHeadingLevel}`);
+  }
+
+  return [...frontmatter, '---', ''].join('\n');
 }
 
 function transformMarkdown(doc, sourceDir, assetMap) {
-  const sourceMdPath = findMarkdownFile(sourceDir);
+  const sourceMdPath = doc.sourceFile || findMarkdownFile(sourceDir);
   const stats = {
     imageRefs: 0,
     fileRefs: 0,
@@ -528,20 +615,24 @@ function transformMarkdown(doc, sourceDir, assetMap) {
 
 function writeDoc(doc, content) {
   const sourcePath = path.join(ROOT, 'docs', doc.docId, 'index.mdx');
-  ensureDir(path.dirname(sourcePath));
-  fs.writeFileSync(sourcePath, content, 'utf8');
+  const localizedPath = path.join(
+    ROOT,
+    'i18n',
+    'en',
+    'docusaurus-plugin-content-docs',
+    'current',
+    doc.docId,
+    'index.mdx',
+  );
+  const written = [];
 
-  const written = [sourcePath];
+  if (!(doc.language === 'en' && doc.publicationMode === 'translated')) {
+    ensureDir(path.dirname(sourcePath));
+    fs.writeFileSync(sourcePath, content, 'utf8');
+    written.push(sourcePath);
+  }
+
   if (doc.language === 'en') {
-    const localizedPath = path.join(
-      ROOT,
-      'i18n',
-      'en',
-      'docusaurus-plugin-content-docs',
-      'current',
-      doc.docId,
-      'index.mdx',
-    );
     ensureDir(path.dirname(localizedPath));
     fs.writeFileSync(localizedPath, content, 'utf8');
     written.push(localizedPath);
@@ -550,14 +641,45 @@ function writeDoc(doc, content) {
   return written;
 }
 
+function writeLocaleRegistry(docs) {
+  const translatedDocIds = [...new Set(
+    docs
+      .filter((doc) => doc.publicationMode === 'translated')
+      .map((doc) => doc.docId),
+  )];
+  const targetPath = path.join(ROOT, 'static', 'js', 'document-locale-registry.js');
+  const content = [
+    '(function () {',
+    "  'use strict';",
+    '',
+    '  window.__HELP_CENTER_DOCUMENT_LOCALES__ = {',
+    `    translatedDocIds: ${JSON.stringify(translatedDocIds)},`,
+    '    crossLocaleDocIds: { en: {}, \'zh-Hans\': {} }',
+    '  };',
+    '})();',
+    '',
+  ].join('\n');
+
+  fs.writeFileSync(targetPath, content, 'utf8');
+}
+
 function main() {
   const dryRun = process.argv.includes('--dry-run');
+  const legacy = process.argv.includes('--legacy');
+  const manifestOption = optionValue('--manifest');
+  const manifestPath = path.resolve(manifestOption || DEFAULT_REGISTRY_PATH);
+  const docs = legacy ? DOCS : loadRegistry(manifestPath);
   const report = [];
 
-  for (const doc of DOCS) {
-    const sourceDir = path.join(SOURCE_ROOT, doc.sourceDir);
+  for (const doc of docs) {
+    const sourceDir = legacy
+      ? path.join(LEGACY_SOURCE_ROOT, doc.sourceDir)
+      : doc.sourceDir || path.dirname(doc.sourceFile);
     if (!fs.existsSync(sourceDir)) {
       throw new Error(`Missing source directory: ${sourceDir}`);
+    }
+    if (doc.sourceFile && !fs.existsSync(doc.sourceFile)) {
+      throw new Error(`Missing source Markdown file: ${doc.sourceFile}`);
     }
 
     const {map, stats: assetStats} = dryRun
@@ -568,6 +690,7 @@ function main() {
 
     report.push({
       language: doc.language,
+      docId: doc.docId,
       slug: doc.slug,
       ...assetStats,
       ...stats,
@@ -575,11 +698,15 @@ function main() {
     });
   }
 
+  if (!dryRun && !legacy) {
+    writeLocaleRegistry(docs);
+  }
+
   for (const entry of report) {
     console.log(
       [
         entry.language,
-        entry.slug,
+        entry.docId,
         `images=${entry.copiedImages}`,
         `files=${entry.copiedFiles}`,
         `refs=${entry.imageRefs}`,
