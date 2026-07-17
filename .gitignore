@@ -61,3 +61,4 @@ github-pages-update-*.zip
 /scripts/*
 !/scripts/audit-docs-content.js
 !/scripts/import-feishu-markdown-docs.js
+!/scripts/generate-chatbase-sitemap.mjs
