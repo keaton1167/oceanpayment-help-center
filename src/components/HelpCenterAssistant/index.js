@@ -16,6 +16,7 @@ import styles from './styles.module.css';
 const SUPPORT_COPY = {
   'zh-Hans': {
     title: 'Oceanpayment \u5E2E\u52A9\u4E2D\u5FC3',
+    triggerLabel: '\u5728\u7EBF\u54A8\u8BE2',
     welcomeText: '\u60A8\u597D\uFF0C\u8BF7\u8F93\u5165\u60A8\u7684\u95EE\u9898\u3002\u6211\u4F1A\u57FA\u4E8E\u5E2E\u52A9\u4E2D\u5FC3\u5185\u5BB9\u4E3A\u60A8\u63D0\u4F9B\u53C2\u8003\u3002',
     translations: {
       header: {
@@ -45,6 +46,7 @@ const SUPPORT_COPY = {
   },
   en: {
     title: 'Oceanpayment Help Center',
+    triggerLabel: 'Need help?',
     welcomeText: 'Welcome to Oceanpayment Help Center. Please enter your question below.',
     translations: {
       header: {
@@ -133,7 +135,10 @@ export default function HelpCenterAssistant() {
 
   const EmptyState = (props) => <WelcomeState {...props} copy={copy} />;
   return (
-    <div className={styles.assistant} lang={currentLocale}>
+    <div
+      className={styles.assistant}
+      lang={currentLocale}
+      style={{'--assistant-trigger-label': `"${copy.triggerLabel}"`}}>
       <InstantSearch indexName={indexName} searchClient={searchClient}>
         <Configure filters={`locale:${currentLocale}`} />
         <Chat
