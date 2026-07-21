@@ -1,5 +1,6 @@
 import React, {useMemo} from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 import {liteClient as algoliasearch} from 'algoliasearch/lite';
 import {
   Chat,
@@ -14,21 +15,15 @@ import styles from './styles.module.css';
 
 const SUPPORT_COPY = {
   'zh-Hans': {
-    title: 'Oceanpayment \u667A\u80FD\u5BA2\u670D',
-    welcomeTitle: '\u60A8\u597D\uFF0C\u6211\u53EF\u4EE5\u534F\u52A9\u60A8\u67E5\u627E\u5E2E\u52A9\u4E2D\u5FC3\u5185\u5BB9\u3002',
-    welcomePrompt: '\u60A8\u4E5F\u53EF\u4EE5\u4ECE\u4EE5\u4E0B\u95EE\u9898\u5F00\u59CB\uFF1A',
-    quickPrompts: [
-      'Google Pay \u652F\u6301\u54EA\u4E9B\u529F\u80FD\uFF1F',
-      '\u5982\u4F55\u67E5\u8BE2\u4EA4\u6613\u72B6\u6001\uFF1F',
-      '\u5982\u4F55\u5F00\u59CB API \u63A5\u5165\uFF1F',
-    ],
+    title: 'Oceanpayment \u5E2E\u52A9\u4E2D\u5FC3',
+    welcomeText: '\u60A8\u597D\uFF0C\u8BF7\u8F93\u5165\u60A8\u7684\u95EE\u9898\u3002\u6211\u4F1A\u57FA\u4E8E\u5E2E\u52A9\u4E2D\u5FC3\u5185\u5BB9\u4E3A\u60A8\u63D0\u4F9B\u53C2\u8003\u3002',
     translations: {
       header: {
         clearLabel: '\u6E05\u7A7A',
         closeLabel: '\u5173\u95ED\u667A\u80FD\u5BA2\u670D',
         maximizeLabel: '\u5168\u5C4F\u663E\u793A',
         minimizeLabel: '\u9000\u51FA\u5168\u5C4F',
-        title: 'Oceanpayment \u667A\u80FD\u5BA2\u670D',
+        title: 'Oceanpayment \u5E2E\u52A9\u4E2D\u5FC3',
       },
       messages: {
         copyToClipboardLabel: '\u590D\u5236\u56DE\u7B54',
@@ -49,21 +44,15 @@ const SUPPORT_COPY = {
     },
   },
   en: {
-    title: 'Oceanpayment Support',
-    welcomeTitle: 'Hello, I can help you find Help Center information.',
-    welcomePrompt: 'You can start with one of these questions:',
-    quickPrompts: [
-      'What does Google Pay support?',
-      'How can I check a transaction status?',
-      'How do I start an API integration?',
-    ],
+    title: 'Oceanpayment Help Center',
+    welcomeText: 'Welcome to Oceanpayment Help Center. Please enter your question below.',
     translations: {
       header: {
         clearLabel: 'Clear',
         closeLabel: 'Close support chat',
         maximizeLabel: 'Maximize',
         minimizeLabel: 'Exit full screen',
-        title: 'Oceanpayment Support',
+        title: 'Oceanpayment Help Center',
       },
       messages: {
         copyToClipboardLabel: 'Copy response',
@@ -99,24 +88,15 @@ function SupportIcon({isOpen}) {
 }
 
 function HeaderIcon() {
-  return <span className={styles.headerMark}>O</span>;
+  const faviconUrl = useBaseUrl('/img/favicon.ico');
+
+  return <img className={styles.headerMark} src={faviconUrl} alt="" />;
 }
 
-function WelcomeState({copy, sendMessage}) {
+function WelcomeState({copy}) {
   return (
     <div className={styles.welcome}>
-      <p>{copy.welcomeTitle}</p>
-      <span>{copy.welcomePrompt}</span>
-      <div className={styles.quickPrompts}>
-        {copy.quickPrompts.map((prompt) => (
-          <button
-            key={prompt}
-            type="button"
-            onClick={() => sendMessage?.({text: prompt})}>
-            {prompt}
-          </button>
-        ))}
-      </div>
+      <p>{copy.welcomeText}</p>
     </div>
   );
 }

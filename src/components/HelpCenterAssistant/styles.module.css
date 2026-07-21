@@ -50,6 +50,11 @@
   transform: none;
 }
 
+.assistant :global(.ais-ChatToggleButton::before) {
+  content: none;
+  display: none;
+}
+
 .assistant :global(.ais-ChatOverlayLayout) {
   --ais-primary-color-rgb: 2, 127, 50;
   left: 16px;
@@ -78,15 +83,10 @@
 }
 
 .headerMark {
-  align-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.72);
+  display: block;
   border-radius: 50%;
-  color: #fff;
-  display: inline-flex;
-  font-size: 0.75rem;
-  font-weight: 700;
   height: 22px;
-  justify-content: center;
+  object-fit: contain;
   width: 22px;
 }
 
@@ -106,37 +106,10 @@
 }
 
 .welcome p {
-  margin: 0 0 5px;
+  margin: 0;
   color: #102216;
-  font-size: 1rem;
-  font-weight: 700;
-}
-
-.welcome span {
-  display: block;
-  margin-bottom: 12px;
-}
-
-.quickPrompts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.quickPrompts button {
-  border: 1px solid rgba(2, 127, 50, 0.25);
-  border-radius: 999px;
-  background: #fff;
-  color: #01682a;
-  cursor: pointer;
-  font: inherit;
-  padding: 7px 10px;
-  transition: background-color 160ms ease, border-color 160ms ease;
-}
-
-.quickPrompts button:hover {
-  border-color: #027f32;
-  background: #edf9f0;
+  font-size: 0.9375rem;
+  font-weight: 600;
 }
 
 @media (max-width: 996px) {
