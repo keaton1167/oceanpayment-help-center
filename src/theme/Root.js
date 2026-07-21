@@ -1,5 +1,6 @@
 import React from 'react';
 import {useEffect, useState} from 'react';
+import HelpCenterAssistant from '@site/src/components/HelpCenterAssistant';
 
 const ALLOWED_SOURCES = new Set(['odpm', 'iam']);
 const SOURCE_STORAGE_KEY = 'oceanpayment-help-center-source';
@@ -35,5 +36,10 @@ export default function Root({children}) {
     return null;
   }
 
-  return <>{children}</>;
+  return (
+    <>
+      {children}
+      <HelpCenterAssistant />
+    </>
+  );
 }

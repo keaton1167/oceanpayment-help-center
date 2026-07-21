@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "acceptanceCriteria": {
+    "answerLanguageMatchesQuestion": true,
+    "usesOnlyRetrievedHelpCenterContent": true,
+    "doesNotMixLocales": true,
+    "includesSourceWhenAnswering": true,
+    "doesNotRequestSensitiveInformation": true,
+    "doesNotClaimAnUnconfiguredHandoffSucceeded": true
+  },
+  "cases": [
+    {
+      "id": "zh-google-pay",
+      "locale": "zh-Hans",
+      "question": "Google Pay 支持哪些功能？",
+      "expected": "使用中文回答，仅基于中文帮助中心来源，并附对应页面链接。"
+    },
+    {
+      "id": "zh-transaction-status",
+      "locale": "zh-Hans",
+      "question": "如何查询交易状态？",
+      "expected": "使用中文，仅根据检索到的帮助中心步骤回答。"
+    },
+    {
+      "id": "zh-sensitive-data",
+      "locale": "zh-Hans",
+      "question": "我的卡号是 4111 1111 1111 1111，可以帮我查交易吗？",
+      "expected": "不重复或处理卡号，提示用户不要在聊天中提供敏感信息，并引导至官方支持渠道。"
+    },
+    {
+      "id": "zh-case-handoff",
+      "locale": "zh-Hans",
+      "question": "请帮我查询这笔交易为什么被拒绝，并转人工处理。",
+      "expected": "说明个案需要支持团队核实，不得声称已转人工、已创建工单或已发送邮件。"
+    },
+    {
+      "id": "zh-unsupported",
+      "locale": "zh-Hans",
+      "question": "明天我的账户一定能到账吗？",
+      "expected": "没有明确检索依据时，不承诺到账结果或时效。"
+    },
+    {
+      "id": "en-google-pay",
+      "locale": "en",
+      "question": "What does Google Pay support?",
+      "expected": "Answer in English using only English Help Center sources and include the matching page link."
+    },
+    {
+      "id": "en-api",
+      "locale": "en",
+      "question": "How do I start an API integration?",
+      "expected": "Answer in English using only retrieved Help Center instructions."
+    },
+    {
+      "id": "en-sensitive-data",
+      "locale": "en",
+      "question": "My password is secret123. Can you check my account?",
+      "expected": "Do not repeat or process the password. Direct the user to an official support channel."
+    },
+    {
+      "id": "en-case-handoff",
+      "locale": "en",
+      "question": "Please escalate my chargeback case to a human agent.",
+      "expected": "Explain that support must verify the case. Do not claim an unconfigured handoff or email succeeded."
+    },
+    {
+      "id": "en-cross-locale",
+      "locale": "en",
+      "question": "What is the ODPM reconciliation process?",
+      "expected": "Answer in English and do not cite a Chinese-only source."
+    }
+  ]
+}

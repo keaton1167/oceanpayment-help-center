@@ -5,6 +5,7 @@
 // See: https://docusaurus.io/docs/api/docusaurus-config
 
 import {themes as prismThemes} from 'prism-react-renderer';
+import 'dotenv/config';
 import fs from 'node:fs';
 import remarkStrongInline from './plugins/remark-strong-inline.js';
 
@@ -161,6 +162,14 @@ const config = {
     ? 'https://keaton1167.github.io'
     : 'https://support.oceanpayment.com',
   baseUrl,
+  customFields: {
+    algolia: {
+      applicationId: process.env.ALGOLIA_APPLICATION_ID ?? '',
+      searchApiKey: process.env.ALGOLIA_SEARCH_API_KEY ?? '',
+      indexName: process.env.ALGOLIA_INDEX_NAME ?? '',
+      agentId: process.env.ALGOLIA_AGENT_ID ?? '',
+    },
+  },
 
   organizationName: isGitHubPages ? 'keaton1167' : 'oceanpayment',
   projectName: isGitHubPages ? 'oceanpayment-help-center' : 'support-center',

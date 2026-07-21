@@ -1,0 +1,161 @@
+.assistant {
+  --ais-chat-height: min(38rem, calc(100vh - 7rem));
+  --ais-chat-width: 25rem;
+  --ais-primary-color-rgb: 2, 127, 50;
+}
+
+.assistant :global(.ais-ChatToggleButton) {
+  left: 20px;
+  right: auto;
+  bottom: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: #027f32;
+  color: #fff;
+  box-shadow: 0 10px 28px rgba(2, 127, 50, 0.28);
+}
+
+.assistant :global(.ais-ChatToggleButton:hover) {
+  background: #01682a;
+  transform: translateY(-2px);
+}
+
+.assistant :global(.ais-ChatToggleButton::before) {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 0;
+  padding: 9px 12px;
+  border: 1px solid #e2e8e4;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  color: #334155;
+  content: '需要帮助吗？';
+  font-size: 0.8125rem;
+  font-weight: 500;
+  opacity: 1;
+  pointer-events: none;
+  transform: translateY(0);
+  transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+  white-space: nowrap;
+}
+
+.assistant :global(.ais-ChatToggleButton--open::before) {
+  opacity: 1;
+  transform: translateY(4px);
+  visibility: hidden;
+}
+
+.assistant :global(.ais-ChatToggleButton--open) {
+  transform: none;
+}
+
+.assistant :global(.ais-ChatOverlayLayout) {
+  --ais-primary-color-rgb: 2, 127, 50;
+  left: 16px;
+  right: auto;
+}
+
+.assistant :global(.ais-Chat) {
+  border-color: #d7dfe6;
+  border-radius: 14px;
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.2);
+}
+
+.assistant :global(.ais-ChatHeader) {
+  border-bottom: 0;
+  background: linear-gradient(135deg, #08a948, #017d31);
+  color: #fff;
+}
+
+.assistant :global(.ais-ChatHeader-title) {
+  color: #fff;
+  font-weight: 700;
+}
+
+.assistant :global(.ais-ChatHeader button) {
+  color: #fff;
+}
+
+.headerMark {
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 50%;
+  color: #fff;
+  display: inline-flex;
+  font-size: 0.75rem;
+  font-weight: 700;
+  height: 22px;
+  justify-content: center;
+  width: 22px;
+}
+
+.assistant :global(.ais-ChatPrompt-textarea:focus) {
+  border-color: #027f32;
+  box-shadow: 0 0 0 3px rgba(2, 127, 50, 0.12);
+}
+
+.welcome {
+  margin: 18px 18px auto;
+  padding: 12px 14px;
+  border-radius: 10px;
+  background: #f4f6f5;
+  color: #475569;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.welcome p {
+  margin: 0 0 5px;
+  color: #102216;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.welcome span {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.quickPrompts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quickPrompts button {
+  border: 1px solid rgba(2, 127, 50, 0.25);
+  border-radius: 999px;
+  background: #fff;
+  color: #01682a;
+  cursor: pointer;
+  font: inherit;
+  padding: 7px 10px;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.quickPrompts button:hover {
+  border-color: #027f32;
+  background: #edf9f0;
+}
+
+@media (max-width: 996px) {
+  .assistant :global(.ais-ChatToggleButton) {
+    left: 20px;
+    right: auto;
+    bottom: 16px;
+  }
+
+  .assistant :global(.ais-ChatOverlayLayout) {
+    left: 16px;
+    right: auto;
+  }
+}
+
+@media (max-width: 680px) {
+  .assistant :global(.ais-ChatToggleButton--floating) {
+    left: 20px;
+    right: auto;
+    position: fixed;
+  }
+}

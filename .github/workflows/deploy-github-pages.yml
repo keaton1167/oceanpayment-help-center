@@ -35,6 +35,10 @@ jobs:
         run: npm run build
         env:
           DEPLOY_TARGET: github-pages
+          ALGOLIA_APPLICATION_ID: ${{ vars.ALGOLIA_APPLICATION_ID }}
+          ALGOLIA_SEARCH_API_KEY: ${{ vars.ALGOLIA_SEARCH_API_KEY }}
+          ALGOLIA_INDEX_NAME: ${{ vars.ALGOLIA_INDEX_NAME }}
+          ALGOLIA_AGENT_ID: ${{ vars.ALGOLIA_AGENT_ID }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v5

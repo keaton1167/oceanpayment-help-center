@@ -1,3 +1,10 @@
+@import 'instantsearch.css/themes/algolia-min.css';
+
+/* Keep the chat overlay out of the page until its floating trigger opens it. */
+.ais-ChatOverlayLayout:not(:has(.ais-Chat-container--open)) {
+  display: none;
+}
+
 :root {
   --ifm-color-primary: #02983b;
   --ifm-color-primary-dark: #028936;

@@ -8,7 +8,6 @@
     "start:zh": "docusaurus start --locale zh-Hans",
     "start:en": "docusaurus start --locale en",
     "build": "docusaurus build",
-    "postbuild": "node scripts/generate-chatbase-sitemap.mjs",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -18,6 +17,9 @@
     "import:feishu-md": "node scripts/import-feishu-markdown-docs.js --legacy",
     "import:documents": "node scripts/import-feishu-markdown-docs.js --manifest content/document-registry.json",
     "audit:docs": "node scripts/audit-docs-content.js",
+    "export:algolia": "node scripts/export-algolia-help-center-records.mjs",
+    "configure:algolia": "node scripts/configure-algolia-help-center-index.mjs",
+    "sync:algolia": "node scripts/sync-algolia-help-center-records.mjs",
     "verify:docs": "npm run audit:docs && npm run build"
   },
   "dependencies": {
@@ -26,10 +28,14 @@
     "@docusaurus/preset-classic": "3.10.1",
     "@easyops-cn/docusaurus-search-local": "^0.55.2",
     "@mdx-js/react": "^3.0.0",
+    "algoliasearch": "^5.56.0",
     "clsx": "^2.0.0",
+    "dotenv": "^17.4.2",
+    "instantsearch.css": "^8.18.0",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-instantsearch": "^7.39.1"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.10.1",
