@@ -16,7 +16,7 @@ import styles from './styles.module.css';
 const SUPPORT_COPY = {
   'zh-Hans': {
     title: 'Oceanpayment \u5E2E\u52A9\u4E2D\u5FC3',
-    triggerLabel: '\u5728\u7EBF\u54A8\u8BE2',
+    triggerLabel: '\u6709\u95EE\u9898\uFF1F\u95EE\u95EE\u6211',
     welcomeText: '\u60A8\u597D\uFF0C\u8BF7\u8F93\u5165\u60A8\u7684\u95EE\u9898\u3002\u6211\u4F1A\u57FA\u4E8E\u5E2E\u52A9\u4E2D\u5FC3\u5185\u5BB9\u4E3A\u60A8\u63D0\u4F9B\u53C2\u8003\u3002',
     translations: {
       header: {
@@ -46,7 +46,7 @@ const SUPPORT_COPY = {
   },
   en: {
     title: 'Oceanpayment Help Center',
-    triggerLabel: 'Need help?',
+    triggerLabel: 'Questions? Ask me',
     welcomeText: 'Welcome to Oceanpayment Help Center. Please enter your question below.',
     translations: {
       header: {
@@ -83,8 +83,9 @@ function SupportIcon({isOpen}) {
     </svg>
   ) : (
     <svg aria-hidden="true" viewBox="0 0 24 24">
-      <path d="M5 6.75A3.75 3.75 0 0 1 8.75 3h6.5A3.75 3.75 0 0 1 19 6.75v4.5A3.75 3.75 0 0 1 15.25 15H12l-4.25 3v-3H8.75A3.75 3.75 0 0 1 5 11.25v-4.5Z" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="1.8" />
-      <path d="M8.5 9h7M8.5 11.5h4.5" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.8" />
+      <path d="M8 6.25h8A3.75 3.75 0 0 1 19.75 10v4A3.75 3.75 0 0 1 16 17.75H12l-3.5 2.5v-2.5H8A3.75 3.75 0 0 1 4.25 14v-4A3.75 3.75 0 0 1 8 6.25Z" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="1.7" />
+      <path d="M12 3.5v2.25M9 11.25h.01M15 11.25h.01M9.5 14.25c.75.5 1.58.75 2.5.75s1.75-.25 2.5-.75" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.7" />
+      <circle cx="12" cy="3" r="1" fill="currentColor" />
     </svg>
   );
 }
@@ -121,6 +122,10 @@ export default function HelpCenterAssistant() {
   const algolia = customFields.algolia || {};
   const {applicationId, searchApiKey, indexName, agentId} = algolia;
   const copy = SUPPORT_COPY[currentLocale] || SUPPORT_COPY['zh-Hans'];
+  const localeFilter =
+    currentLocale === 'en'
+      ? 'locale:en OR locale:zh-Hans'
+      : `locale:${currentLocale}`;
   const searchClient = useMemo(
     () =>
       applicationId && searchApiKey
@@ -140,14 +145,14 @@ export default function HelpCenterAssistant() {
       lang={currentLocale}
       style={{'--assistant-trigger-label': `"${copy.triggerLabel}"`}}>
       <InstantSearch indexName={indexName} searchClient={searchClient}>
-        <Configure filters={`locale:${currentLocale}`} />
+        <Configure filters={localeFilter} />
         <Chat
           agentId={agentId}
           tools={chatTools}
           title={copy.title}
           headerTitleIconComponent={HeaderIcon}
           messagesProps={{emptyComponent: EmptyState}}
-          promptProps={{maxRows: 4}}
+          promptProps={{maxRows: 3}}
           translations={copy.translations}
         />
         <ChatTrigger

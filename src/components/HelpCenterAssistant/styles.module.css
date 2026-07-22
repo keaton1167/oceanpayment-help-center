@@ -8,16 +8,23 @@
   left: 20px;
   right: auto;
   bottom: 20px;
+  width: 52px;
+  height: 52px;
   border: 0;
   border-radius: 50%;
   background: #027f32;
   color: #fff;
-  box-shadow: 0 10px 28px rgba(2, 127, 50, 0.28);
+  box-shadow: 0 8px 20px rgba(2, 127, 50, 0.22), inset 0 0 0 1px rgba(255, 255, 255, 0.18);
 }
 
 .assistant :global(.ais-ChatToggleButton:hover) {
   background: #01682a;
   transform: translateY(-2px);
+}
+
+.assistant :global(.ais-ChatToggleButton svg) {
+  width: 28px;
+  height: 28px;
 }
 
 .assistant :global(.ais-ChatToggleButton::before) {
@@ -26,9 +33,9 @@
   left: 0;
   padding: 9px 12px;
   border: 1px solid #e2e8e4;
-  border-radius: 6px;
+  border-radius: 8px;
   background: #fff;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.1);
   color: #334155;
   content: var(--assistant-trigger-label);
   font-size: 0.8125rem;
@@ -90,32 +97,85 @@
 }
 
 .assistant :global(.ais-ChatPrompt) {
-  overflow: hidden;
-  border: 1px solid rgba(2, 127, 50, 0.45);
-  border-radius: 8px;
+  display: grid;
+  grid-template-areas:
+    'input'
+    'footer';
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  overflow: visible;
+  border: 0;
+  background: transparent;
+}
+
+.assistant :global(.ais-ChatPrompt::before) {
+  content: none;
+}
+
+.assistant :global(.ais-ChatPrompt:focus-within) {
+  box-shadow: none;
+}
+
+.assistant :global(.ais-ChatPrompt-body) {
+  grid-area: input;
+  border: 1px solid rgba(2, 127, 50, 0.36);
+  border-radius: 12px;
   background: #fff;
   transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
-.assistant :global(.ais-ChatPrompt:focus-within) {
+.assistant :global(.ais-ChatPrompt:focus-within .ais-ChatPrompt-body) {
   border-color: #027f32;
-  box-shadow: 0 0 0 3px rgba(2, 127, 50, 0.12);
-}
-
-.assistant :global(.ais-ChatPrompt-body) {
-  border: 0;
+  box-shadow: 0 0 0 3px rgba(2, 127, 50, 0.1);
 }
 
 .assistant :global(.ais-ChatPrompt-textarea),
 .assistant :global(.ais-ChatPrompt-textarea:focus) {
-  min-height: 4.5rem;
+  min-height: 5.25rem;
+  padding: 14px 60px 14px 16px;
   border: 0;
+  border-radius: 12px;
   box-shadow: none;
 }
 
 .assistant :global(.ais-ChatPrompt-actions) {
-  border-top: 1px solid rgba(2, 127, 50, 0.14);
-  background: #f8fcf9;
+  grid-area: input;
+  align-self: end;
+  justify-self: end;
+  z-index: 1;
+  min-height: 0;
+  padding: 0 12px 12px 0;
+  border: 0;
+  background: transparent;
+}
+
+.assistant :global(.ais-ChatPrompt-submit) {
+  min-width: 36px;
+  min-height: 36px;
+  padding: 0;
+  border-radius: 50%;
+  background: #027f32;
+  color: #fff;
+  box-shadow: 0 3px 8px rgba(2, 127, 50, 0.2);
+}
+
+.assistant :global(.ais-ChatPrompt-submit:disabled) {
+  background: #b8d9c2;
+  color: #fff;
+}
+
+.assistant :global(.ais-ChatPrompt-submit:hover:not(:disabled)) {
+  background: #01682a;
+}
+
+.assistant :global(.ais-ChatPrompt-footer) {
+  grid-area: footer;
+  margin-top: 0;
+}
+
+.assistant :global(.ais-ChatPrompt-disclaimer) {
+  color: #77837a;
+  font-size: 0.75rem;
 }
 
 .welcome {
