@@ -23,33 +23,56 @@
 }
 
 .assistant :global(.ais-ChatToggleButton svg) {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
 }
 
 .assistant :global(.ais-ChatToggleButton::before) {
   position: absolute;
   bottom: calc(100% + 12px);
   left: 0;
-  padding: 9px 12px;
-  border: 1px solid #e2e8e4;
-  border-radius: 8px;
+  padding: 8px 12px;
+  border: 1px solid #dce7df;
+  border-radius: 10px;
   background: #fff;
-  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.1);
-  color: #334155;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+  color: #1e293b;
   content: var(--assistant-trigger-label);
-  font-size: 0.8125rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
   opacity: 1;
   pointer-events: none;
   transform: translateY(0);
   transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
   white-space: nowrap;
+  z-index: 2;
+}
+
+.assistant :global(.ais-ChatToggleButton::after) {
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 18px;
+  width: 10px;
+  height: 10px;
+  border-right: 1px solid #dce7df;
+  border-bottom: 1px solid #dce7df;
+  background: #fff;
+  content: '';
+  opacity: 1;
+  pointer-events: none;
+  transform: rotate(45deg);
+  transition: opacity 160ms ease, visibility 160ms ease;
+  z-index: 1;
 }
 
 .assistant :global(.ais-ChatToggleButton--open::before) {
   opacity: 0;
   transform: translateY(4px);
+  visibility: hidden;
+}
+
+.assistant :global(.ais-ChatToggleButton--open::after) {
+  opacity: 0;
   visibility: hidden;
 }
 

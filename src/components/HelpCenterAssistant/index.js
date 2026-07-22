@@ -1,4 +1,4 @@
-import React, {useMemo} from 'react';
+import React, {useEffect, useMemo, useRef} from 'react';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import {liteClient as algoliasearch} from 'algoliasearch/lite';
@@ -82,12 +82,30 @@ function SupportIcon({isOpen}) {
       <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="2" />
     </svg>
   ) : (
-    <svg aria-hidden="true" viewBox="0 0 24 24">
-      <path d="M8 6.25h8A3.75 3.75 0 0 1 19.75 10v4A3.75 3.75 0 0 1 16 17.75H12l-3.5 2.5v-2.5H8A3.75 3.75 0 0 1 4.25 14v-4A3.75 3.75 0 0 1 8 6.25Z" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="1.7" />
-      <path d="M12 3.5v2.25M9 11.25h.01M15 11.25h.01M9.5 14.25c.75.5 1.58.75 2.5.75s1.75-.25 2.5-.75" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="1.7" />
-      <circle cx="12" cy="3" r="1" fill="currentColor" />
+    <svg aria-hidden="true" viewBox="0 0 32 32">
+      <path d="m24 2.75.9 2.85 2.85.9-2.85.9L24 10.25l-.9-2.85-2.85-.9 2.85-.9.9-2.85Z" fill="currentColor" />
+      <path d="m28.2 9.8.48 1.52 1.52.48-1.52.48-.48 1.52-.48-1.52-1.52-.48 1.52-.48.48-1.52Z" fill="currentColor" opacity=".9" />
+      <path d="M4.75 11.25A4.25 4.25 0 0 1 9 7h10a4.25 4.25 0 0 1 4.25 4.25v5A4.25 4.25 0 0 1 19 20.5h-2.5L14 24.25l-2.5-3.75H9a4.25 4.25 0 0 1-4.25-4.25v-5Z" fill="none" stroke="currentColor" strokeLinejoin="round" strokeWidth="2" />
+      <circle cx="10" cy="14" r="1.25" fill="currentColor" />
+      <circle cx="14" cy="14" r="1.25" fill="currentColor" />
+      <circle cx="18" cy="14" r="1.25" fill="currentColor" />
     </svg>
   );
+}
+
+function addSourceParameter(link) {
+  const url = new URL(link.href, window.location.origin);
+  const isHelpCenterLink =
+    url.origin === window.location.origin || url.hostname === 'support.oceanpayment.com';
+
+  if (isHelpCenterLink) {
+    if (url.searchParams.get('source') !== 'odpm') {
+      url.searchParams.set('source', 'odpm');
+      link.href = url.toString();
+    }
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+  }
 }
 
 function HeaderIcon() {
@@ -122,6 +140,7 @@ export default function HelpCenterAssistant() {
   const algolia = customFields.algolia || {};
   const {applicationId, searchApiKey, indexName, agentId} = algolia;
   const copy = SUPPORT_COPY[currentLocale] || SUPPORT_COPY['zh-Hans'];
+  const assistantRef = useRef(null);
   const localeFilter =
     currentLocale === 'en'
       ? 'locale:en OR locale:zh-Hans'
@@ -134,6 +153,22 @@ export default function HelpCenterAssistant() {
     [applicationId, searchApiKey],
   );
 
+  useEffect(() => {
+    const assistant = assistantRef.current;
+    if (!assistant) {
+      return undefined;
+    }
+
+    const normalizeLinks = () => {
+      assistant.querySelectorAll('a[href]').forEach(addSourceParameter);
+    };
+    const observer = new MutationObserver(normalizeLinks);
+
+    normalizeLinks();
+    observer.observe(assistant, {attributes: true, attributeFilter: ['href'], childList: true, subtree: true});
+    return () => observer.disconnect();
+  }, []);
+
   if (!searchClient || !indexName || !agentId) {
     return null;
   }
@@ -141,8 +176,15 @@ export default function HelpCenterAssistant() {
   const EmptyState = (props) => <WelcomeState {...props} copy={copy} />;
   return (
     <div
+      ref={assistantRef}
       className={styles.assistant}
       lang={currentLocale}
+      onClickCapture={(event) => {
+        const link = event.target.closest('a[href]');
+        if (link) {
+          addSourceParameter(link);
+        }
+      }}
       style={{'--assistant-trigger-label': `"${copy.triggerLabel}"`}}>
       <InstantSearch indexName={indexName} searchClient={searchClient}>
         <Configure filters={localeFilter} />
